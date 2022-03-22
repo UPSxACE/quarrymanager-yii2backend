@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\LocalExtracao;
 use app\models\Lote;
 use app\models\LoteSearch;
 use yii\web\Controller;
@@ -77,8 +78,11 @@ class LoteController extends Controller
             $model->loadDefaultValues();
         }
 
+        $localextracao = LocalExtracao::getAllAsArray();
+
         return $this->render('create', [
             'model' => $model,
+            'localextracao' => $localextracao
         ]);
     }
 

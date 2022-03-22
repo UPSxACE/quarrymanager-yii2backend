@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'dataHora',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Lote $model, $key, $index, $column) {
+                'urlCreator' => function ($action, \app\models\Lote $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'codigo_lote' => $model->codigo_lote]);
                  }
             ],

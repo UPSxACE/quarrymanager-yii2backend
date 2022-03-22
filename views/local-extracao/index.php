@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'coordenadasGPS_Y',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, LocalExtracao $model, $key, $index, $column) {
+                'urlCreator' => function ($action, \app\models\LocalExtracao $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nome',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, LocalArmazem $model, $key, $index, $column) {
+                'urlCreator' => function ($action, \app\models\LocalArmazem $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'preco',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Produto $model, $key, $index, $column) {
+                'urlCreator' => function ($action, \app\models\Produto $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
