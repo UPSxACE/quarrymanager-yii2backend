@@ -26,9 +26,11 @@ class LocalExtracao extends \yii\db\ActiveRecord
     }
 
     public static function getAllAsArray(){
+
         $res = LocalExtracao::find()->asArray()->all();
         $localextracao = ArrayHelper::map($res, 'id', 'nome');
         return $localextracao;
+
     }
 
     /**

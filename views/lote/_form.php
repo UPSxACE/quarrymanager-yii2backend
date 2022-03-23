@@ -20,9 +20,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idLocalExtracao')->textInput() ?>
 
-    <!-- @var $form yii\widgets\ActiveForm -->
+
+
+    <!-- adicionar em cima @var $form yii\widgets\ActiveForm -->
     <?php
-        echo $form->field($model, 'idLocalExtracao')->dropdownList([$localextracao],
+        echo $form->field($model, 'idLocalExtracao')->dropdownList($localextracao,
         ['prompt'=>'Select Category']
         );
     ?>
