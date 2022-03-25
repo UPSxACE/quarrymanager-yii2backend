@@ -140,9 +140,12 @@ class SiteController extends Controller
                 $model->password = password_hash($model->password, PASSWORD_ARGON2I);
                 $model->authKey = md5(random_bytes(5));
                 $model->accessToken = password_hash(random_bytes(10), PASSWORD_DEFAULT);
-                $model->save();
-                return $this->redirect(['login']);
+
+                if($model->validate() && $model->save()) {
+                    return $this->redirect(['login']);
+                }
             }
+            $model->password = '';
         }
 
         return $this->render('register', [
