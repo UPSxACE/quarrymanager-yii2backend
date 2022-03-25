@@ -45,6 +45,7 @@ class Utilizador extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['username'], 'unique'],
             [['tipoUtilizador', 'idFotografia', 'username', 'password', 'email'], 'required'],
             [['tipoUtilizador', 'idFotografia', 'nif'], 'integer'],
             [['dataCriacao'], 'safe'],

@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Utilizador;
 
 class SiteController extends Controller
 {
@@ -124,5 +125,27 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionRegister()
+    {
+        $model = new Utilizador();
+
+        if ($model->load(Yii::$app->request->post())) {
+            //vamos ver se vai funcionar assim
+            $model->tipoUtilizador = 4;
+            $model->idFotografia = 1;
+            if ($model->validate() && $model->save()) {
+                // form inputs are valid, do something here
+                $model->password = password_hash($model->password, PASSWORD_ARGON2I);
+                $model->authKey = md5(random_bytes(5));
+                $model->accessToken = password_hash(random_bytes(10), PASSWORD_DEFAULT);
+                return $this->redirect(['login']);
+            }
+        }
+
+        return $this->render('register', [
+            'model' => $model,
+        ]);
     }
 }
