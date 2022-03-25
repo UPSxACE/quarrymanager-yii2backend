@@ -29,7 +29,7 @@ use Yii;
  * @property Pedido[] $pedidos
  * @property Tipoutilizador $tipoUtilizador0
  */
-class Utilizador extends \yii\db\ActiveRecord
+class UserTable extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
