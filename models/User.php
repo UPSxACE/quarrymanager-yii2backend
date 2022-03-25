@@ -58,10 +58,22 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
+        /*
         foreach (self::$users as $user) {
             if (strcasecmp($user['username'], $username) === 0) {
                 return new static($user);
             }
+        }
+
+        return null;
+        */
+
+        //caso o 'like' não funcione: where(['username' => strtolower($username)])->one();
+
+        $findUser = UserTable::find()->where(['like', 'username', $username])->one();
+
+        if ($findUser != false){
+            return $findUser;
         }
 
         return null;
