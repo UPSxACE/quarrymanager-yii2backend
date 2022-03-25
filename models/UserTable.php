@@ -124,4 +124,11 @@ class UserTable extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Tipoutilizador::className(), ['id' => 'tipoUtilizador']);
     }
+
+    //migrado do User.php
+    public function validatePassword($password)
+    {
+        //return $this->password === $password;
+        return $this->password === password_hash($password, PASSWORD_ARGON2I);
+    }
 }
