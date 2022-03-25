@@ -55,6 +55,8 @@ class LoginForm extends Model
                 echo '<h1>' . password_hash($this->password, PASSWORD_ARGON2I); // teste para ver o valor para o qual o "(this)password é convertido"
 
                 echo '<h1>' . var_dump($user->password) . '</h1>'; //teste para ver o valor que transporta a propriedade 'password' do $user
+
+                echo '<h1>' . var_dump(password_verify($this->password, $user->password)); // teste para ver se o validate password está a retornar 'true'; CONCLUSãO: O validate password ESTÁ a funcionar!
                 $this->addError($attribute, 'Incorrect username or password.');
             }
         }
