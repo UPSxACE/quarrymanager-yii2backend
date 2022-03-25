@@ -54,7 +54,7 @@ class LoginForm extends Model
 
                 echo '<h1>' . password_hash($this->password, PASSWORD_ARGON2I); // teste para ver o valor para o qual o "(this)password é convertido"
 
-                echo '<h1>' . password_hash($user->password, PASSWORD_ARGON2I) . '</h1>'; //teste para ver o valor que transporta a propriedade 'password' do $user
+                echo '<h1>' . var_dump($user->password) . '</h1>'; //teste para ver o valor que transporta a propriedade 'password' do $user
                 $this->addError($attribute, 'Incorrect username or password.');
             }
         }
