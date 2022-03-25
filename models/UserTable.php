@@ -29,7 +29,7 @@ use Yii;
  * @property Pedido[] $pedidos
  * @property Tipoutilizador $tipoUtilizador0
  */
-class UserTable extends \yii\db\ActiveRecord
+class UserTable extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -129,6 +129,43 @@ class UserTable extends \yii\db\ActiveRecord
     public function validatePassword($password)
     {
         //return $this->password === $password;
-        return $this->password === password_hash($password, PASSWORD_ARGON2I);
+
+        //teste 0303
+        //return $this->password === password_hash($password, PASSWORD_ARGON2I);
+
+        return password_verify($password, $this->password);
+    }
+
+    public function getId()
+    {
+       return $this->id;
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        return $this->authKey === $authKey;
+    }
+
+    public function getAuthKey()
+    {
+        return $this->authKey;
+    }
+
+    public static function findIdentityByAccessToken($token, $type=null){
+        return self::findOne(['accessToken'=>$token]);
+    }
+
+    public static function findIdentity($id){
+        return self::findOne($id);
+    }
+
+    public static function findByUsername($username){
+        $findUser = UserTable::find()->where(['like', 'username', $username])->one();
+
+        if ($findUser != false){
+            return $findUser;
+        }
+
+        return null;
     }
 }

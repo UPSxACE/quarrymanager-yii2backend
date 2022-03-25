@@ -46,9 +46,11 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-            echo '<h1>' . var_dump($user) . '</h1>'; //teste para ver se o getUser encontrou o usuário; conclusão: ENCONTROU
+            // echo '<h1>' . var_dump($user) . '</h1>'; //teste para ver se o getUser encontrou o usuário; conclusão: ENCONTROU
 
             if (!$user || !$user->validatePassword($this->password)) {
+
+                /*
                 echo '<h1>' . var_dump($user->validatePassword($this->password)) . '</h1>'; //teste para ver se o validatePassword considerou as duas passwords iguais; conclusão: NÃO
                 echo '<h1>' . var_dump(($this->password)) . '</h1>'; //teste para ver o valor que transporta a variável "(this)password"
 
@@ -57,6 +59,7 @@ class LoginForm extends Model
                 echo '<h1>' . var_dump($user->password) . '</h1>'; //teste para ver o valor que transporta a propriedade 'password' do $user
 
                 echo '<h1>' . var_dump(password_verify($this->password, $user->password)); // teste para ver se o validate password está a retornar 'true'; CONCLUSãO: O validate password ESTÁ a funcionar!
+                */
                 $this->addError($attribute, 'Incorrect username or password.');
             }
         }
@@ -82,7 +85,7 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = UserTable::findByUsername($this->username);
         }
 
         return $this->_user;
