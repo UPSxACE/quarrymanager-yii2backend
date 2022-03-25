@@ -46,8 +46,15 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
+            echo '<h1>' . var_dump($user) . '</h1>'; //teste para ver se o getUser encontrou o usuário; conclusão: ENCONTROU
 
             if (!$user || !$user->validatePassword($this->password)) {
+                echo '<h1>' . var_dump($user->validatePassword($this->password)) . '</h1>'; //teste para ver se o validatePassword considerou as duas passwords iguais; conclusão: NÃO
+                echo '<h1>' . var_dump(($this->password)) . '</h1>'; //teste para ver o valor que transporta a variável "(this)password"
+
+                echo '<h1>' . password_hash($this->password, PASSWORD_ARGON2I); // teste para ver o valor para o qual o "(this)password é convertido"
+
+                echo '<h1>' . password_hash($user->password, PASSWORD_ARGON2I) . '</h1>'; //teste para ver o valor que transporta a propriedade 'password' do $user
                 $this->addError($attribute, 'Incorrect username or password.');
             }
         }
