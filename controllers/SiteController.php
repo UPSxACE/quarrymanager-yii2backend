@@ -9,7 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\UserTable;
+use app\models\Utilizador;
 
 class SiteController extends Controller
 {
@@ -129,7 +129,7 @@ class SiteController extends Controller
 
     public function actionRegister()
     {
-        $model = new UserTable();
+        $model = new Utilizador();
 
         if ($model->load(Yii::$app->request->post())) {
             //vamos ver se vai funcionar assim

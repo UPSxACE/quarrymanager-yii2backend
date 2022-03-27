@@ -70,7 +70,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
         //caso o 'like' não funcione: where(['username' => strtolower($username)])->one();
 
-        $findUser = UserTable::find()->where(['like', 'username', $username])->one();
+        $findUser = Utilizador::find()->where(['like', 'username', $username])->one();
 
         if ($findUser != false){
             return $findUser;

@@ -29,7 +29,7 @@ use Yii;
  * @property Pedido[] $pedidos
  * @property Tipoutilizador $tipoUtilizador0
  */
-class UserTable extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+class Utilizador extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -160,7 +160,7 @@ class UserTable extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfa
     }
 
     public static function findByUsername($username){
-        $findUser = UserTable::find()->where(['like', 'username', $username])->one();
+        $findUser = Utilizador::find()->where(['like', 'username', $username])->one();
 
         if ($findUser != false){
             return $findUser;
