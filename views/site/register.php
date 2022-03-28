@@ -21,8 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'password')->passwordInput() ?>
         <?= $form->field($model, 'email')->textInput() ?>
         <?= $form->field($model, 'nome')->textInput() ?>
-
-        <?= "<h1>" . date('y-m-d h:i:s', time()) . "</h1>"?>
     
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
