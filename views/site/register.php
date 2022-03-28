@@ -21,7 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'password')->passwordInput() ?>
         <?= $form->field($model, 'email')->textInput() ?>
         <?= $form->field($model, 'nome')->textInput() ?>
-        <?= $form->field($model, 'morada')->textInput() ?>
+
+        <?= "<h1>" . date('y-m-d h:i:s', time()) . "</h1>"?>
     
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
@@ -30,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
     /*
+     * <?= $form->field($model, 'morada')->textInput() ?>
     <?= $form->field($model, 'nif')
     <?= $form->field($model, 'dataCriacao')
     <?= $form->field($model, 'localidade')

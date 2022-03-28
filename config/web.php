@@ -11,7 +11,11 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+
+    'timeZone' => 'Europe/London',
+
     'components' => [
+
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'lVZtY6X1loBW9EuIRX6PAcqKCQtUpXJI',
