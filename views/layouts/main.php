@@ -40,8 +40,9 @@ AppAsset::register($this);
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
+            //['label' => 'CRUDS', 'url' => ['/site/cruds'], 'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('gestor')],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Login', 'url' => ['/user/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
