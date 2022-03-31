@@ -7,6 +7,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema gestorpedreira
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `gestorpedreira` ;
 
 -- -----------------------------------------------------
 -- Schema gestorpedreira
@@ -477,13 +478,13 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `gestorpedreira`.`notificacoes`
+-- Table `gestorpedreira`.`notificacao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `gestorpedreira`.`notificacoes` (
+CREATE TABLE IF NOT EXISTS `gestorpedreira`.`notificacao` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `idUser` INT NOT NULL,
   `mensagem` VARCHAR(255) NOT NULL,
-  `notificacoescol` TINYINT NOT NULL DEFAULT 0,
+  `notificao_lida` TINYINT NOT NULL DEFAULT 0,
   `origem` VARCHAR(100) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_notificacoes_user1_idx` (`idUser` ASC) ,
