@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\TipoUtilizador */
+/* @var $model app\models\Profile */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Tipo Utilizadors', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Profiles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="tipo-utilizador-view">
+<div class="profile-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,7 +30,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'nome',
+            'user_id',
+            'idFotografia',
+            'email:email',
+            'full_name',
+            'telefone',
+            'morada',
+            'localidade',
+            'codPostal',
+            'nif',
+            'nib',
+            'created_at',
+            'updated_at',
+            'timezone',
         ],
     ]) ?>
 

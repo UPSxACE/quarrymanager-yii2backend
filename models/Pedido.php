@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "pedido".
  *
  * @property int $id
- * @property int $idUtilizador
+ * @property int $idUser
  * @property int|null $idProduto
  * @property float|null $desconto
  * @property float|null $quantidade
@@ -22,7 +22,7 @@ use Yii;
  *
  * @property EstadoPedido[] $estadoPedidos
  * @property Produto $idProduto0
- * @property Utilizador $idUtilizador0
+ * @property User $idUser0
  * @property PedidoLote[] $pedidoLotes
  */
 class Pedido extends \yii\db\ActiveRecord
@@ -41,15 +41,15 @@ class Pedido extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idUtilizador', 'nome', 'dataHoraPedido'], 'required'],
-            [['idUtilizador', 'idProduto', 'nif'], 'integer'],
+            [['idUser', 'nome', 'dataHoraPedido'], 'required'],
+            [['idUser', 'idProduto', 'nif'], 'integer'],
             [['desconto', 'quantidade'], 'number'],
             [['dataHoraPedido'], 'safe'],
             [['nome', 'morada', 'mensagem'], 'string', 'max' => 150],
             [['telefone'], 'string', 'max' => 15],
             [['email'], 'string', 'max' => 70],
-            [['idUtilizador'], 'exist', 'skipOnError' => true, 'targetClass' => Utilizador::className(), 'targetAttribute' => ['idUtilizador' => 'id']],
             [['idProduto'], 'exist', 'skipOnError' => true, 'targetClass' => Produto::className(), 'targetAttribute' => ['idProduto' => 'id']],
+            [['idUser'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['idUser' => 'id']],
         ];
     }
 
@@ -60,7 +60,7 @@ class Pedido extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'idUtilizador' => 'Id Utilizador',
+            'idUser' => 'Id User',
             'idProduto' => 'Id Produto',
             'desconto' => 'Desconto',
             'quantidade' => 'Quantidade',
@@ -95,13 +95,13 @@ class Pedido extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[IdUtilizador0]].
+     * Gets query for [[IdUser0]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIdUtilizador0()
+    public function getIdUser0()
     {
-        return $this->hasOne(Utilizador::className(), ['id' => 'idUtilizador']);
+        return $this->hasOne(User::className(), ['id' => 'idUser']);
     }
 
     /**

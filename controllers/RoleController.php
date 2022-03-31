@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\TipoUtilizador;
-use app\models\TipoUtilizadorSearch;
+use app\models\Role;
+use app\models\RoleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TipoUtilizadorController implements the CRUD actions for TipoUtilizador model.
+ * RoleController implements the CRUD actions for Role model.
  */
-class TipoUtilizadorController extends Controller
+class RoleController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class TipoUtilizadorController extends Controller
     }
 
     /**
-     * Lists all TipoUtilizador models.
+     * Lists all Role models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new TipoUtilizadorSearch();
+        $searchModel = new RoleSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class TipoUtilizadorController extends Controller
     }
 
     /**
-     * Displays a single TipoUtilizador model.
+     * Displays a single Role model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class TipoUtilizadorController extends Controller
     }
 
     /**
-     * Creates a new TipoUtilizador model.
+     * Creates a new Role model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new TipoUtilizador();
+        $model = new Role();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class TipoUtilizadorController extends Controller
     }
 
     /**
-     * Updates an existing TipoUtilizador model.
+     * Updates an existing Role model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class TipoUtilizadorController extends Controller
     }
 
     /**
-     * Deletes an existing TipoUtilizador model.
+     * Deletes an existing Role model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class TipoUtilizadorController extends Controller
     }
 
     /**
-     * Finds the TipoUtilizador model based on its primary key value.
+     * Finds the Role model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return TipoUtilizador the loaded model
+     * @return Role the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = TipoUtilizador::findOne(['id' => $id])) !== null) {
+        if (($model = Role::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

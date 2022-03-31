@@ -6,18 +6,18 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\TipoUtilizadorSearch */
+/* @var $searchModel app\models\NotificacaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tipo Utilizadors';
+$this->title = 'Notificacaos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="tipo-utilizador-index">
+<div class="notificacao-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Tipo Utilizador', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Notificacao', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,10 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'nome',
+            'idUser',
+            'mensagem',
+            'notificao_lida',
+            'origem',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, \app\models\TipoUtilizador $model, $key, $index, $column) {
+                'urlCreator' => function ($action, \app\models\Notificacao $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

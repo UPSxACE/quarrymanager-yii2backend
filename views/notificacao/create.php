@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Utilizador */
+/* @var $model app\models\Notificacao */
 
-$this->title = 'Create Utilizador';
-$this->params['breadcrumbs'][] = ['label' => 'Utilizadors', 'url' => ['index']];
+$this->title = 'Create Notificacao';
+$this->params['breadcrumbs'][] = ['label' => 'Notificacaos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="utilizador-create">
+<div class="notificacao-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

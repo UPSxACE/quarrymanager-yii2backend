@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Utilizador */
+/* @var $model app\models\Notificacao */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Utilizadors', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Notificacaos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="utilizador-view">
+<div class="notificacao-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,21 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'tipoUtilizador',
-            'idFotografia',
-            'username',
-            'password',
-            'email:email',
-            'nome',
-            'telefone',
-            'authKey',
-            'accessToken',
-            'morada',
-            'localidade',
-            'codPostal',
-            'nif',
-            'nib',
-            'dataCriacao',
+            'idUser',
+            'mensagem',
+            'notificao_lida',
+            'origem',
         ],
     ]) ?>
 

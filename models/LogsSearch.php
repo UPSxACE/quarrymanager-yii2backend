@@ -17,7 +17,7 @@ class LogsSearch extends Logs
     public function rules()
     {
         return [
-            [['id', 'idUtilizador', 'idTipoAcao'], 'integer'],
+            [['id', 'idUser', 'idTipoAcao'], 'integer'],
             [['descricao', 'dataHora'], 'safe'],
         ];
     }
@@ -59,7 +59,7 @@ class LogsSearch extends Logs
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'idUtilizador' => $this->idUtilizador,
+            'idUser' => $this->idUser,
             'idTipoAcao' => $this->idTipoAcao,
             'dataHora' => $this->dataHora,
         ]);

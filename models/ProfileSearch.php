@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Utilizador;
+use app\models\Profile;
 
 /**
- * UtilizadorSearch represents the model behind the search form of `app\models\Utilizador`.
+ * ProfileSearch represents the model behind the search form of `app\models\Profile`.
  */
-class UtilizadorSearch extends Utilizador
+class ProfileSearch extends Profile
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class UtilizadorSearch extends Utilizador
     public function rules()
     {
         return [
-            [['id', 'tipoUtilizador', 'idFotografia', 'nif'], 'integer'],
-            [['username', 'password', 'email', 'nome', 'telefone', 'authKey', 'accessToken', 'morada', 'localidade', 'codPostal', 'nib', 'dataCriacao'], 'safe'],
+            [['id', 'user_id', 'idFotografia', 'nif'], 'integer'],
+            [['email', 'full_name', 'telefone', 'morada', 'localidade', 'codPostal', 'nib', 'created_at', 'updated_at', 'timezone'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class UtilizadorSearch extends Utilizador
      */
     public function search($params)
     {
-        $query = Utilizador::find();
+        $query = Profile::find();
 
         // add conditions that should always apply here
 
@@ -59,23 +59,21 @@ class UtilizadorSearch extends Utilizador
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'tipoUtilizador' => $this->tipoUtilizador,
+            'user_id' => $this->user_id,
             'idFotografia' => $this->idFotografia,
             'nif' => $this->nif,
-            'dataCriacao' => $this->dataCriacao,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'password', $this->password])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'nome', $this->nome])
+        $query->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'full_name', $this->full_name])
             ->andFilterWhere(['like', 'telefone', $this->telefone])
-            ->andFilterWhere(['like', 'authKey', $this->authKey])
-            ->andFilterWhere(['like', 'accessToken', $this->accessToken])
             ->andFilterWhere(['like', 'morada', $this->morada])
             ->andFilterWhere(['like', 'localidade', $this->localidade])
             ->andFilterWhere(['like', 'codPostal', $this->codPostal])
-            ->andFilterWhere(['like', 'nib', $this->nib]);
+            ->andFilterWhere(['like', 'nib', $this->nib])
+            ->andFilterWhere(['like', 'timezone', $this->timezone]);
 
         return $dataProvider;
     }

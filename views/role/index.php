@@ -6,18 +6,18 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\PedidoSearch */
+/* @var $searchModel app\models\RoleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pedidos';
+$this->title = 'Roles';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pedido-index">
+<div class="role-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Pedido', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Role', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,20 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'idUser',
-            'idProduto',
-            'desconto',
-            'quantidade',
-            //'nome',
-            //'morada',
-            //'telefone',
-            //'email:email',
-            //'mensagem',
-            //'nif',
-            //'dataHoraPedido',
+            'name',
+            'created_at',
+            'updated_at',
+            'can_admin',
+            //'can_gestor',
+            //'can_operario',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, \app\models\Pedido $model, $key, $index, $column) {
+                'urlCreator' => function ($action, \app\models\Role $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

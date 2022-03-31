@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\TipoUtilizador;
+use app\models\Notificacao;
 
 /**
- * TipoUtilizadorSearch represents the model behind the search form of `app\models\TipoUtilizador`.
+ * NotificacaoSearch represents the model behind the search form of `app\models\Notificacao`.
  */
-class TipoUtilizadorSearch extends TipoUtilizador
+class NotificacaoSearch extends Notificacao
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class TipoUtilizadorSearch extends TipoUtilizador
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['nome'], 'safe'],
+            [['id', 'idUser', 'notificao_lida'], 'integer'],
+            [['mensagem', 'origem'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class TipoUtilizadorSearch extends TipoUtilizador
      */
     public function search($params)
     {
-        $query = TipoUtilizador::find();
+        $query = Notificacao::find();
 
         // add conditions that should always apply here
 
@@ -59,9 +59,12 @@ class TipoUtilizadorSearch extends TipoUtilizador
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'idUser' => $this->idUser,
+            'notificao_lida' => $this->notificao_lida,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome]);
+        $query->andFilterWhere(['like', 'mensagem', $this->mensagem])
+            ->andFilterWhere(['like', 'origem', $this->origem]);
 
         return $dataProvider;
     }

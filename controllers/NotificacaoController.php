@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Utilizador;
-use app\models\UtilizadorSearch;
+use app\models\Notificacao;
+use app\models\NotificacaoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UtilizadorController implements the CRUD actions for Utilizador model.
+ * NotificacaoController implements the CRUD actions for Notificacao model.
  */
-class UtilizadorController extends Controller
+class NotificacaoController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class UtilizadorController extends Controller
     }
 
     /**
-     * Lists all Utilizador models.
+     * Lists all Notificacao models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new UtilizadorSearch();
+        $searchModel = new NotificacaoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class UtilizadorController extends Controller
     }
 
     /**
-     * Displays a single Utilizador model.
+     * Displays a single Notificacao model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class UtilizadorController extends Controller
     }
 
     /**
-     * Creates a new Utilizador model.
+     * Creates a new Notificacao model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Utilizador();
+        $model = new Notificacao();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class UtilizadorController extends Controller
     }
 
     /**
-     * Updates an existing Utilizador model.
+     * Updates an existing Notificacao model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class UtilizadorController extends Controller
     }
 
     /**
-     * Deletes an existing Utilizador model.
+     * Deletes an existing Notificacao model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class UtilizadorController extends Controller
     }
 
     /**
-     * Finds the Utilizador model based on its primary key value.
+     * Finds the Notificacao model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Utilizador the loaded model
+     * @return Notificacao the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Utilizador::findOne(['id' => $id])) !== null) {
+        if (($model = Notificacao::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\TipoUtilizadorSearch */
+/* @var $model app\models\NotificacaoSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="tipo-utilizador-search">
+<div class="notificacao-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,7 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'nome') ?>
+    <?= $form->field($model, 'idUser') ?>
+
+    <?= $form->field($model, 'mensagem') ?>
+
+    <?= $form->field($model, 'notificao_lida') ?>
+
+    <?= $form->field($model, 'origem') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

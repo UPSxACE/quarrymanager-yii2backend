@@ -37,6 +37,11 @@ class Role extends ActiveRecord
     /**
      * @inheritdoc
      */
+    public static function tableName()
+    {
+        return 'role';
+    }
+
     public function init()
     {
         if (!$this->module) {

@@ -14,7 +14,7 @@ use Yii;
  * @property string|null $dataHora
  *
  * @property Tipoacao $idTipoAcao0
- * @property Utilizador $idUser0
+ * @property User $idUser0
  */
 class Logs extends \yii\db\ActiveRecord
 {
@@ -36,7 +36,7 @@ class Logs extends \yii\db\ActiveRecord
             [['dataHora'], 'safe'],
             [['descricao'], 'string', 'max' => 255],
             [['idTipoAcao'], 'exist', 'skipOnError' => true, 'targetClass' => Tipoacao::className(), 'targetAttribute' => ['idTipoAcao' => 'id']],
-            [['idUser'], 'exist', 'skipOnError' => true, 'targetClass' => Utilizador::className(), 'targetAttribute' => ['idUser' => 'id']],
+            [['idUser'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['idUser' => 'id']],
         ];
     }
 
@@ -47,7 +47,7 @@ class Logs extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'idUser' => 'Id Utilizador',
+            'idUser' => 'Id User',
             'idTipoAcao' => 'Id Tipo Acao',
             'descricao' => 'Descricao',
             'dataHora' => 'Data Hora',
@@ -71,7 +71,7 @@ class Logs extends \yii\db\ActiveRecord
      */
     public function getIdUser0()
     {
-        return $this->hasOne(Utilizador::className(), ['id' => 'idUser']);
+        return $this->hasOne(User::className(), ['id' => 'idUser']);
     }
 
     static public function registrarLogSystem($idTipoAcao, $descricao){
@@ -88,4 +88,5 @@ class Logs extends \yii\db\ActiveRecord
          *
          */
     }
+
 }

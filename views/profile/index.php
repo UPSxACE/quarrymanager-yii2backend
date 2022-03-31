@@ -6,18 +6,18 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\UtilizadorSearch */
+/* @var $searchModel app\models\ProfileSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Utilizadors';
+$this->title = 'Profiles';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="utilizador-index">
+<div class="profile-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Utilizador', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Profile', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,24 +29,22 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'tipoUtilizador',
+            'user_id',
             'idFotografia',
-            'username',
-            'password',
-            //'email:email',
-            //'nome',
+            'email:email',
+            'full_name',
             //'telefone',
-            //'authKey',
-            //'accessToken',
             //'morada',
             //'localidade',
             //'codPostal',
             //'nif',
             //'nib',
-            //'dataCriacao',
+            //'created_at',
+            //'updated_at',
+            //'timezone',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, app\models\Utilizador $model, $key, $index, $column) {
+                'urlCreator' => function ($action, \app\models\Profile $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

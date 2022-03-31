@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\TipoUtilizador */
+/* @var $model app\models\Profile */
 
-$this->title = 'Create Tipo Utilizador';
-$this->params['breadcrumbs'][] = ['label' => 'Tipo Utilizadors', 'url' => ['index']];
+$this->title = 'Create Profile';
+$this->params['breadcrumbs'][] = ['label' => 'Profiles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="tipo-utilizador-create">
+<div class="profile-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

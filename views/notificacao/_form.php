@@ -4,21 +4,21 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Logs */
+/* @var $model app\models\Notificacao */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="logs-form">
+<div class="notificacao-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'idUser')->textInput() ?>
 
-    <?= $form->field($model, 'idTipoAcao')->textInput() ?>
+    <?= $form->field($model, 'mensagem')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'descricao')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'notificao_lida')->textInput() ?>
 
-    <?= $form->field($model, 'dataHora')->textInput() ?>
+    <?= $form->field($model, 'origem')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

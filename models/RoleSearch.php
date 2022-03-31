@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Pedido;
+use app\models\Role;
 
 /**
- * PedidoSearch represents the model behind the search form of `app\models\Pedido`.
+ * RoleSearch represents the model behind the search form of `app\models\Role`.
  */
-class PedidoSearch extends Pedido
+class RoleSearch extends Role
 {
     /**
      * {@inheritdoc}
@@ -17,9 +17,8 @@ class PedidoSearch extends Pedido
     public function rules()
     {
         return [
-            [['id', 'idUser', 'idProduto', 'nif'], 'integer'],
-            [['desconto', 'quantidade'], 'number'],
-            [['nome', 'morada', 'telefone', 'email', 'mensagem', 'dataHoraPedido'], 'safe'],
+            [['id', 'can_admin', 'can_gestor', 'can_operario'], 'integer'],
+            [['name', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -41,7 +40,7 @@ class PedidoSearch extends Pedido
      */
     public function search($params)
     {
-        $query = Pedido::find();
+        $query = Role::find();
 
         // add conditions that should always apply here
 
@@ -60,19 +59,14 @@ class PedidoSearch extends Pedido
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'idUser' => $this->idUser,
-            'idProduto' => $this->idProduto,
-            'desconto' => $this->desconto,
-            'quantidade' => $this->quantidade,
-            'nif' => $this->nif,
-            'dataHoraPedido' => $this->dataHoraPedido,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'can_admin' => $this->can_admin,
+            'can_gestor' => $this->can_gestor,
+            'can_operario' => $this->can_operario,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome])
-            ->andFilterWhere(['like', 'morada', $this->morada])
-            ->andFilterWhere(['like', 'telefone', $this->telefone])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'mensagem', $this->mensagem]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

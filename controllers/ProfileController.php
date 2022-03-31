@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Logs;
-use app\models\LogsSearch;
+use app\models\Profile;
+use app\models\ProfileSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * LogsController implements the CRUD actions for Logs model.
+ * ProfileController implements the CRUD actions for Profile model.
  */
-class LogsController extends Controller
+class ProfileController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class LogsController extends Controller
     }
 
     /**
-     * Lists all Logs models.
+     * Lists all Profile models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new LogsSearch();
+        $searchModel = new ProfileSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class LogsController extends Controller
     }
 
     /**
-     * Displays a single Logs model.
+     * Displays a single Profile model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class LogsController extends Controller
     }
 
     /**
-     * Creates a new Logs model.
+     * Creates a new Profile model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Logs();
+        $model = new Profile();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class LogsController extends Controller
     }
 
     /**
-     * Updates an existing Logs model.
+     * Updates an existing Profile model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class LogsController extends Controller
     }
 
     /**
-     * Deletes an existing Logs model.
+     * Deletes an existing Profile model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class LogsController extends Controller
     }
 
     /**
-     * Finds the Logs model based on its primary key value.
+     * Finds the Profile model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Logs the loaded model
+     * @return Profile the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Logs::findOne(['id' => $id])) !== null) {
+        if (($model = Profile::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
