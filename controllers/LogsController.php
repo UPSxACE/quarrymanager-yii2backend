@@ -123,6 +123,7 @@ class LogsController extends Controller
      * @return Logs the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+
     protected function findModel($id)
     {
         if (($model = Logs::findOne(['id' => $id])) !== null) {
@@ -131,4 +132,6 @@ class LogsController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+
 }

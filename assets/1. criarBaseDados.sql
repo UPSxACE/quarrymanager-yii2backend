@@ -7,7 +7,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema gestorpedreira
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `gestorpedreira` ;
 
 -- -----------------------------------------------------
 -- Schema gestorpedreira
@@ -305,13 +304,14 @@ CREATE TABLE IF NOT EXISTS `gestorpedreira`.`Logs` (
   `dataHora` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Logs_TipoAcao1_idx` (`idTipoAcao` ASC) ,
+  INDEX `fk_Logs_user1_idx` (`idUser` ASC) ,
   CONSTRAINT `fk_Logs_TipoAcao1`
     FOREIGN KEY (`idTipoAcao`)
     REFERENCES `gestorpedreira`.`TipoAcao` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Logs_user1`
-    FOREIGN KEY (`id`)
+    FOREIGN KEY (`idUser`)
     REFERENCES `gestorpedreira`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -319,33 +319,33 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `gestorpedreira`.`perfil`
+-- Table `gestorpedreira`.`profile`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `gestorpedreira`.`perfil` (
+CREATE TABLE IF NOT EXISTS `gestorpedreira`.`profile` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `idUser` INT NULL,
-  `idFotografia` INT NOT NULL,
-  `email` VARCHAR(70) NOT NULL,
-  `nome` VARCHAR(150) NULL,
+  `user_id` INT NULL,
+  `idFotografia` INT NOT NULL DEFAULT 1,
+  `email` VARCHAR(70) NULL,
+  `full_name` VARCHAR(255) NULL,
   `telefone` VARCHAR(15) NULL,
   `morada` VARCHAR(150) NULL,
   `localidade` VARCHAR(50) NULL,
   `codPostal` VARCHAR(15) NULL,
   `nif` INT NULL,
   `nib` VARCHAR(50) NULL,
-  `created_at` DATETIME NULL,
-  `updated_at` DATETIME NULL,
+  `created_at` TIMESTAMP NULL,
+  `updated_at` TIMESTAMP NULL,
   `timezone` VARCHAR(255) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Utilizador_Fotografia1_idx` (`idFotografia` ASC) ,
-  INDEX `fk_dadosPessoais_user1_idx` (`idUser` ASC) ,
+  INDEX `fk_dadosPessoais_user1_idx` (`user_id` ASC) ,
   CONSTRAINT `fk_Utilizador_Fotografia1`
     FOREIGN KEY (`idFotografia`)
     REFERENCES `gestorpedreira`.`Fotografia` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_dadosPessoais_user1`
-    FOREIGN KEY (`idUser`)
+    FOREIGN KEY (`user_id`)
     REFERENCES `gestorpedreira`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

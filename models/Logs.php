@@ -8,13 +8,13 @@ use Yii;
  * This is the model class for table "logs".
  *
  * @property int $id
- * @property int|null $idUtilizador
+ * @property int|null $idUser
  * @property int|null $idTipoAcao
  * @property string|null $descricao
  * @property string|null $dataHora
  *
  * @property Tipoacao $idTipoAcao0
- * @property Utilizador $idUtilizador0
+ * @property Utilizador $idUser0
  */
 class Logs extends \yii\db\ActiveRecord
 {
@@ -32,11 +32,11 @@ class Logs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idUtilizador', 'idTipoAcao'], 'integer'],
+            [['idUser', 'idTipoAcao'], 'integer'],
             [['dataHora'], 'safe'],
             [['descricao'], 'string', 'max' => 255],
             [['idTipoAcao'], 'exist', 'skipOnError' => true, 'targetClass' => Tipoacao::className(), 'targetAttribute' => ['idTipoAcao' => 'id']],
-            [['idUtilizador'], 'exist', 'skipOnError' => true, 'targetClass' => Utilizador::className(), 'targetAttribute' => ['idUtilizador' => 'id']],
+            [['idUser'], 'exist', 'skipOnError' => true, 'targetClass' => Utilizador::className(), 'targetAttribute' => ['idUser' => 'id']],
         ];
     }
 
@@ -47,7 +47,7 @@ class Logs extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'idUtilizador' => 'Id Utilizador',
+            'idUser' => 'Id Utilizador',
             'idTipoAcao' => 'Id Tipo Acao',
             'descricao' => 'Descricao',
             'dataHora' => 'Data Hora',
@@ -65,12 +65,27 @@ class Logs extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[IdUtilizador0]].
+     * Gets query for [[IdUser0]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIdUtilizador0()
+    public function getIdUser0()
     {
-        return $this->hasOne(Utilizador::className(), ['id' => 'idUtilizador']);
+        return $this->hasOne(Utilizador::className(), ['id' => 'idUser']);
+    }
+
+    static public function registrarLogSystem($idTipoAcao, $descricao){
+        /* codigo de teste
+        $model = new Logs();
+        $model->idTipoAcao = $idTipoAcao;
+        $model->descricao = $descricao;
+        $model->validate() && $model->save();
+        */
+    }
+
+    static public function registrarLogUser($idUser, $idTipoAcao, $descricao){
+        /*
+         *
+         */
     }
 }

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Logs;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -72,6 +73,8 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        Logs::registrarLogSystem(1, "Tal usuário registrou-se");
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -141,6 +144,8 @@ class SiteController extends Controller
                 $model->authKey = md5(random_bytes(5));
                 $model->accessToken = password_hash(random_bytes(10), PASSWORD_DEFAULT);
                 $model->dataCriacao = date('y-m-d H:i:s', time());
+
+
 
                 if($model->validate() && $model->save()) {
                     return $this->redirect(['login']);
