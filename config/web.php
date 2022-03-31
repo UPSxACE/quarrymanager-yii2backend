@@ -41,16 +41,31 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'encryption' => 'tls',
+                'host' => 'smtp.gmail.com',
+                'port' => '587',
+                'username' => 'gestorapedreira@gmail.com',
+                'password' => 'CTeSP-DS-Grupo03',
+            ],        
         ],
         */
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            'useFileTransport' => true,
-            'messageConfig' => [
-                'from' => ['admin@website.com' => 'Admin'], // this is needed for sending emails
-                'charset' => 'UTF-8',
-            ]
+            // send all mails to a file by default. You have to set
+            // 'useFileTransport' to false and configure transport
+            // for the mailer to send real emails.
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'encryption' => 'tls',
+                'host' => 'smtp.gmail.com',
+                'port' => '587',
+                'username' => 'gestorapedreira@gmail.com',
+                'password' => 'CTeSP-DS-Grupo03',
+            ],        
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -75,7 +90,7 @@ $config = [
         'user' => [
             'class' => 'amnah\yii2\user\Module',
             // set custom module properties here ...
-            'requireEmail' => false,
+            'requireEmail' => true,
             'requireUsername' => true,
             'modelClasses' => [
                 'Role' => 'app\models\Role',
