@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Produto;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -15,6 +16,17 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="produto-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <?php
+    //teste da função getInfoProduto($idProduto)
+
+    //$idProduto = 1;
+    //$linkRecebido = \app\models\FotografiaProduto::getInfoProduto($idProduto);
+    //echo "<h1>" . $linkRecebido . "</h1>";
+    ?>
+
+
+
 
     <p>
         <?= Html::a('Create Produto', ['create'], ['class' => 'btn btn-success']) ?>

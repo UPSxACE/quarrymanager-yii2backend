@@ -40,7 +40,7 @@ AppAsset::register($this);
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
-            //['label' => 'CRUDS', 'url' => ['/site/cruds'], 'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('gestor')],
+            //['label' => 'CRUDS', 'url' => ['/site/cruds'], 'visible' => Yii::$app->user->can('operario') || Yii::$app->user->can('gestor')],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/user/login']]
             ) : (

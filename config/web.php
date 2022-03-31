@@ -94,6 +94,7 @@ $config = [
             'requireUsername' => true,
             'modelClasses' => [
                 'Role' => 'app\models\Role',
+		'User' => 'app\models\User',
             ]
         ],
     ],

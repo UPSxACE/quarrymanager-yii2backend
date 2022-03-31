@@ -69,4 +69,12 @@ class FotografiaProduto extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Produto::className(), ['id' => 'idProduto']);
     }
+
+    static public function getInfoProduto($idProduto){
+        $find_fotografia_produto = FotografiaProduto::find()->where(['idProduto' => $idProduto])->one();
+        $idFotografia = $find_fotografia_produto->idFotografia;
+        $find_fotografia = Fotografia::find()->where(['id' => $idFotografia])->one();
+        $link = $find_fotografia->link;
+        return($link);
+    }
 }

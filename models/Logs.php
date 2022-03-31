@@ -16,6 +16,7 @@ use Yii;
  * @property Tipoacao $idTipoAcao0
  * @property User $idUser0
  */
+
 class Logs extends \yii\db\ActiveRecord
 {
     /**
@@ -75,18 +76,30 @@ class Logs extends \yii\db\ActiveRecord
     }
 
     static public function registrarLogSystem($idTipoAcao, $descricao){
-        /* codigo de teste
         $model = new Logs();
         $model->idTipoAcao = $idTipoAcao;
         $model->descricao = $descricao;
-        $model->validate() && $model->save();
-        */
+        $model->dataHora = date('y-m-d H:i:s', time());
+
+        if($model->validate()){
+            $model->save();
+        }
     }
 
     static public function registrarLogUser($idUser, $idTipoAcao, $descricao){
         /*
          *
          */
+
+        $model = new Logs();
+        $model->idUser = $idUser;
+        $model->idTipoAcao = $idTipoAcao;
+        $model->descricao = $descricao;
+        $model->dataHora = date('y-m-d H:i:s', time());
+
+        if($model->validate()){
+            $model->save();
+        }
     }
 
 }

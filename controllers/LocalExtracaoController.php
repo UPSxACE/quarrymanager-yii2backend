@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use app\models\LocalExtracao;
 use app\models\LocalExtracaoSearch;
+use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -71,6 +73,10 @@ class LocalExtracaoController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+
+                $userid = Yii::$app->user->identity->id;
+                $username = Yii::$app->user->identity->username;
+                \app\models\Logs::registrarLogUser($userid, 2, $username . " criou um novo Local de Extração."); //identificar id usuario automatico
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {

@@ -129,4 +129,10 @@ class Produto extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Pedido::className(), ['idProduto' => 'id']);
     }
+
+    static public function getAllProducts(){
+        $produtos = new Produto();
+        $listaProdutos = $produtos->find()->all();
+        return $listaProdutos;
+    }
 }
