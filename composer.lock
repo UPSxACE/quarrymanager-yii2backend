@@ -4,8 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "90281da2590b6bcf08900b714be14165",
+    "content-hash": "b04be5eda8b4c5a2c8326b3f97b62955",
     "packages": [
+        {
+            "name": "amnah/yii2-user",
+            "version": "5.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amnah/yii2-user.git",
+                "reference": "317290a75a9dd83c00a52cd8973af578ab34571a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amnah/yii2-user/zipball/317290a75a9dd83c00a52cd8973af578ab34571a",
+                "reference": "317290a75a9dd83c00a52cd8973af578ab34571a",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-authclient": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "amnah\\yii2\\user\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "amnah",
+                    "email": "amnah.dev@gmail.com"
+                }
+            ],
+            "description": "Yii 2 user authentication module",
+            "keywords": [
+                "Authentication",
+                "auth",
+                "user",
+                "yii",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/amnah/yii2-user/issues",
+                "source": "https://github.com/amnah/yii2-user/tree/5.0.9"
+            },
+            "time": "2019-11-11T13:09:42+00:00"
+        },
         {
             "name": "bower-asset/inputmask",
             "version": "3.3.11",
@@ -890,51 +938,6 @@
                 }
             ],
             "time": "2021-05-27T09:17:38+00:00"
-        },
-        {
-            "name": "upsxace/yii2-user",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/UPSxACE/yii2-user.git",
-                "reference": "148485e93c5e8f54832d8a0fd353638b287f23a3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/UPSxACE/yii2-user/zipball/148485e93c5e8f54832d8a0fd353638b287f23a3",
-                "reference": "148485e93c5e8f54832d8a0fd353638b287f23a3",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "*",
-                "yiisoft/yii2-authclient": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "ace\\yii2\\user\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Eduardo Botelho",
-                    "email": "eduardo11224b@gmail.com"
-                }
-            ],
-            "description": "Fork from amnah/yii2-user, a Yii 2 user authentication module",
-            "keywords": [
-                "Authentication",
-                "auth",
-                "user",
-                "yii",
-                "yii2"
-            ],
-            "support": {
-                "issues": "https://github.com/UPSxACE/yii2-user/issues",
-                "source": "https://github.com/UPSxACE/yii2-user/tree/v2.0.0"
-            },
-            "time": "2022-03-31T00:49:22+00:00"
         },
         {
             "name": "yiisoft/yii2",

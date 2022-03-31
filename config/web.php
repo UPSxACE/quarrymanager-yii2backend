@@ -30,7 +30,7 @@ $config = [
         ],
         */
         'user' => [
-            'class' => 'upsxace\yii2\user\components\User',
+            'class' => 'amnah\yii2\user\components\User',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -73,10 +73,13 @@ $config = [
     /* added because of amnah/yii2-user */
     'modules' => [
         'user' => [
-            'class' => 'upsxace\yii2\user\Module',
+            'class' => 'amnah\yii2\user\Module',
             // set custom module properties here ...
             'requireEmail' => false,
             'requireUsername' => true,
+            'modelClasses' => [
+                'Role' => 'app\models\Role',
+            ]
         ],
     ],
     /* ^ added because of amnah/yii-user ^ */

@@ -3,7 +3,7 @@
 -- Host: localhost    Database: gestorpedreira
 -- ------------------------------------------------------
 -- Server version	10.4.22-MariaDB
-use gestorpedreira;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -130,7 +130,7 @@ CREATE TABLE `fotografia` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `link` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,6 +139,7 @@ CREATE TABLE `fotografia` (
 
 LOCK TABLES `fotografia` WRITE;
 /*!40000 ALTER TABLE `fotografia` DISABLE KEYS */;
+INSERT INTO `fotografia` VALUES (1,'img/genericUserProfilePicture.svg');
 /*!40000 ALTER TABLE `fotografia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,7 +264,7 @@ CREATE TABLE `logs` (
   KEY `fk_Logs_TipoAcao1_idx` (`idTipoAcao`),
   CONSTRAINT `fk_Logs_TipoAcao1` FOREIGN KEY (`idTipoAcao`) REFERENCES `tipoacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Logs_user1` FOREIGN KEY (`id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -455,45 +456,6 @@ LOCK TABLES `pedido_lote` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `perfil`
---
-
-DROP TABLE IF EXISTS `perfil`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `perfil` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idUser` int(11) DEFAULT NULL,
-  `idFotografia` int(11) NOT NULL,
-  `email` varchar(70) NOT NULL,
-  `nome` varchar(150) DEFAULT NULL,
-  `telefone` varchar(15) DEFAULT NULL,
-  `morada` varchar(150) DEFAULT NULL,
-  `localidade` varchar(50) DEFAULT NULL,
-  `codPostal` varchar(15) DEFAULT NULL,
-  `nif` int(11) DEFAULT NULL,
-  `nib` varchar(50) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `timezone` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_Utilizador_Fotografia1_idx` (`idFotografia`),
-  KEY `fk_dadosPessoais_user1_idx` (`idUser`),
-  CONSTRAINT `fk_Utilizador_Fotografia1` FOREIGN KEY (`idFotografia`) REFERENCES `fotografia` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_dadosPessoais_user1` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `perfil`
---
-
-LOCK TABLES `perfil` WRITE;
-/*!40000 ALTER TABLE `perfil` DISABLE KEYS */;
-/*!40000 ALTER TABLE `perfil` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `produto`
 --
 
@@ -526,6 +488,45 @@ CREATE TABLE `produto` (
 LOCK TABLES `produto` WRITE;
 /*!40000 ALTER TABLE `produto` DISABLE KEYS */;
 /*!40000 ALTER TABLE `produto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `profile`
+--
+
+DROP TABLE IF EXISTS `profile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `profile` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `idFotografia` int(11) NOT NULL DEFAULT 1,
+  `email` varchar(70) DEFAULT NULL,
+  `full_name` varchar(255) DEFAULT NULL,
+  `telefone` varchar(15) DEFAULT NULL,
+  `morada` varchar(150) DEFAULT NULL,
+  `localidade` varchar(50) DEFAULT NULL,
+  `codPostal` varchar(15) DEFAULT NULL,
+  `nif` int(11) DEFAULT NULL,
+  `nib` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `timezone` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_Utilizador_Fotografia1_idx` (`idFotografia`),
+  KEY `fk_dadosPessoais_user1_idx` (`user_id`),
+  CONSTRAINT `fk_Utilizador_Fotografia1` FOREIGN KEY (`idFotografia`) REFERENCES `fotografia` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_dadosPessoais_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `profile`
+--
+
+LOCK TABLES `profile` WRITE;
+/*!40000 ALTER TABLE `profile` DISABLE KEYS */;
+/*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -568,7 +569,7 @@ CREATE TABLE `tipoacao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(25) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -631,7 +632,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `user_username` (`username`),
   KEY `user_role_id` (`role_id`),
   CONSTRAINT `user_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -640,7 +641,6 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,1,1,'neo@neo.com','neo','$2y$13$dyVw4WkZGkABf2UrGWrhHO4ZmVBv.K4puhOL59Y9jQhIdj63TlV.O','d_TNYtRyDLfxdvVU_gZGetpt8RRBpr8l','oLpt-2PEk-1P7Ncq_vCkqtAkoQUf90xi',NULL,NULL,NULL,'2022-03-30 15:42:18',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -715,4 +715,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-30 22:17:42
+-- Dump completed on 2022-03-31  3:22:37
