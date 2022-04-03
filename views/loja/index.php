@@ -27,3 +27,5 @@ $this->params['breadcrumbs'][] = $this->title;
     //echo "<h2>" . $carro . "<h1>"; teste
     ?>
 </div>
+
+<div>teste</div>
