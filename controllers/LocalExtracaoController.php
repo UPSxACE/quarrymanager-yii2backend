@@ -33,6 +33,13 @@ class LocalExtracaoController extends Controller
         );
     }
 
+    static public function testeArray(){
+        $arr = ["nome" => "Rafael"];
+        echo $arr["nome"];
+    }
+
+
+
     /**
      * Lists all LocalExtracao models.
      *
