@@ -34,7 +34,7 @@ class LojaController extends Controller{
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 5,
+                'pageSize' => 8,
             ],
         ]);
 
