@@ -11,5 +11,5 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="dashboard-home">
-    <h1>Index</h1>
+    <h1>Home</h1>
 </div>
