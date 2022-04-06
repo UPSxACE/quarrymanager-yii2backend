@@ -44,6 +44,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             [
                 'class' => 'yii\grid\DataColumn', // this line is optional
+                'attribute' => 'tituloArtigo',
+                'format'=>'text',
+                'label' => 'Produto',
+            ],
+            [
+                'class' => 'yii\grid\DataColumn', // this line is optional
+                //'attribute' => 'idMaterial',
+                'attribute' => 'idMaterial0.nome',
+                'format' => 'text',
+                'label' => 'Material',
+            ],
+            [
+                'class' => 'yii\grid\DataColumn', // this line is optional
+                //'attribute' => 'idMaterial',
+                'attribute' => 'idCor0.nome',
+                'format' => 'text',
+                'label' => 'Côr',
+            ],
+            [
+                'class' => 'yii\grid\DataColumn', // this line is optional
                 'attribute' => 'preco',
                 'format'=>'currency',
                 'label' => 'Preco',
