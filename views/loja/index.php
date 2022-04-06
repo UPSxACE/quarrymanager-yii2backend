@@ -10,6 +10,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ProdutoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $listaProdutos \yii\data\ActiveDataProvider*/
 
 $this->title = 'Loja';
 $this->params['breadcrumbs'][] = $this->title;
@@ -71,6 +72,18 @@ $this->params['breadcrumbs'][] = $this->title;
         ]
     ]);
     ?>
-</div>
 
-<div>teste</div>
+    <?php
+        echo \yii\widgets\ListView::widget([
+                'dataProvider' => $listaProdutos,
+                'itemView' => '_produto',             //para cada entrada da base de dados, vai ser aplicado o código deste view
+                'options' => [
+                        'class' => 'row'
+                ],
+                'itemOptions' => [
+                        'class' => 'col-4'
+                ],
+                'layout' => "<div class='row'>{summary}</div><div class='row'>{items}</div><div class='row'>{pager}</div>"
+        ])
+    ?>
+</div>
