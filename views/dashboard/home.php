@@ -6,10 +6,10 @@ use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 
-$this->title = 'Histórico';
+$this->title = 'Home';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="perfil-historico">
-    <h1>Histórico de Encomendas</h1>
+<div class="dashboard-home">
+    <h1>Index</h1>
 </div>

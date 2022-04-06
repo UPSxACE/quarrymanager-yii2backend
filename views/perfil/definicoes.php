@@ -10,6 +10,6 @@ $this->title = 'Definições';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="definicoes-index">
+<div class="perfil-definicoes">
     <h1>Definições da Conta</h1>
 </div>
