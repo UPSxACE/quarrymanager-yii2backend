@@ -84,6 +84,11 @@ $config = [
             'rules' => [
             ],
         ],
+        'formatter' => [
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+            'currencyCode' => '€',
+        ],
     ],
     /* added because of amnah/yii2-user */
     'modules' => [

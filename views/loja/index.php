@@ -29,6 +29,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
     echo GridView::widget([
         'dataProvider' => $listaProdutos,
+        /*
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'class' => 'yii\grid\DataColumn', // this line is optional
+                'attribute' => 'name',
+                'format' => 'text',
+                'label' => 'Name',
+            ],
+            ['class' => 'yii\grid\CheckboxColumn'],
+        ]
+        */
+        'columns' => [
+            [
+                'class' => 'yii\grid\DataColumn', // this line is optional
+                'attribute' => 'preco',
+                'format'=>'currency',
+                'label' => 'Preco',
+            ],
+        ]
     ]);
     ?>
 </div>
