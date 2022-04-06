@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Loja;
 use app\models\Produto;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -18,11 +19,20 @@ class LojaController extends Controller{
         //echo "<h1>" . $tituloProduto . "<h1>";
         //}
 
+        /*
         $listaProdutos = Produto::getAllProducts();
+        */
 
+        $query = Produto::find(); //busca todos os produtos da base de dados
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 5,
+            ],
+        ]);
 
         return $this->render('index', [
-            'listaProdutos' => $listaProdutos,
+            'listaProdutos' => $provider,
         ]);
     }
 }

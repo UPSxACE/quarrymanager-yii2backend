@@ -20,11 +20,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
 
-    foreach($listaProdutos as $produto){
+    /*foreach($listaProdutos as $produto){
         $tituloProduto = $produto->tituloArtigo;
         echo "<h2>" . $tituloProduto . "<h1>";
     }
+    */
     //echo "<h2>" . $carro . "<h1>"; teste
+
+    echo GridView::widget([
+        'dataProvider' => $listaProdutos,
+    ]);
     ?>
 </div>
 
