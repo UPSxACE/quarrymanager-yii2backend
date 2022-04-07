@@ -15,6 +15,8 @@ class PerfilController extends Controller
     }
 
     public function actionMeuPerfil(){
+        $modelPerfil = new Profile();
+
         return $this->render('meu-perfil');
     }
 

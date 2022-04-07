@@ -86,4 +86,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'layout' => "<div class='row'>{summary}</div><div class='row'>{items}</div><div class='row'>{pager}</div>"
         ])
     ?>
+
+    <?php /*echo (Yii::$app->user->identity->profile->user_id) */ ?>
 </div>
