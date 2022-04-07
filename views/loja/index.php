@@ -87,5 +87,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ])
     ?>
 
-    <?php /*echo (Yii::$app->user->identity->profile->user_id) */ ?>
+    <?php /*echo (Yii::$app->user->identity->profile->full_name) */ ?>
 </div>

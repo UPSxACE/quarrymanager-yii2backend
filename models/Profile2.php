@@ -27,7 +27,7 @@ use Yii;
  * @property Fotografia $idFotografia0
  * @property User $user
  */
-class Profile extends \yii\db\ActiveRecord
+class Profile2 extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
