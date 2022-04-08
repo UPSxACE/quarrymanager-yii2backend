@@ -46,6 +46,7 @@ AppAsset::register($this);
             ['label' => 'Dashboard', 'url' => ['/dashboard/home'], 'visible' => Yii::$app->user->can('operario')],
             //['label' => 'CRUDS', 'url' => ['/site/cruds'], 'visible' => Yii::$app->user->can('operario') || Yii::$app->user->can('gestor')],
             ['label' => 'Perfil', 'url' => ['/perfil/meu-perfil'], 'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'Definicoes', 'url' => ['/perfil/definicoes'], 'visible' => !Yii::$app->user->isGuest],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/user/login']]
             ) : (

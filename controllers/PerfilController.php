@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Profile;
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -40,7 +41,12 @@ class PerfilController extends Controller
     }
 
     public function actionDefinicoes(){
-        return $this->render('definicoes');
+        $modelDefinicoes = new User();
+
+
+        return $this->render('definicoes',[
+            'modelDefinicoes' => $modelDefinicoes
+        ]);
     }
 
     public function actionHistorico(){
