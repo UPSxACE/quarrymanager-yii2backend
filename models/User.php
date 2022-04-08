@@ -33,7 +33,7 @@ use ReflectionClass;
  * @property Role $role
  * @property UserToken[] $userTokens
  * @property UserAuth[] $userAuths
- *
+ * @property UserForm $userForm
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -195,6 +195,13 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $profile = $this->module->model("Profile");
         return $this->hasOne($profile::className(), ['user_id' => 'id']);
+
+    }
+
+    public function getUserForm()  //teste criado
+    {
+        $userForm = $this->module->model("UserForm");
+        return $this->hasOne($userForm::className(), ['user_id' => 'id']);
 
     }
 
