@@ -33,6 +33,7 @@ use ReflectionClass;
  * @property Role $role
  * @property UserToken[] $userTokens
  * @property UserAuth[] $userAuths
+ *
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -194,7 +195,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $profile = $this->module->model("Profile");
         return $this->hasOne($profile::className(), ['user_id' => 'id']);
+
     }
+
 
     /**
      * @return \yii\db\ActiveQuery
