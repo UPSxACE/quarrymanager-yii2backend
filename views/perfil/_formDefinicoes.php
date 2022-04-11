@@ -21,8 +21,12 @@ use yii\widgets\ActiveForm;
         ?>
         <div class="col-12"><?= $form->field($modelDefinicoes, 'username',['inputOptions' => ['value'=>Yii::$app->user->identity->username, 'class'=>'form-control']])->textInput(['maxlength' => true]) ?></div>
         <div class="col-12"><?= $form->field($modelDefinicoes, 'email',['inputOptions' => ['value'=>Yii::$app->user->identity->email, 'class'=>'form-control',]])->textInput(['maxlength' => true]) ?></div>
-        <div class="col-12"><?= $form->field($modelDefinicoes, 'password',['inputOptions' => ['class'=>'form-control', 'type' => 'password',]])->textInput(['maxlength' => true]) ?></div>
+        <div class="col-12"><?= $form->field($modelDefinicoes, 'currentPassword',['inputOptions' => ['class'=>'form-control', 'type' => 'password',]])->textInput(['maxlength' => true]) ?></div>
+        <div class="col-12"><?= $form->field($modelDefinicoes, 'newPassword',['inputOptions' => ['class'=>'form-control', 'type' => 'password',]])->textInput(['maxlength' => true]) ?></div>
+        <div class="col-12"><?= $form->field($modelDefinicoes, 'newPasswordConfirm',['inputOptions' => ['class'=>'form-control', 'type' => 'password',]])->textInput(['maxlength' => true]) ?></div>
 
+
+        <!--
         <div class="col-12">
             <div class="form-group">
                 <label class="control-label">Nova Password</label>
@@ -36,10 +40,10 @@ use yii\widgets\ActiveForm;
                 <input id="confirmar-nova-password" class="form-control" type="password">
             </div>
         </div>
-    </div>
+    </div>-->
 
 
-    <div class="form-group">
+    <div class="form-group p-3">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 

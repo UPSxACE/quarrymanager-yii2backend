@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use amnah\yii2\user\models\UserToken;
 use app\models\Profile;
 use app\models\User;
 use Yii;
@@ -41,8 +42,49 @@ class PerfilController extends Controller
     }
 
     public function actionDefinicoes(){
-        $modelDefinicoes = new User();
+        $modelDefinicoes = Yii::$app->user->identity;
+        $modelDefinicoes->setScenario("account");
 
+
+        if ($this->request->isPost) {
+
+            if ($modelDefinicoes->load($this->request->post())) {
+
+                //visto que o identity não está a permitir criar um novo método...
+                $modelUser = new User();
+                $modelUser->load($this->request->post());
+
+                $userToken = new \amnah\yii2\user\models\UserToken();
+                if($modelUser->validateCurrentPasswordReturn($modelDefinicoes->currentPassword)){
+
+                    // check if user changed his email
+                    $newEmail = $modelDefinicoes->email != Yii::$app->user->identity->email;
+                    if ($newEmail) {
+                        $userToken = $userToken::generate($modelDefinicoes->id, $userToken::TYPE_EMAIL_CHANGE, $newEmail);
+                        if (!$numSent = $modelDefinicoes->sendEmailConfirmation($userToken)) {
+
+                            // handle email error
+                            Yii::$app->session->setFlash("Email-error", "Failed to send email");
+                        }
+                    }
+
+                    $modelDefinicoes->save(false);
+                    Yii::$app->session->setFlash("Account-success", Yii::t("user", "Account updated"));
+
+
+                    //return $this->refresh();
+
+                    //recriar model
+                    $modelDefinicoes->loadDefaultValues();
+
+                    return $this->render('definicoes',[
+                        'modelDefinicoes' => $modelDefinicoes
+                    ]);
+                }
+
+
+            }
+        }
 
         return $this->render('definicoes',[
             'modelDefinicoes' => $modelDefinicoes
