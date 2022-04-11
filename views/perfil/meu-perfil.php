@@ -11,10 +11,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="perfil-meu-perfil">
-    <h1>Meu Perfil</h1>
-
-    <?= $this->render('_formMeuPerfil', [
-        'modelPerfil' => $modelPerfil,
-    ]) ?>
-
+    <div class="row">
+        <div class="col-3">BOTOES</div>
+        <div class="col-9">
+            <h1>Meu Perfil</h1>
+            <?= $this->render('_formMeuPerfil', [
+                'modelPerfil' => $modelPerfil,
+            ]) ?>
+        </div>
+    </div>
 </div>
