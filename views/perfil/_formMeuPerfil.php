@@ -24,13 +24,4 @@ use yii\widgets\ActiveForm;
                     <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
                     <?php ActiveForm::end(); ?>
                 </div>
-
-
-
-
-
-
-
-
-
 </div>

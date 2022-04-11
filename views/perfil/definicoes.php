@@ -11,18 +11,22 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="definicoes">
-    <h1>Definições da Conta</h1>
+    <div class="row">
+        <div class="col-3">BOTÕES</div>
+        <div class="col-9">
+            <h1>Definições da Conta</h1>
 
-    <?php if(Yii::$app->session->hasFlash('Account-success')): ?>
+            <?php if(Yii::$app->session->hasFlash('Account-success')): ?>
 
-        <div class="flash-success">
-            <?php echo Yii::$app->session->getFlash('Account-success'); ?>
+                <div class="flash-success">
+                    <?php echo Yii::$app->session->getFlash('Account-success'); ?>
+                </div>
+
+            <?php endif; ?>
+
+            <?= $this->render('_formDefinicoes', [
+                'modelDefinicoes' => $modelDefinicoes,
+            ]) ?>
         </div>
-
-    <?php endif; ?>
-
-    <?= $this->render('_formDefinicoes', [
-        'modelDefinicoes' => $modelDefinicoes,
-    ]) ?>
-
+    </div>
 </div>
