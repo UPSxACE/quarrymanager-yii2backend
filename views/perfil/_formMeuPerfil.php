@@ -18,6 +18,11 @@ use yii\widgets\ActiveForm;
                         <div class="col-12"><?= $form->field($modelPerfil, 'full_name',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->full_name, 'class'=>'form-control']])->textInput(['maxlength' => true]) ?></div>
                         <div class="col-6"><?= $form->field($modelPerfil, 'dataNascimento',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->dataNascimento , 'class'=>'form-control', 'type'=>'date']])->textInput(['maxlength' => true]) ?></div>
                         <div class="col-6"><?= $form->field($modelPerfil, 'genero',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->genero, 'class'=>'form-control']])->dropDownList(["Masculino", "Feminino", "Outro(s)"]) ?></div>
+                        <div class="col-12"><?= $form->field($modelPerfil, 'morada',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->morada, 'class'=>'form-control']])->textInput(['maxlength' => true]) ?></div>
+                        <div class="col-6"><?= $form->field($modelPerfil, 'codPostal',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->codPostal, 'class'=>'form-control']])->textInput(['maxlength' => true]) ?></div>
+                        <div class="col-6"><?= $form->field($modelPerfil, 'localidade',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->localidade, 'class'=>'form-control']])->textInput(['maxlength' => true]) ?></div>
+
+
                         <div class="col-12">
                             <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
                             <?php //ActiveForm::end(); ?>
@@ -26,7 +31,7 @@ use yii\widgets\ActiveForm;
                     <?php ActiveForm::end(); ?>
                 </div>
                 <div class="col-3">
-                    <div>AAAAA</div>
+                    <div>Fotografia_perfil_atual</div>
                     <?php
 
                     $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>

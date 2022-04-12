@@ -46,8 +46,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php if(Yii::$app->session->hasFlash('Account-success')): ?>
 
-                <div class="flash-success">
+                <div class="alert alert-success">
                     <?php echo Yii::$app->session->getFlash('Account-success'); ?>
+                </div>
+
+            <?php endif; ?>
+
+            <?php if(Yii::$app->session->hasFlash('Account-fail')): ?>
+
+                <div class="alert alert-danger">
+                    <?php echo Yii::$app->session->getFlash('Account-fail'); ?>
                 </div>
 
             <?php endif; ?>

@@ -70,7 +70,7 @@ class Profile extends \yii\db\ActiveRecord
             'dataNascimento' => 'Data Nascimento',
             'telefone' => 'Telefone',
             'morada' => 'Morada',
-            'localidade' => 'Localidade',
+            'localidade' => 'Região',
             'codPostal' => 'Cod Postal',
             'nif' => 'Nif',
             'nib' => 'Nib',

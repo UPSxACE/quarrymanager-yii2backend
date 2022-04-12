@@ -32,7 +32,7 @@ class PerfilController extends Controller
                 //$modelPerfil->user_id = Yii::$app->user->identity->profile->user_id;
                 $modelUpload->imageFile = UploadedFile::getInstance($modelUpload, 'imageFile');
                 if ($modelUpload->upload()) {
-                    Yii::$app->session->setFlash("Account-success", Yii::t("user", "CHEGOU AQUI"));
+                    Yii::$app->session->setFlash("Account-success", Yii::t("user", "Fotografia de perfil atualizada com sucesso."));
                     // file is uploaded successfully
                     return $this->render('meu-perfil',[
                         'modelPerfil' => $modelPerfil,
@@ -51,7 +51,7 @@ class PerfilController extends Controller
                 $username = Yii::$app->user->identity->username;
                 */
                 //\app\models\Logs::registrarLogUser($userid, 2, $username . " criou um novo Local de Extração."); //identificar id usuario automatico
-                Yii::$app->session->setFlash("Account-success", Yii::t("user", "CHEGOU AQUI E NÃO DEVIA"));
+                Yii::$app->session->setFlash("Account-success", Yii::t("user", "Dados da conta atualizados com sucesso."));
                 return $this->redirect(['meu-perfil', [
                     'modelPerfil' => $modelPerfil,
                     'modelUpload' => $modelUpload
@@ -95,8 +95,7 @@ class PerfilController extends Controller
                     }
 
                     $modelDefinicoes->save(false);
-                    Yii::$app->session->setFlash("Account-success", Yii::t("user", "Account updated"));
-
+                    Yii::$app->session->setFlash("Account-success", Yii::t("user", "Definições da conta atualizados com sucesso."));
 
                     //return $this->refresh();
 
@@ -106,7 +105,7 @@ class PerfilController extends Controller
                     return $this->render('definicoes',[
                         'modelDefinicoes' => $modelDefinicoes
                     ]);
-                }
+                } else { Yii::$app->session->setFlash("Account-fail", Yii::t("user", "Account not updated")); }
 
 
             }
