@@ -13,7 +13,7 @@ use app\models\Profile;
 ?>
 
 <div class="meu-perfil-form row">
-                <div class="col-9">
+                <div class="col-7">
                     <?php $form = ActiveForm::begin(['options' => ['data.formShareValues'=>'[\'fieldtest1\'=>\'abc\', \'fieldtest2\'=>\'def\']']]); ?>
                     <div class="row">
                         <div class="col-12"><?= $form->field($modelPerfil, 'full_name',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->full_name, 'class'=>'form-control']])->textInput(['maxlength' => true]) ?></div>
@@ -31,7 +31,7 @@ use app\models\Profile;
                     </div>
                     <?php ActiveForm::end(); ?>
                 </div>
-                <div class="col-3">
+                <div class="col-5">
                     <img width="100px" height="100px" src="/uploads/<?php
                     $profile = new Profile();
                     $profile = $profile->findPerfil(Yii::$app->user->identity->id);
