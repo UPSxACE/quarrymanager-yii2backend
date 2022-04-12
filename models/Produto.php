@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property int $idMaterial
+ * @property int $idFotografia
  * @property int|null $idCor
  * @property float|null $Res_Compressao
  * @property float|null $Res_Flexao
@@ -24,6 +25,7 @@ use Yii;
  * @property Material $idMaterial0
  * @property Lote[] $lotes
  * @property Pedido[] $pedidos
+ * @property Fotografia $idFotografia0
  */
 class Produto extends \yii\db\ActiveRecord
 {
@@ -110,6 +112,11 @@ class Produto extends \yii\db\ActiveRecord
         return $this->hasOne(Material::className(), ['id' => 'idMaterial']);
     }
 
+    public function getIdFotografia0()
+    {
+        return $this->hasOne(Fotografia::className(), ['id' => 'idFotografia']);
+    }
+
     /**
      * Gets query for [[Lotes]].
      *
@@ -129,6 +136,8 @@ class Produto extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Pedido::className(), ['idProduto' => 'id']);
     }
+
+
 
     static public function getAllProducts(){
         $produtos = new Produto();

@@ -28,20 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
     */
     //echo "<h2>" . $carro . "<h1>"; teste
 
+    /* GRID VIEW
     echo GridView::widget([
         'dataProvider' => $listaProdutos,
-        /*
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'class' => 'yii\grid\DataColumn', // this line is optional
-                'attribute' => 'name',
-                'format' => 'text',
-                'label' => 'Name',
-            ],
-            ['class' => 'yii\grid\CheckboxColumn'],
-        ]
-        */
         'columns' => [
             [
                 'class' => 'yii\grid\DataColumn', // this line is optional
@@ -71,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]
     ]);
+    */
     ?>
 
     <?php
@@ -83,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'itemOptions' => [
                         'class' => 'col-4'
                 ],
-                'layout' => "<div class='row'>{summary}</div><div class='row'>{items}</div><div class='row'>{pager}</div>"
+                'layout' => "<div class='row col-12 justify-content-center d-flex'>{summary}</div><div class='row'>{items}</div><div class='row col-12 justify-content-center d-flex'>{pager}</div>"
         ])
     ?>
 
