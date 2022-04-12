@@ -43,8 +43,16 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-9">
             <h1>Meu Perfil</h1>
+            <?php if(Yii::$app->session->hasFlash('Account-success')): ?>
+
+                <div class="flash-success">
+                    <?php echo Yii::$app->session->getFlash('Account-success'); ?>
+                </div>
+
+            <?php endif; ?>
             <?= $this->render('_formMeuPerfil', [
                 'modelPerfil' => $modelPerfil,
+                'modelUpload' => $modelUpload
             ]) ?>
         </div>
     </div>

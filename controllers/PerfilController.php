@@ -4,12 +4,14 @@ namespace app\controllers;
 
 use amnah\yii2\user\models\UserToken;
 use app\models\Profile;
+use app\models\UploadForm;
 use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 class PerfilController extends Controller
 {
@@ -19,8 +21,22 @@ class PerfilController extends Controller
 
     public function actionMeuPerfil(){
         $modelPerfil = new Profile();
+        $modelUpload = new UploadForm();
 
         if ($this->request->isPost) {
+            //uploaded file save
+            if (Yii::$app->request->isPost) {
+                $modelUpload->imageFile = UploadedFile::getInstance($modelUpload, 'imageFile');
+                if ($modelUpload->upload()) {
+                    Yii::$app->session->setFlash("Account-success", Yii::t("user", "CHEGOU AQUI"));
+                    // file is uploaded successfully
+                    return;
+                }
+            }
+
+            //return $this->render('upload', ['model' => $model]);
+
+            //form save
             if ($modelPerfil->load($this->request->post()) && $modelPerfil->save()) {
 
                 /*
@@ -28,8 +44,10 @@ class PerfilController extends Controller
                 $username = Yii::$app->user->identity->username;
                 */
                 //\app\models\Logs::registrarLogUser($userid, 2, $username . " criou um novo Local de Extração."); //identificar id usuario automatico
+                Yii::$app->session->setFlash("Account-success", Yii::t("user", "CHEGOU AQUI E NÃO DEVIA"));
                 return $this->redirect(['meu-perfil', [
-                    'modelPerfil' => $modelPerfil
+                    'modelPerfil' => $modelPerfil,
+                    'modelUpload' => $modelUpload
                 ]]);
             }
         } else {
@@ -37,7 +55,8 @@ class PerfilController extends Controller
         }
 
         return $this->render('meu-perfil',[
-            'modelPerfil' => $modelPerfil
+            'modelPerfil' => $modelPerfil,
+            'modelUpload' => $modelUpload
         ]);
     }
 

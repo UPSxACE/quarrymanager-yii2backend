@@ -5,7 +5,8 @@ use yii\bootstrap4\NavBar;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $modelPerfil app\controllers\PerfilController
+/* @var $modelPerfil app\controllers\PerfilController */
+/* @var $modelUpload app\controllers\PerfilController */
 /* @var $this yii\web\View */
 /* @var $form yii\widgets\ActiveForm */
 ?>
@@ -21,6 +22,9 @@ use yii\widgets\ActiveForm;
                 </div>
                 <div class="col-3">
                     <div>AAAAA</div>
+                    <?= $this->render('_formFile', [
+                        'modelUpload' => $modelUpload
+                    ]) ?>
                 </div>
                 <div class="form-group col-12">
                     <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
