@@ -83,6 +83,13 @@ class PerfilController extends Controller
                 $userToken = new \amnah\yii2\user\models\UserToken();
                 if($modelUser->validateCurrentPasswordReturn($modelDefinicoes->currentPassword)){
 
+                    if($modelUser->newPassword !== $modelUser->newPasswordConfirm){
+                        $modelDefinicoes->addError("newPassword", "Passwords do not match");
+                        return $this->render('definicoes',[
+                            'modelDefinicoes' => $modelDefinicoes
+                        ]);
+                    }
+
                     // check if user changed his email
                     $newEmail = $modelDefinicoes->email != Yii::$app->user->identity->email;
                     if ($newEmail) {
@@ -105,7 +112,7 @@ class PerfilController extends Controller
                     return $this->render('definicoes',[
                         'modelDefinicoes' => $modelDefinicoes
                     ]);
-                } else { Yii::$app->session->setFlash("Account-fail", Yii::t("user", "Account not updated")); }
+                } else { Yii::$app->session->setFlash("Account-fail", Yii::t("user", "Account not updated. Incorrect password.")); }
 
 
             }

@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
                 <div class="col-12"><?= $form->field($modelDefinicoes, 'email',['inputOptions' => ['value'=>Yii::$app->user->identity->email, 'class'=>'form-control',]])->textInput(['maxlength' => true]) ?></div>
                 <div class="col-12"><?= $form->field($modelDefinicoes, 'currentPassword',['inputOptions' => ['class'=>'form-control', 'type' => 'password',]])->textInput(['maxlength' => true]) ?></div>
                 <div class="col-12"><?= $form->field($modelDefinicoes, 'newPassword',['inputOptions' => ['class'=>'form-control', 'type' => 'password',]])->textInput(['maxlength' => true, 'compare', 'compareAttribute' => 'newPasswordConfirm', 'message' => Yii::t('user', 'Passwords do not match')]) ?></div>
-                <div class="col-12"><?= $form->field($modelDefinicoes, 'newPasswordConfirm',['inputOptions' => ['class'=>'form-control', 'type' => 'password',]])->textInput(['maxlength' => true, 'compare', 'compareAttribute' => 'newPassword', 'message' => Yii::t('user', 'Passwords do not match')]) ?></div>
+                <div class="col-12"><?= $form->field($modelDefinicoes, 'newPasswordConfirm',['inputOptions' => ['class'=>'form-control', 'type' => 'password',]])->textInput(['maxlength' => true]) ?></div>
 
 
                 <!--
