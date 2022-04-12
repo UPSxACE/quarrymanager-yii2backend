@@ -30,7 +30,10 @@ class PerfilController extends Controller
                 if ($modelUpload->upload()) {
                     Yii::$app->session->setFlash("Account-success", Yii::t("user", "CHEGOU AQUI"));
                     // file is uploaded successfully
-                    return;
+                    return $this->render('meu-perfil',[
+                        'modelPerfil' => $modelPerfil,
+                        'modelUpload' => $modelUpload
+                    ]);
                 }
             }
 
