@@ -33,6 +33,7 @@ use ReflectionClass;
  * @property Role $role
  * @property UserToken[] $userTokens
  * @property UserAuth[] $userAuths
+ * @property UserForm $userForm
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -119,7 +120,7 @@ class User extends ActiveRecord implements IdentityInterface
         // add required for currentPassword on account page
         // only if $this->password is set (might be null from a social login)
         if ($this->password) {
-            $rules[] = [['currentPassword'], 'required', 'on' => ['account']];
+            $rules[] = [['currentPassword'], 'required', 'on' => ['account']]; //'account' provavelmente aqui refere-se ao scenario
         }
 
         // add required rules for email/username depending on module properties
@@ -142,6 +143,25 @@ class User extends ActiveRecord implements IdentityInterface
             $this->addError("currentPassword", "Current password incorrect");
         }
     }
+
+
+
+    //funções criadas para facilitar a criação de uma nova página de definições de conta
+    public function validateCurrentPasswordReturn($currentPassword)
+    {
+        if (!$this->validatePasswordIdentity($currentPassword)) {
+            $this->addError("currentPassword", "Current password incorrect");
+            return false;
+        }
+
+        return true;
+    }
+
+    public function validatePasswordIdentity($password)
+    {
+        return Yii::$app->security->validatePassword($password, Yii::$app->user->identity->password);
+    }
+
 
     /**
      * @inheritdoc
@@ -194,7 +214,16 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $profile = $this->module->model("Profile");
         return $this->hasOne($profile::className(), ['user_id' => 'id']);
+
     }
+
+    public function getUserForm()  //teste criado
+    {
+        $userForm = $this->module->model("UserForm");
+        return $this->hasOne($userForm::className(), ['user_id' => 'id']);
+
+    }
+
 
     /**
      * @return \yii\db\ActiveQuery

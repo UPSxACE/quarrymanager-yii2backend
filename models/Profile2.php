@@ -27,7 +27,7 @@ use Yii;
  * @property Fotografia $idFotografia0
  * @property User $user
  */
-class Profile extends \yii\db\ActiveRecord
+class Profile2 extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -70,7 +70,7 @@ class Profile extends \yii\db\ActiveRecord
             'dataNascimento' => 'Data Nascimento',
             'telefone' => 'Telefone',
             'morada' => 'Morada',
-            'localidade' => 'Região',
+            'localidade' => 'Localidade',
             'codPostal' => 'Cod Postal',
             'nif' => 'Nif',
             'nib' => 'Nib',
@@ -98,14 +98,5 @@ class Profile extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
-    }
-
-    public function findPerfil($user_id)
-    {
-        if (($model = Profile::findOne(['user_id' => $user_id])) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
