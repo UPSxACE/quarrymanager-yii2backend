@@ -4,6 +4,7 @@ use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\Profile;
 
 /* @var $modelPerfil app\controllers\PerfilController */
 /* @var $modelUpload app\controllers\PerfilController */
@@ -31,7 +32,11 @@ use yii\widgets\ActiveForm;
                     <?php ActiveForm::end(); ?>
                 </div>
                 <div class="col-3">
-                    <div>Fotografia_perfil_atual</div>
+                    <img width="100px" height="100px" src="/uploads/<?php
+                    $profile = new Profile();
+                    $profile = $profile->findPerfil(Yii::$app->user->identity->id);
+                    $profilePic = $profile->idFotografia0->link;
+                    echo $profilePic ?>">
                     <?php
 
                     $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
