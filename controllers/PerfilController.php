@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use amnah\yii2\user\models\UserToken;
+use app\models\Fotografia;
 use app\models\Profile;
 use app\models\UploadForm;
 use app\models\User;
@@ -31,7 +32,19 @@ class PerfilController extends Controller
                 $modelPerfil->load($this->request->post());
                 //$modelPerfil->user_id = Yii::$app->user->identity->profile->user_id;
                 $modelUpload->imageFile = UploadedFile::getInstance($modelUpload, 'imageFile');
-                if ($modelUpload->upload()) {
+                if ($modelUpload->uploadProfilePicture()) {
+                    //codigo NOVO
+                    $modelFotografia = new Fotografia();
+                    $modelFotografia->link = 'profilePictures/' . $modelUpload->imageFile->baseName . '.' . $modelUpload->imageFile->extension;
+                    if(!$modelFotografia->save()){
+                        //código para lidar com erro ao guardar imagem(irá ser feito futuramente)
+                    } else {
+                        $modelPerfil->idFotografia = $modelFotografia->id;
+                        if(!$modelPerfil->save()){
+                            //código para lidar com erro ao guardar imagem(irá ser feito futuramente)
+                        }
+                    }
+
                     Yii::$app->session->setFlash("Account-success", Yii::t("user", "Fotografia de perfil atualizada com sucesso."));
                     // file is uploaded successfully
                     return $this->render('meu-perfil',[

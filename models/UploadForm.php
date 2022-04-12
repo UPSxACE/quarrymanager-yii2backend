@@ -28,4 +28,14 @@ class UploadForm extends Model
             return false;
         }
     }
+
+    public function uploadProfilePicture()
+    {
+        if ($this->validate()) {
+            $this->imageFile->saveAs('uploads/profilePictures/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
