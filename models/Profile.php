@@ -99,4 +99,13 @@ class Profile extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+
+    public function findPerfil($user_id)
+    {
+        if (($model = Profile::findOne(['user_id' => $user_id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
 }

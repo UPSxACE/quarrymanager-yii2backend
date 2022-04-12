@@ -21,11 +21,15 @@ class PerfilController extends Controller
 
     public function actionMeuPerfil(){
         $modelPerfil = new Profile();
+        $modelPerfil = $modelPerfil->findPerfil(Yii::$app->user->identity->profile->user_id);
         $modelUpload = new UploadForm();
 
         if ($this->request->isPost) {
             //uploaded file save
             if (Yii::$app->request->isPost) {
+
+                $modelPerfil->load($this->request->post());
+                //$modelPerfil->user_id = Yii::$app->user->identity->profile->user_id;
                 $modelUpload->imageFile = UploadedFile::getInstance($modelUpload, 'imageFile');
                 if ($modelUpload->upload()) {
                     Yii::$app->session->setFlash("Account-success", Yii::t("user", "CHEGOU AQUI"));
