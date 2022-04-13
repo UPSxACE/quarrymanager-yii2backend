@@ -60,8 +60,8 @@ class Produto extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'idMaterial' => 'Id Material',
-            'idCor' => 'Id Cor',
+            'idMaterial' => 'Material',
+            'idCor' => 'Cor',
             'Res_Compressao' => 'Res Compressao',
             'Res_Flexao' => 'Res Flexao',
             'Massa_Vol_Aparente' => 'Massa Vol Aparente',

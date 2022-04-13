@@ -13,6 +13,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="dashboard-novoproduto">
     <h1>Novo Produto</h1>
     <?= $this->render('_formNovoProduto', [
-        'modelProduto' => $modelProduto
+        'modelProduto' => $modelProduto,
+        'arrayMateriais' => $arrayMateriais,
+        'arrayCores' => $arrayCores
     ]) ?>
 </div>

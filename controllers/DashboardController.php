@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\Cor;
 use app\models\EstadoPedido;
+use app\models\Material;
 use app\models\Pedido;
 use app\models\Produto;
 use Yii;
@@ -52,9 +54,13 @@ class DashboardController extends Controller
 
     public function actionNovoProduto(){
         $modelProduto = new Produto();
+        $arrayMateriais = Material::getAllAsArray();
+        $arrayCores = Cor::getAllAsArray();
 
         return $this->render('novoProduto', [
-            'modelProduto' => $modelProduto
+            'modelProduto' => $modelProduto,
+            'arrayMateriais' => $arrayMateriais,
+            'arrayCores' => $arrayCores
         ]);
     }
 

@@ -8,10 +8,27 @@ use yii\widgets\ActiveForm;
 <div class="novoproduto-form row">
 
 
+
+
     <div class="col-6"><?php $form = ActiveForm::begin(); ?>
-        <?= $form->field($modelProduto, 'idMaterial')->textInput() ?>
+        <?php
+        echo $form->field($modelProduto, 'idMaterial')->dropdownList($arrayMateriais,
+            ['text' => 'teste', 'prompt'=>'Selecione um material'],
+        );
+        ?>
     </div>
-    <div class="col-6"><?= $form->field($modelProduto, 'idCor')->textInput() ?></div>
+
+
+
+    <div class="col-6"><?php
+        echo $form->field($modelProduto, 'idCor')->dropdownList($arrayMateriais,
+            ['prompt'=>'Selecione uma cor']
+        );
+        ?>
+    </div>
+
+
+
 
     <div class="col-12"><?= $form->field($modelProduto, 'idFotografia')->textInput() ?></div>
     <div class="col-9"><?= $form->field($modelProduto, 'tituloArtigo')->textInput() ?></div>

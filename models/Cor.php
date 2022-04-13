@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "cor".
@@ -20,6 +21,12 @@ class Cor extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'cor';
+    }
+
+    public static function getAllAsArray(){
+        $res = Cor::find()->asArray()->all();
+        $arrayCores = ArrayHelper::map($res, 'id', 'nome');
+        return $arrayCores;
     }
 
     /**
