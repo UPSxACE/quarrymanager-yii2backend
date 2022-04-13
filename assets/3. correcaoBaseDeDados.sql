@@ -18,3 +18,7 @@ ADD CONSTRAINT `fk_Produto_Fotografia1`
   REFERENCES `gestorpedreira`.`fotografia` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+
+ALTER TABLE `gestorpedreira`.`produto` 
+ADD COLUMN `na_loja` TINYINT(1) NULL DEFAULT 0 AFTER `preco`;
+

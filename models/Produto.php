@@ -32,6 +32,9 @@ class Produto extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+    public $imageFile;
+
     public static function tableName()
     {
         return 'produto';
@@ -60,8 +63,8 @@ class Produto extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'idMaterial' => 'Id Material',
-            'idCor' => 'Id Cor',
+            'idMaterial' => 'Material',
+            'idCor' => 'Cor',
             'Res_Compressao' => 'Res Compressao',
             'Res_Flexao' => 'Res Flexao',
             'Massa_Vol_Aparente' => 'Massa Vol Aparente',
@@ -143,5 +146,15 @@ class Produto extends \yii\db\ActiveRecord
         $produtos = new Produto();
         $listaProdutos = $produtos->find()->all();
         return $listaProdutos;
+    }
+
+    public function uploadProductPicture()
+    {
+        if ($this->validate()) {
+            $this->imageFile->saveAs('uploads/productPictures/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "material".
@@ -20,6 +21,13 @@ class Material extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'material';
+    }
+
+    public static function getAllAsArray(){
+
+        $res = Material::find()->asArray()->all();
+        $arrayMateriais = ArrayHelper::map($res, 'id', 'nome');
+        return $arrayMateriais;
     }
 
     /**
