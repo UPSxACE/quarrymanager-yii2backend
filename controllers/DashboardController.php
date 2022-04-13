@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Cor;
 use app\models\EstadoPedido;
+use app\models\Fotografia;
 use app\models\Material;
 use app\models\Pedido;
 use app\models\Produto;
@@ -13,6 +14,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 class DashboardController extends Controller
 {
@@ -54,8 +56,39 @@ class DashboardController extends Controller
 
     public function actionNovoProduto(){
         $modelProduto = new Produto();
+        $modelFotografia = new Fotografia();
         $arrayMateriais = Material::getAllAsArray();
         $arrayCores = Cor::getAllAsArray();
+
+        //caso post
+        if ($this->request->isPost) {
+            //uploaded file save
+            if (Yii::$app->request->isPost) {
+
+                $modelProduto->load($this->request->post());
+                $modelProduto->imageFile = UploadedFile::getInstance($modelProduto, 'imageFile');
+                if ($modelProduto->uploadProductPicture()) {
+                    //codigo NOVO
+                    $modelFotografia = new Fotografia();
+                    $modelFotografia->link = 'productPictures/' . $modelProduto->imageFile->baseName . '.' . $modelProduto->imageFile->extension;
+                    if(!$modelFotografia->save()){
+                        //código para lidar com erro ao guardar imagem(irá ser feito futuramente)
+                    } else {
+                        $modelProduto->idFotografia = $modelFotografia->id;
+                        if(!$modelProduto->save()){
+                            //código para lidar com erro ao guardar imagem(irá ser feito futuramente)
+                        }
+                    }
+
+                    // file is uploaded successfully
+                    return $this->redirect(['dashboard/produtos']);
+                }
+            }
+        } else {
+            //$modelPerfil->loadDefaultValues();
+        }
+
+
 
         return $this->render('novoProduto', [
             'modelProduto' => $modelProduto,

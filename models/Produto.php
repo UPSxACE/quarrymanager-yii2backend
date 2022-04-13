@@ -32,6 +32,9 @@ class Produto extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+    public $imageFile;
+
     public static function tableName()
     {
         return 'produto';
@@ -145,4 +148,13 @@ class Produto extends \yii\db\ActiveRecord
         return $listaProdutos;
     }
 
+    public function uploadProductPicture()
+    {
+        if ($this->validate()) {
+            $this->imageFile->saveAs('uploads/productPictures/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
