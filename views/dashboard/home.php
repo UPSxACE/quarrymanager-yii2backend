@@ -10,6 +10,13 @@ $this->title = 'Home';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+
 <div class="dashboard-home">
-    <h1>Home</h1>
+    <div class="row">
+        <div class="col-2" style="">
+            <?=
+            $this->render('_navbarLeft', []);
+            ?>
+        </div>
+    </div>
 </div>
