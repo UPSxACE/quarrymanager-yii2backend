@@ -14,10 +14,12 @@ use yii\bootstrap4\Nav;
         ['label' => 'Stock', 'url' => ['/dashboard/stock']],
         ['label' => 'Produtos', 'url' => ['/dashboard/produtos']],
         ['label' => 'Encomendas', 'url' => ['/dashboard/encomendas']],
-        ['label' => 'Configurar Loja', 'url' => ['/dashboard/configurar-loja']],
-        ['label' => 'Usuários', 'url' => ['/dashboard/users']],
+        ['label' => 'Descontos', 'url' => ['/dashboard/descontos']],
+        ['label' => 'Clientes', 'url' => ['/dashboard/clientes']],
+        ['label' => 'Operários', 'url' => ['/dashboard/operários']],
+        ['label' => 'Gestores', 'url' => ['/dashboard/gestores']],
         ['label' => 'Logs', 'url' => ['/dashboard/logs']],
-        ['label' => 'Ajuda', 'url' => ['/dashboard/help']],
+        //['label' => 'Ajuda', 'url' => ['/dashboard/help']],
     ]
 ]); ?>
 
