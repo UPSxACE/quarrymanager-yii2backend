@@ -19,14 +19,17 @@ use yii\web\UploadedFile;
 class DashboardController extends Controller
 {
     public function actionIndex(){
+        $this->layout = 'main-fluid';
         return $this->redirect(['home']);
     }
 
     public function actionHome(){
+        $this->layout = 'main-fluid';
         return $this->render('home');
     }
 
     public function actionEncomendas(){
+        $this->layout = 'main-fluid';
         $query = EstadoPedido::find();
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
@@ -41,6 +44,7 @@ class DashboardController extends Controller
     }
 
     public function actionProdutos(){
+        $this->layout = 'main-fluid';
         $query = Produto::find();
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
@@ -55,6 +59,7 @@ class DashboardController extends Controller
     }
 
     public function actionNovoProduto(){
+        $this->layout = 'main-fluid';
         $modelProduto = new Produto();
         $modelFotografia = new Fotografia();
         $arrayMateriais = Material::getAllAsArray();
