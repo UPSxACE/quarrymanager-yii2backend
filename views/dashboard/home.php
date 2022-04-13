@@ -18,5 +18,9 @@ $this->params['breadcrumbs'][] = $this->title;
             $this->render('_navbarLeft', []);
             ?>
         </div>
+        <div class="col-10">
+            <h1>Stock</h1>
+        </div>
     </div>
+
 </div>
