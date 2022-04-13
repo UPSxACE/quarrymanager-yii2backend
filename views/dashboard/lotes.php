@@ -33,13 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'yii\grid\DataColumn', // this line is optional
-                    'attribute' => 'idProduto.idMaterial0.nome',
+                    'attribute' => 'idProduto0.idMaterial0.nome',
                     'format'=>'text',
                     'label' => 'Material',
                 ],
                 [
                     'class' => 'yii\grid\DataColumn', // this line is optional
-                    'attribute' => 'idCor.nome',
+                    'attribute' => 'idProduto0.idCor0.nome',
                     'format'=>'text',
                     'label' => 'Cor',
                 ],
@@ -57,9 +57,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'yii\grid\DataColumn', // this line is optional
-                    'attribute' => 'idLocalExtracao0.nome',
+                    'attribute' => 'idLocalExtracao0.coordenadasGPS_X',
                     'format'=>'text',
-                    'label' => 'Coordenadas GPS',
+                    'label' => 'Coordenadas GPS X',
+                ],
+                [
+                    'class' => 'yii\grid\DataColumn', // this line is optional
+                    'attribute' => 'idLocalExtracao0.coordenadasGPS_Y',
+                    'format'=>'text',
+                    'label' => 'Coordenadas GPS Y',
                 ],
                 [
                     'class' => 'yii\grid\DataColumn', // this line is optional
