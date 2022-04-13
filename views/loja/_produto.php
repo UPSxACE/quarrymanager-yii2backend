@@ -7,7 +7,7 @@ use app\models\Produto;
     <img class="align-self-center" width="240px" height="160px" src="/uploads/<?=$model->idFotografia0->link?>">
     <div class="row">
         <?php $formatter = \Yii::$app->formatter; ?>
-        <span class="col-6"><?=$model->tituloArtigo?></span>
+        <span class="col-6"><a href="/loja/produto/<?= $model->id ?>" style="color:black"><?=$model->tituloArtigo?></a></span>
         <span class="col-6 text-right"><?=$formatter->asCurrency($model->preco)?></span>
     </div>
 </div>
