@@ -18,7 +18,7 @@ $this->title = 'Produto ' . $produto->id;
         <h1><?= $produto->tituloArtigo ?></h1>
     </div>
     <div class="col-6">
-        <h1 class="text-right"><?= $produto->preco ?> €/m2</h1>
+        <h1 class="text-right"><?= $produto->preco ?> €/m²</h1>
     </div>
     <div class="d-flex align-items-center col-6">
         <p class="p-0 m-0"><?= $produto->descricaoProduto ?></p>

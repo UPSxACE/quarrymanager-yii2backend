@@ -8,7 +8,7 @@ use app\models\Produto;
     <div class="row">
         <?php $formatter = \Yii::$app->formatter; ?>
         <span class="col-6"><a href="/loja/produto/<?= $model->id ?>" style="color:black"><?=$model->tituloArtigo?></a></span>
-        <span class="col-6 text-right"><?=$formatter->asCurrency($model->preco)?></span>
+        <span class="col-6 text-right"><?= $model->preco ?>€/m²</span>
     </div>
 </div>
 
