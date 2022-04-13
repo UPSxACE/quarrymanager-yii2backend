@@ -118,4 +118,19 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function actionStock(){
+        $this->layout = 'main-fluid';
+        $query = Produto::find();
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('stock', [
+            'listaStock' => $provider,
+        ]);
+    }
+
 }
