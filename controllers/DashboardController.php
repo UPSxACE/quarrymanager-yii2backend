@@ -2,7 +2,10 @@
 
 namespace app\controllers;
 
+use app\models\EstadoPedido;
+use app\models\Pedido;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -16,6 +19,20 @@ class DashboardController extends Controller
 
     public function actionHome(){
         return $this->render('home');
+    }
+
+    public function actionEncomendas(){
+        $query = EstadoPedido::find();
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('encomendas', [
+            'listaEncomendas' => $provider,
+        ]);
     }
 
 }
