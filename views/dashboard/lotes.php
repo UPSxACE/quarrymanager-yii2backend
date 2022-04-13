@@ -70,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'class' => 'yii\grid\DataColumn', // this line is optional
                     'attribute' => 'dataHora',
-                    'format'=>'date',
+                    'format'=>'datetime',
                     'label' => 'Data',
                 ],
 

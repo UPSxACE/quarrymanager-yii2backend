@@ -8,11 +8,11 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $listaProdutos \app\controllers\DashboardController */
 
-$this->title = 'Operários';
+$this->title = 'Administradores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="dashboard-operarios row">
+<div class="dashboard-administradores row">
     <div class="col-2">
         <?= $this->render('_navbarLeft') ?>
     </div>
@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php
 
         echo GridView::widget([
-            'dataProvider' => $listaOperarios,
+            'dataProvider' => $listaAdministradores,
             'columns' => [
                 [
                     'class' => 'yii\grid\DataColumn', // this line is optional
@@ -43,7 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format'=>'datetime',
                     'label' => 'Data',
                 ],
-
 
             ]
         ]);
