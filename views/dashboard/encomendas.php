@@ -16,6 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <?php
+
+$texto = "teste";
+
 echo GridView::widget([
     'dataProvider' => $listaEncomendas,
     'columns' => [
@@ -48,8 +51,8 @@ echo GridView::widget([
         ],
         [
             'class' => 'yii\grid\DataColumn', // this line is optional
-            //'attribute' => 'idMaterial',
             'attribute' => 'idPedido0.idProduto0.tituloArtigo',
+            //'value' => function(){return "teste";},
             'format' => 'text',
             'label' => 'Produto',
         ],

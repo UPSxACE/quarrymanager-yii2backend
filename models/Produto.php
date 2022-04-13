@@ -144,4 +144,5 @@ class Produto extends \yii\db\ActiveRecord
         $listaProdutos = $produtos->find()->all();
         return $listaProdutos;
     }
+
 }
