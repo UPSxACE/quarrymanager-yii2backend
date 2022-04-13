@@ -50,4 +50,12 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function actionNovoProduto(){
+        $modelProduto = new Produto();
+
+        return $this->render('novoProduto', [
+            'modelProduto' => $modelProduto
+        ]);
+    }
+
 }
