@@ -42,4 +42,12 @@ class LojaController extends Controller{
             'listaProdutos' => $provider,
         ]);
     }
+
+    public function actionProduto($id){
+        $produto = new Produto();
+        $produto = $produto->find()->where(['id' => $id])->one();
+        return $this->render('produto', [
+            'produto' => $produto,
+        ]);
+    }
 }

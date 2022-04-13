@@ -82,6 +82,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'loja/produto/<id:\d+>' => 'loja/produto',
             ],
         ],
         'formatter' => [
