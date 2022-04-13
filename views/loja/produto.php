@@ -13,4 +13,23 @@ $this->title = 'Produto ' . $produto->id;
 ?>
 
 <img height="500px" width="100%" style="object-fit: cover" src="/uploads/<?= $produto->idFotografia0->link ?>">
+<div class="row">
+    <div class="col-6">
+        <h1><?= $produto->tituloArtigo ?></h1>
+    </div>
+    <div class="col-6">
+        <h1 class="text-right"><?= $produto->preco ?> €/m2</h1>
+    </div>
+    <div class="d-flex align-items-center col-6">
+        <p class="p-0 m-0"><?= $produto->descricaoProduto ?></p>
+    </div>
+    <div class="d-flex align-content-center col-6 flex-column">
+        <div class="row">
+            <span class="col-6 font-weight-bold">Resistência à Compressão</span><span class="col-6 text-right"><?= $produto->Res_Compressao ?> MPa</span>
+            <span class="col-6 font-weight-bold">Resistência à Flexão</span><span class="col-6 text-right"><?= $produto->Res_Flexao ?> MPa</span>
+            <span class="col-6 font-weight-bold">Massa Volúmica Aparente</span><span class="col-6 text-right"><?= $produto->Massa_Vol_Aparente ?> Kg/m³</span>
+            <span class="col-6 font-weight-bold">Absorção de Água</span><span class="col-6 text-right"><?= $produto->Absorcao_Agua ?>%</span>
+        </div>
 
+    </div>
+</div>
