@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Cor;
 use app\models\EstadoPedido;
 use app\models\Fotografia;
+use app\models\Lote;
 use app\models\Material;
 use app\models\Pedido;
 use app\models\Produto;
@@ -99,6 +100,21 @@ class DashboardController extends Controller
             'modelProduto' => $modelProduto,
             'arrayMateriais' => $arrayMateriais,
             'arrayCores' => $arrayCores
+        ]);
+    }
+
+    public function actionLotes(){
+        $this->layout = 'main-fluid';
+        $query = Lote::find();
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('lotes', [
+            'listaLotes' => $provider,
         ]);
     }
 
