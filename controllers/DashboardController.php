@@ -34,7 +34,7 @@ class DashboardController extends Controller
 
     public function actionEncomendas(){
         $this->layout = 'main-fluid';
-        $query = EstadoPedido::find();
+        $query = EstadoPedido::find()->where(['last' => '1']);
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [

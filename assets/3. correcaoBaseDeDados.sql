@@ -38,3 +38,7 @@ ADD COLUMN `nib` INT(11) NULL AFTER `nif`;
 ALTER TABLE `gestorpedreira`.`pedido` 
 ADD COLUMN `codigo_desconto` VARCHAR(50) NULL AFTER `desconto`;
 
+ALTER TABLE `gestorpedreira`.`estado_pedido` 
+ADD COLUMN `last` TINYINT(1) NOT NULL DEFAULT 1 AFTER `dataEstado`;
+
+

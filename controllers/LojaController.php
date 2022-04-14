@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\EstadoPedido;
 use app\models\Loja;
 use app\models\Pedido;
 use app\models\Produto;
@@ -49,6 +50,7 @@ class LojaController extends Controller{
         $produto = new Produto();
         $produto = $produto->find()->where(['id' => $id])->one();
         $modelPedido = new Pedido();
+        $modelEstadoPedido = new EstadoPedido();
 
 
 
@@ -56,9 +58,18 @@ class LojaController extends Controller{
         if ($this->request->isPost) {
             $modelPedido->idUser = Yii::$app->user->identity->id;
             $modelPedido->dataHoraPedido = date('Y-m-d H:i:s');
+            $modelPedido->idProduto = $id;
             if ($modelPedido->load($this->request->post()) && $modelPedido->save()) {
-                Yii::$app->session->setFlash("Orcamento-success", Yii::t("user", "Pedido de orçamento enviado."));
-                return $this->refresh();
+                $modelEstadoPedido->idEstado = '1';
+                $modelEstadoPedido->idPedido = $modelPedido->id;
+                $modelEstadoPedido->dataEstado = $modelPedido->dataHoraPedido;
+
+                if($modelEstadoPedido->save()){
+                    Yii::$app->session->setFlash("Orcamento-success", Yii::t("user", "Pedido de orçamento enviado."));
+                    return $this->refresh();
+                } else {
+                    //mensagem de erro
+                }
             }
         } else {
             $modelPedido->loadDefaultValues();
