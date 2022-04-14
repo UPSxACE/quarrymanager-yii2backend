@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Cor;
 use app\models\EstadoPedido;
 use app\models\Fotografia;
+use app\models\Logs;
 use app\models\Lote;
 use app\models\Material;
 use app\models\Pedido;
@@ -192,6 +193,21 @@ class DashboardController extends Controller
 
         return $this->render('administradores', [
             'listaAdministradores' => $provider,
+        ]);
+    }
+
+    public function actionLogs(){
+        $this->layout = 'main-fluid';
+        $query = Logs::find();
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('logs', [
+            'listaLogs' => $provider,
         ]);
     }
 }
