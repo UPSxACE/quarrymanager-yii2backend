@@ -6,60 +6,57 @@ use yii\helpers\Url;
 
 
 /* @var $this yii\web\View */
+/* @var $listaProdutos \app\controllers\DashboardController */
 
-$this->title = 'Encomendas';
+$this->title = 'Logs';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="dashboard-encomendas row">
+<div class="dashboard-logs row">
     <div class="col-2">
         <?= $this->render('_navbarLeft') ?>
     </div>
     <div class="col-10">
         <div class="d-flex align-items-center w-100">
-            <h1>Encomendas</h1>
+            <h1> <?= $this->title ?> </h1>
         </div>
         <?php
 
-        $texto = "teste";
-
         echo GridView::widget([
-            'dataProvider' => $listaEncomendas,
+            'dataProvider' => $listaLogs,
             'columns' => [
                 [
                     'class' => 'yii\grid\DataColumn', // this line is optional
-                    'attribute' => 'idEstado0.nome',
+                    'attribute' => 'idUser0.username',
                     'format'=>'text',
-                    'label' => 'Status',
+                    'label' => 'Username',
                 ],
                 [
                     'class' => 'yii\grid\DataColumn', // this line is optional
-                    //'attribute' => 'idMaterial',
-                    'attribute' => 'idPedido0.id',
-                    'format' => 'text',
-                    'label' => 'ID Encomenda',
+                    'attribute' => 'idUser0.profile0.full_name',
+                    'format'=>'text',
+                    'label' => 'Nome',
                 ],
                 [
                     'class' => 'yii\grid\DataColumn', // this line is optional
-                    //'attribute' => 'idMaterial',
-                    'attribute' => 'dataEstado',
-                    'format' => 'text',
-                    'label' => 'Ultima Atualização',
+                    'attribute' => 'idUser0.role0.name',
+                    'format'=>'text',
+                    'label' => 'Cargo',
                 ],
                 [
                     'class' => 'yii\grid\DataColumn', // this line is optional
-                    //'attribute' => 'idMaterial',
-                    'attribute' => 'idPedido0.idUser0.username',
-                    'format' => 'text',
-                    'label' => 'Cliente',
+                    'attribute' => 'idTipoAcao0.nome',
+                    'format'=>'text',
+                    'label' => 'Ação',
                 ],
                 [
                     'class' => 'yii\grid\DataColumn', // this line is optional
-                    'attribute' => 'idPedido0.idProduto0.tituloArtigo',
-                    //'value' => function(){return "teste";},
-                    'format' => 'text',
-                    'label' => 'Produto',
+                    'attribute' => 'dataHora',
+                    'format'=>'datetime',
+                    'label' => 'Data',
                 ],
+
+
             ]
         ]);
         ?>

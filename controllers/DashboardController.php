@@ -5,9 +5,13 @@ namespace app\controllers;
 use app\models\Cor;
 use app\models\EstadoPedido;
 use app\models\Fotografia;
+use app\models\Logs;
+use app\models\Lote;
 use app\models\Material;
 use app\models\Pedido;
 use app\models\Produto;
+use app\models\Profile;
+use app\models\User;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -102,4 +106,108 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function actionLotes(){
+        $this->layout = 'main-fluid';
+        $query = Lote::find();
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('lotes', [
+            'listaLotes' => $provider,
+        ]);
+    }
+
+    public function actionStock(){
+        $this->layout = 'main-fluid';
+        $query = Produto::find();
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('stock', [
+            'listaStock' => $provider,
+        ]);
+    }
+
+    public function actionClientes(){
+        $this->layout = 'main-fluid';
+        $query = User::find()->where(['role_id' => '4']);
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('clientes', [
+            'listaClientes' => $provider,
+        ]);
+    }
+
+    public function actionOperarios(){
+        $this->layout = 'main-fluid';
+        $query = User::find()->where(['role_id' => '3']);
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('operarios', [
+            'listaOperarios' => $provider,
+        ]);
+    }
+
+    public function actionGestores(){
+        $this->layout = 'main-fluid';
+        $query = User::find()->where(['role_id' => '2']);
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('gestores', [
+            'listaGestores' => $provider,
+        ]);
+    }
+
+    public function actionAdministradores(){
+        $this->layout = 'main-fluid';
+        $query = User::find()->where(['role_id' => '1']);
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('administradores', [
+            'listaAdministradores' => $provider,
+        ]);
+    }
+
+    public function actionLogs(){
+        $this->layout = 'main-fluid';
+        $query = Logs::find();
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('logs', [
+            'listaLogs' => $provider,
+        ]);
+    }
 }
