@@ -126,8 +126,6 @@ class PerfilController extends Controller
                         'modelDefinicoes' => $modelDefinicoes
                     ]);
                 } else { Yii::$app->session->setFlash("Account-fail", Yii::t("user", "Account not updated. Incorrect password.")); }
-
-
             }
         }
 

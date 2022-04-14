@@ -3,6 +3,7 @@
 use app\models\Produto;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ProdutoSearch */
@@ -32,4 +33,21 @@ $this->title = 'Produto ' . $produto->id;
         </div>
 
     </div>
+
+    <div class="container-fluid vw-100">
+        <div class="row justify-content-center">
+            <div class="col-9" style="background-color:grey">
+                <h1 class="text-center">Orçamento</h1>
+                <?php if(Yii::$app->session->hasFlash('Orcamento-success')): ?>
+                    <div class="alert alert-success">
+                        <?php echo Yii::$app->session->getFlash('Orcamento-success'); ?>
+                    </div>
+                <?php endif; ?>
+                <?= $this->render('_formOrcamento',[
+                    'modelPedido' => $modelPedido,
+                ]); ?>
+            </div>
+        </div>
+    </div>
+
 </div>

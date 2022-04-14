@@ -3,7 +3,9 @@
 namespace app\controllers;
 
 use app\models\Loja;
+use app\models\Pedido;
 use app\models\Produto;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Query;
 use yii\web\Controller;
@@ -46,8 +48,25 @@ class LojaController extends Controller{
     public function actionProduto($id){
         $produto = new Produto();
         $produto = $produto->find()->where(['id' => $id])->one();
+        $modelPedido = new Pedido();
+
+
+
+        //post
+        if ($this->request->isPost) {
+            $modelPedido->idUser = Yii::$app->user->identity->id;
+            $modelPedido->dataHoraPedido = date('Y-m-d H:i:s');
+            if ($modelPedido->load($this->request->post()) && $modelPedido->save()) {
+                Yii::$app->session->setFlash("Orcamento-success", Yii::t("user", "Pedido de orçamento enviado."));
+                return $this->refresh();
+            }
+        } else {
+            $modelPedido->loadDefaultValues();
+        }
+
         return $this->render('produto', [
             'produto' => $produto,
+            'modelPedido' => $modelPedido
         ]);
     }
 }
