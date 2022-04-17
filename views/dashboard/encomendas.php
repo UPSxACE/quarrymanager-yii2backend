@@ -1,5 +1,6 @@
 <?php
 
+use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -28,16 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 [
                     'class' => 'yii\grid\DataColumn', // this line is optional
-                    'attribute' => 'idEstado0.nome',
-                    'format'=>'text',
-                    'label' => 'Status',
-                ],
-                [
-                    'class' => 'yii\grid\DataColumn', // this line is optional
                     //'attribute' => 'idMaterial',
                     'attribute' => 'idPedido0.id',
                     'format' => 'text',
                     'label' => 'ID Encomenda',
+                ],
+                [
+                    'class' => 'yii\grid\DataColumn', // this line is optional
+                    'attribute' => 'idEstado0.nome',
+                    'format'=>'text',
+                    'label' => 'Status',
                 ],
                 [
                     'class' => 'yii\grid\DataColumn', // this line is optional
@@ -59,6 +60,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     //'value' => function(){return "teste";},
                     'format' => 'text',
                     'label' => 'Produto',
+                ],
+                [
+                    'content' => function ($model, $key, $index, $column) {
+                        return '<a class="fa-solid fa-angle-right h3" href="encomendas/' . $model->idPedido0->id . '">' ;
+                    },
                 ],
             ]
         ]);
