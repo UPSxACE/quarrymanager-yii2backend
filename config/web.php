@@ -83,6 +83,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'loja/produto/<id:\d+>' => 'loja/produto',
+                'dashboard/encomendas/<id:\d+>' => 'dashboard/encomendas-action',
             ],
         ],
         'formatter' => [

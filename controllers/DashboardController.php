@@ -47,6 +47,16 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function actionEncomendasAction($id){
+        $this->layout = 'main-fluid';
+        $modelEncomenda = new Pedido();
+        $modelEncomenda = $modelEncomenda->find()->where(['id' => $id])->one();
+
+        return $this->render('encomendas_action', [
+            'modelEncomenda' => $modelEncomenda,
+        ]);
+    }
+
     public function actionProdutos(){
         $this->layout = 'main-fluid';
         $query = Produto::find();
