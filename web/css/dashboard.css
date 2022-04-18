@@ -90,3 +90,20 @@
 .nav#encomendaNav a{
     color:white;
 }
+
+.dashboardDiv{
+    border: 1px solid black;
+    /*
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    */
+}
+
+.dashboardInnerDiv{
+    border: 1px solid black;
+}
+
+.dashboardInnerDiv textarea{
+    resize: none;
+}

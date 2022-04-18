@@ -11,6 +11,7 @@ use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 
 AppAsset::register($this);
+$this->registerCssFile('@web/css/dashboard.css');
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
