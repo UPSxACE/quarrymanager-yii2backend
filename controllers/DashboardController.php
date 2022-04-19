@@ -78,6 +78,20 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function actionEncomendasAgendar($idEncomenda){
+        $this->layout = 'main-fluid';
+        $modelEncomenda = new Pedido();
+        $modelEncomenda = $modelEncomenda->find()->where(['id' => $idEncomenda])->one();
+        $modelPedidoLote = new PedidoLote();
+
+        //data provider
+
+        return $this->render('encomendas_agendar', [
+            'modelEncomenda' => $modelEncomenda,
+            'modelPedidoLote' => $modelPedidoLote
+        ]);
+    }
+
     public function actionProdutos(){
         $this->layout = 'main-fluid';
         $query = Produto::find();

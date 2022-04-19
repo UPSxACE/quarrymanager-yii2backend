@@ -96,6 +96,10 @@
     min-height: 710px;
 }
 
+.dashboardDiv.extend{
+    min-height: 765px;
+}
+
 .dashboardInnerDiv{
     border: 1px solid black;
 }
