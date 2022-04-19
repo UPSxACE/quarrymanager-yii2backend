@@ -84,6 +84,7 @@ $config = [
             'rules' => [
                 'loja/produto/<id:\d+>' => 'loja/produto',
                 'dashboard/encomendas/<id:\d+>' => 'dashboard/encomendas-action',
+                'dashboard/encomendas/<id:\d+>/mobilizacao' => 'dashboard/encomendas-mobilizacao',
             ],
         ],
         'formatter' => [
