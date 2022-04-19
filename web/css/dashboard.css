@@ -103,3 +103,7 @@
 .dashboardInnerDiv textarea{
     resize: none;
 }
+
+td{
+    vertical-align: middle!important;
+}

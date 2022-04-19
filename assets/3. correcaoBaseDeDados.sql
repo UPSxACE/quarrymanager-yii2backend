@@ -41,4 +41,5 @@ ADD COLUMN `codigo_desconto` VARCHAR(50) NULL AFTER `desconto`;
 ALTER TABLE `gestorpedreira`.`estado_pedido` 
 ADD COLUMN `last` TINYINT(1) NOT NULL DEFAULT 1 AFTER `dataEstado`;
 
-
+ALTER TABLE `gestorpedreira`.`pedido_lote` 
+ADD COLUMN `dataHoraAgendamento` DATETIME NULL DEFAULT NULL AFTER `idTransportadora`;

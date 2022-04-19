@@ -9,6 +9,7 @@ use app\models\Logs;
 use app\models\Lote;
 use app\models\Material;
 use app\models\Pedido;
+use app\models\PedidoLote;
 use app\models\Produto;
 use app\models\Profile;
 use app\models\User;
@@ -62,8 +63,18 @@ class DashboardController extends Controller
         $modelEncomenda = new Pedido();
         $modelEncomenda = $modelEncomenda->find()->where(['id' => $id])->one();
 
+        //data provider
+        $query = PedidoLote::find()->where(['idPedido' => $id])->orderBy('dataHoraRecolha ASC'); //não recolhidos sempre vão aparecer primeiro
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 4,
+            ],
+        ]);
+
         return $this->render('encomendas_mobilizacao', [
             'modelEncomenda' => $modelEncomenda,
+            'listaPedidoLote' => $provider
         ]);
     }
 
