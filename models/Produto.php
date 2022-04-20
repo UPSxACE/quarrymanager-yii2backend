@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Query;
 
 /**
  * This is the model class for table "produto".
@@ -26,6 +27,8 @@ use Yii;
  * @property Lote[] $lotes
  * @property Pedido[] $pedidos
  * @property Fotografia $idFotografia0
+ *
+ * @property NumeroDePedidos $numeroPedidos
  */
 class Produto extends \yii\db\ActiveRecord
 {
@@ -150,6 +153,15 @@ class Produto extends \yii\db\ActiveRecord
     public function getPedidos()
     {
         return $this->hasMany(Pedido::className(), ['idProduto' => 'id']);
+    }
+
+    public function numeroPedidos($idProduto){
+        return Pedido::find()->where(['idProduto' => $idProduto])->count();
+    }
+
+    public function quantidadeVendida($idProduto){
+        $sum = Pedido::find()->where(['idProduto' => $idProduto])->innerJoinWith('estadoPedidos', 'estadoPedidos.idPedido = id')->andWhere(['last' => '1'])->andWhere(['>=', 'idEstado', 2])->sum('pedido.quantidade');
+        if ($sum>0){return $sum;} else return 0;
     }
 
 

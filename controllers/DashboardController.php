@@ -110,6 +110,21 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function actionLoja(){
+        $this->layout = 'main-fluid';
+        $query = Produto::find();
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('loja', [
+            'listaProdutos' => $provider,
+        ]);
+    }
+
     public function actionNovoProduto(){
         $this->layout = 'main-fluid';
         $modelProduto = new Produto(['scenario' => Produto::SCENARIO_LOJA]);
