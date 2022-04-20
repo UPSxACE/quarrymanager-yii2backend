@@ -45,7 +45,7 @@ $context = 0;
                 <div class="col-12 dashboardDiv mb-5">
                     <div class="row pl-5 pr-5 pb-5 pt-5">
                         <div class="col-6 pl-0 pr-3">
-                            <?= $this->render('_encomendaTooltip') ?>
+                            <?= $this->render('_encomendaTooltip', ['modelEncomenda' => $modelEncomenda]) ?>
                         </div>
                         <div class="col-6 d-flex justify-content-end">
                             <div class="d-flex flex-column text-right">

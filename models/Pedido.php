@@ -85,6 +85,26 @@ class Pedido extends \yii\db\ActiveRecord
         return $this->hasMany(EstadoPedido::className(), ['idPedido' => 'id']);
     }
 
+    public function ultimoEstadoId(){
+        //$estado = new EstadoPedido();
+        //$estado->idEstado0->afterFind()
+        //idPedido0->afterFind()->where(['idPedido' => $this->id])
+        //return EstadoPedido::find()->where(['idPedido' => $this->id])->andWhere(['last'=>'1']);
+        $EstadoPedido = EstadoPedido::find()->where(['idPedido' => $this->id])->andWhere(['last' => '1'])->one();
+        $estado = Estado::find()->where(['id' => $EstadoPedido->idEstado])->one();
+        return $estado->id ;
+    }
+
+    public function ultimoEstadoNome(){
+        //$estado = new EstadoPedido();
+        //$estado->idEstado0->afterFind()
+        //idPedido0->afterFind()->where(['idPedido' => $this->id])
+        //return EstadoPedido::find()->where(['idPedido' => $this->id])->andWhere(['last'=>'1']);
+        $EstadoPedido = EstadoPedido::find()->where(['idPedido' => $this->id])->andWhere(['last' => '1'])->one();
+        $estado = Estado::find()->where(['id' => $EstadoPedido->idEstado])->one();
+        return $estado->nome;
+    }
+
     /**
      * Gets query for [[IdProduto0]].
      *

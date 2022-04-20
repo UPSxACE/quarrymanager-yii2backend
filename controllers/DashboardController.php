@@ -59,7 +59,8 @@ class DashboardController extends Controller
     }
 
     public function actionEncomendasActionTooltipStep(){
-        $step =
+        //$step =
+        $this->redirect('produtos'); // teste
     }
 
     public function actionEncomendasMobilizacao($id){
