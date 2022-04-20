@@ -26,6 +26,43 @@ use yii\web\UploadedFile;
 
 class DashboardController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['home', 'index', 'lotes', 'stock', 'produtos', 'novo-produto', 'materiais', 'cores', 'encomendas', 'encomendas-action', 'encomendas-mobilizacao', 'encomendas-agendar' ],
+                        'allow' => true,
+                        'roles' => ['operario'],
+                    ],
+
+                    [
+                        'actions' => ['transportadoras', 'loja', 'novo-produto-loja', 'clientes', 'operarios'],
+                        'allow' => true,
+                        'roles' => ['gestor'],
+                    ],
+
+                    [
+                        'actions' => ['gestores', 'administradores', 'locais-armazens', 'locais-extracao'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
+
+
+
+
     public function actionIndex(){
         $this->layout = 'main-fluid';
         return $this->redirect(['home']);

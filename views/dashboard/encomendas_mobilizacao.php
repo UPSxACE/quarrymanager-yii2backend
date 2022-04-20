@@ -29,11 +29,6 @@ $context = 1;
                 </div>
             </div>
             <!-- isto vai se tornar CONDICIONAL -->
-            <div class="col-12">
-                <div class="bd-callout bd-callout-warning">
-                    <h4>Há <mark>5</mark> pedidos <mark>em espera</mark>.</h4>
-                </div>
-            </div>
         </div>
         <div class="container-fluid mt-4">
             <div class="row">
@@ -46,7 +41,7 @@ $context = 1;
                     <div class="row p-5">
                         <div class="col-12">
                             <div class="pb-5">
-                                <span class="h2">Produto: </span><span class="h2 font-weight-normal">??</span>
+                                <span class="h2">Produto: </span><span class="h2 font-weight-normal"><?= $modelEncomenda->idProduto0->tituloArtigo ?></span>
                                 <br>
                                 <span class="h6"><i>O</i> </span><span class="h6">Stock Disponível: </span><span>??</span><span>m² </span><span>(Suficiente)</span>
                                 <br>
