@@ -28,7 +28,7 @@ $this->title = 'Produto ' . $produto->id;
         <div class="row">
             <span class="col-6 font-weight-bold">Resistência à Compressão</span><span class="col-6 text-right"><?= $produto->Res_Compressao ?> MPa</span>
             <span class="col-6 font-weight-bold">Resistência à Flexão</span><span class="col-6 text-right"><?= $produto->Res_Flexao ?> MPa</span>
-            <span class="col-6 font-weight-bold">Massa Volúmica Aparente</span><span class="col-6 text-right"><?= $produto->Massa_Vol_Aparente ?> Kg/m³</span>
+            <span class="col-6 font-weight-bold">Massa Volúmica Aparente</span><span class="col-6 text-right"><?= $produto->Massa_Vol_Aparente ?> Kg/m²</span>
             <span class="col-6 font-weight-bold">Absorção de Água</span><span class="col-6 text-right"><?= $produto->Absorcao_Agua ?>%</span>
         </div>
 

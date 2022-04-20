@@ -35,6 +35,18 @@ class Produto extends \yii\db\ActiveRecord
 
     public $imageFile;
 
+    const SCENARIO_PRODUTO = 'produto';
+    const SCENARIO_LOJA = 'loja';
+
+    public function scenarios(){
+
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_PRODUTO] = ['idMaterial', 'idCor', 'Res Compressao', 'Res Flexao', 'Massa Vol Aparente', 'Absorcao Agua'];
+        $scenarios[self::SCENARIO_LOJA] = ['id', 'tituloArtigo', 'preco', 'descricaoProduto', 'imageFile'];
+        return $scenarios;
+
+    }
+
     public static function tableName()
     {
         return 'produto';

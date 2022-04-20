@@ -5,6 +5,8 @@ namespace app\controllers;
 use app\models\Cor;
 use app\models\EstadoPedido;
 use app\models\Fotografia;
+use app\models\LocalArmazem;
+use app\models\LocalExtracao;
 use app\models\Logs;
 use app\models\Lote;
 use app\models\Material;
@@ -12,6 +14,7 @@ use app\models\Pedido;
 use app\models\PedidoLote;
 use app\models\Produto;
 use app\models\Profile;
+use app\models\Transportadora;
 use app\models\User;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -109,7 +112,7 @@ class DashboardController extends Controller
 
     public function actionNovoProduto(){
         $this->layout = 'main-fluid';
-        $modelProduto = new Produto();
+        $modelProduto = new Produto(['scenario' => Produto::SCENARIO_LOJA]);
         $modelFotografia = new Fotografia();
         $arrayMateriais = Material::getAllAsArray();
         $arrayCores = Cor::getAllAsArray();
@@ -253,6 +256,81 @@ class DashboardController extends Controller
 
         return $this->render('logs', [
             'listaLogs' => $provider,
+        ]);
+    }
+
+    public function actionMateriais(){
+        $this->layout = 'main-fluid';
+        $query = Material::find();
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('materiais', [
+            'listaMateriais' => $provider,
+        ]);
+    }
+
+    public function actionCores(){
+        $this->layout = 'main-fluid';
+        $query = Cor::find();
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('cores', [
+            'listaCores' => $provider,
+        ]);
+    }
+
+    public function actionTransportadoras(){
+        $this->layout = 'main-fluid';
+        $query = Transportadora::find();
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('transportadoras', [
+            'listaTransportadoras' => $provider,
+        ]);
+    }
+
+    public function actionLocaisExtracao(){
+        $this->layout = 'main-fluid';
+        $query = LocalExtracao::find();
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('locais-extracao', [
+            'listaLocaisExtracao' => $provider,
+        ]);
+    }
+
+    public function actionLocaisArmazens(){
+        $this->layout = 'main-fluid';
+        $query = LocalArmazem::find();
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+        ]);
+
+        return $this->render('locais-armazens', [
+            'listaLocaisArmazens' => $provider,
         ]);
     }
 }
