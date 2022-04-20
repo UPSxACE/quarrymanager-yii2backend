@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use yii\db\Query;
+use yii\helpers\ArrayHelper;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "produto".
@@ -36,16 +38,17 @@ class Produto extends \yii\db\ActiveRecord
      * {@inheritdoc}
      */
 
+    public $idProductToUpdate;
     public $imageFile;
 
-    const SCENARIO_PRODUTO = 'produto';
-    const SCENARIO_LOJA = 'loja';
+    const SCENARIO_ADICIONARPRODUTO = 'adicionar-produto';
+    const SCENARIO_ADICIONARLOJA = 'adicionar-loja';
 
     public function scenarios(){
 
         $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_PRODUTO] = ['idMaterial', 'idCor', 'Res Compressao', 'Res Flexao', 'Massa Vol Aparente', 'Absorcao Agua'];
-        $scenarios[self::SCENARIO_LOJA] = ['id', 'tituloArtigo', 'preco', 'descricaoProduto', 'imageFile'];
+        $scenarios[self::SCENARIO_ADICIONARPRODUTO] = ['idMaterial', 'idCor', 'Res_Compressao', 'Res_Flexao', 'Massa_Vol_Aparente', 'Absorcao_Agua'];
+        $scenarios[self::SCENARIO_ADICIONARLOJA] = ['idProductToUpdate', 'tituloArtigo', 'preco', 'descricaoProduto', 'imageFile'];
         return $scenarios;
 
     }
@@ -180,5 +183,41 @@ class Produto extends \yii\db\ActiveRecord
         } else {
             return false;
         }
+    }
+
+    public function adicionarLoja(){
+        //['idProductToUpdate', 'tituloArtigo', 'preco', 'descricaoProduto', 'imageFile']
+        $model = Produto::find()->where(['id' => $this->idProductToUpdate ])->one();
+        $model->tituloArtigo = $this->tituloArtigo;
+        $model->preco = $this->preco;
+        $model->descricaoProduto = $this->descricaoProduto;
+
+        $model->imageFile = UploadedFile::getInstance($this, 'imageFile');
+
+
+                if ($this->uploadProductPicture()) {
+                    //codigo NOVO
+                    $modelFotografia = new Fotografia();
+                    $modelFotografia->link = 'productPictures/' . $this->imageFile->baseName . '.' . $this->imageFile->extension;
+                    if (!$modelFotografia->save()) {
+                        return false;
+                        //código para lidar com erro ao guardar imagem(irá ser feito futuramente)
+                    } else {
+                        $this->idFotografia = $modelFotografia->id;
+                        if (!$this->save()) {
+                            return false; // mais tarde fazer alguma forma de destinguir erros dos diferentes modelos
+                            //código para lidar com erro ao guardar imagem(irá ser feito futuramente)
+                        }
+                    }
+                }
+
+                return true;
+
+    }
+
+    public static function getAllAsArray(){
+        $res = Produto::find()->asArray()->all();
+        $arrayProdutos = ArrayHelper::map($res, 'id', 'tituloArtigo');
+        return $arrayProdutos;
     }
 }

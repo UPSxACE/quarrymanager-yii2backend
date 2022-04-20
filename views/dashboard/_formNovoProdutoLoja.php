@@ -8,8 +8,8 @@ use yii\widgets\ActiveForm;
 <div class="novoproduto-form row">
     <div class="col-6"><?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <?php
-        echo $form->field($modelProduto, 'idMaterial')->dropdownList($arrayMateriais,
-            ['text' => 'teste', 'prompt'=>'Selecione um material'],
+        echo $form->field($modelProduto, 'idProductToUpdate')->dropdownList($arrayProdutos,
+            ['text' => 'teste', 'prompt'=>'Selecione um Produto'],
         );
         ?>
     </div>

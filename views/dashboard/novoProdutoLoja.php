@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_formNovoProdutoLoja', [
         'modelProduto' => $modelProduto,
         'arrayMateriais' => $arrayMateriais,
-        'arrayCores' => $arrayCores
+        'arrayCores' => $arrayCores,
+        'arrayProdutos' => $arrayProdutos
     ]) ?>
 </div>

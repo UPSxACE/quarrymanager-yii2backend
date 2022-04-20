@@ -132,16 +132,37 @@ class DashboardController extends Controller
 
     public function actionNovoProduto(){
         $this->layout = 'main-fluid';
-        $modelProduto = new Produto(['scenario' => Produto::SCENARIO_LOJA]);
-        $modelFotografia = new Fotografia();
+        $modelProduto = new Produto(['scenario' => Produto::SCENARIO_ADICIONARPRODUTO]);
         $arrayMateriais = Material::getAllAsArray();
         $arrayCores = Cor::getAllAsArray();
 
         //caso post
         if ($this->request->isPost) {
+            if($modelProduto->load($this->request->post()) && $modelProduto->save()){
+                return $this->redirect(['dashboard/produtos']);
+            }
+        }
+
+        return $this->render('novoProduto', [
+            'modelProduto' => $modelProduto,
+            'arrayMateriais' => $arrayMateriais,
+            'arrayCores' => $arrayCores
+        ]);
+    }
+
+    public function actionNovoProdutoLoja(){
+        $this->layout = 'main-fluid';
+        $modelProduto = new Produto(['scenario' => Produto::SCENARIO_ADICIONARLOJA]);
+        $modelFotografia = new Fotografia();
+        $arrayMateriais = Material::getAllAsArray();
+        $arrayCores = Cor::getAllAsArray();
+        $arrayProdutos = Produto::getAllAsArray();
+
+        //caso post
+        if ($this->request->isPost) {
             //uploaded file save
             if (Yii::$app->request->isPost) {
-
+                /* CODIGO ANTIGO
                 $modelProduto->load($this->request->post());
                 $modelProduto->imageFile = UploadedFile::getInstance($modelProduto, 'imageFile');
                 if ($modelProduto->uploadProductPicture()) {
@@ -160,6 +181,12 @@ class DashboardController extends Controller
                     // file is uploaded successfully
                     return $this->redirect(['dashboard/produtos']);
                 }
+                CODIGO ANTIGO */
+                $modelProduto->load($this->request->post());
+                if($modelProduto->adicionarLoja()){
+                    //sucesso no post
+                    return $this->redirect(['dashboard/produtos']);
+                }
             }
         } else {
             //$modelPerfil->loadDefaultValues();
@@ -167,10 +194,11 @@ class DashboardController extends Controller
 
 
 
-        return $this->render('novoProduto', [
+        return $this->render('novoProdutoLoja', [
             'modelProduto' => $modelProduto,
             'arrayMateriais' => $arrayMateriais,
-            'arrayCores' => $arrayCores
+            'arrayCores' => $arrayCores,
+            'arrayProdutos' => $arrayProdutos
         ]);
     }
 
