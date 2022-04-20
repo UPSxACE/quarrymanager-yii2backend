@@ -46,7 +46,7 @@ $context = 1;
                     <div class="row p-5">
                         <div class="col-12">
                             <div class="pb-5">
-                                <span class="h2">Produto: </span><span class="h2 font-weight-normal">??</span>
+                                <span class="h2">Produto: </span><span class="h2 font-weight-normal"><?= $modelEncomenda->idProduto0->tituloArtigo ?></span>
                                 <br>
                                 <span class="h6"><i>O</i> </span><span class="h6">Stock Disponível: </span><span>??</span><span>m² </span><span>(Suficiente)</span>
                                 <br>
