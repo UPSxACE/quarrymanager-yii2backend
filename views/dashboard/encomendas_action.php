@@ -48,12 +48,14 @@ $context = 0;
                             <?= $this->render('_encomendaTooltip', ['modelEncomenda' => $modelEncomenda]) ?>
                         </div>
                         <div class="col-6 d-flex justify-content-end">
-                            <div class="d-flex flex-column text-right">
-                                <h2>username</h2>
-                                <h6>Encomenda NºX</h6>
-                                <h6>Pedido realizado em: dd/mm/yyyy hh:mm</h6>
+                            <div class="d-flex flex-column text-right pr-3">
+                                <h2><?= $modelEncomenda->idUser0->profile0->full_name ?></h2>
+                                <h6>Encomenda Nº <?= $modelEncomenda->id ?> </h6>
+                                <h6>Pedido realizado em: <?= $modelEncomenda->dataHoraPedido ?> </h6>
                             </div>
-                            <img height="110px" width="110px" src="/uploads/profilePictures/genericUserProfilePicture.svg">
+                            <img height="110px" width="110px" src="/uploads/<?= $modelEncomenda->idUser0->profile0->idFotografia0->link ?>">
+
+                            <!-- <img height="110px" width="110px" src="/uploads/profilePictures/genericUserProfilePicture.svg"> -->
                         </div>
                     </div>
                     <div class="row pl-5 pr-5 pb-5">
@@ -66,26 +68,25 @@ $context = 0;
                                     <div class="row p-2">
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Nome:</h6>
-                                            <h6>??</h6>
+                                            <h6><?= $modelEncomenda->nome ?></h6>
                                         </div>
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Morada:</h6>
-                                            <h6>??</h6>
-                                            <h6>??</h6>
+                                            <h6><?= $modelEncomenda->morada ?></h6>
                                         </div>
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Email:</h6>
-                                            <h6>??</h6>
+                                            <h6><?= $modelEncomenda->email ?></h6>
                                         </div>
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Telefone:</h6>
-                                            <h6>??</h6>
+                                            <h6><?= $modelEncomenda->telefone ?></h6>
                                         </div>
                                         <div class="col-12 pb-2">
-                                            <span>Detalhes da Conta do Utilizador</span>
+                                            <span style="text-decoration: underline;">Detalhes da Conta do Utilizador</span>
                                         </div>
                                         <div class="col-12 pb-2">
-                                            <textarea class="w-100" style="height: 200px" value="???" readonly>??</textarea>
+                                            <textarea class="w-100" style="height: 200px" readonly><?= $modelEncomenda->mensagem ?></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -101,40 +102,32 @@ $context = 0;
                                     <div class="row p-2">
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Produto:</h6>
-                                            <h6>??</h6>
+                                            <h6><?= $modelEncomenda->idProduto0->tituloArtigo ?></h6>
                                         </div>
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Preço/m²:</h6>
-                                            <h6>??</h6>
-                                            <h6>??</h6>
+                                            <h6><?= $modelEncomenda->idProduto0->preco ?></h6>
                                         </div>
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Quantidade:</h6>
-                                            <h6>??</h6>
+                                            <h6><?= $modelEncomenda->quantidade ?></h6>
                                         </div>
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Código de Desconto::</h6>
-                                            <h6>??</h6>
+                                            <h6><?= $modelEncomenda->codigo_desconto ?></h6>
                                         </div>
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Preço Inicial:</h6>
-                                            <h6>??</h6>
-                                        </div>
-                                        <div class="col-6 pb-2">
-                                            <h6 class="font-weight-bold">Desconto (Código):</h6>
-                                            <h6>??</h6>
+                                            <h6><?= $modelEncomenda->idProduto0->preco ?></h6>
                                         </div>
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Desconto (Manual):</h6>
-                                            <h6>??</h6>
+                                            <h6><?= $modelEncomenda->desconto ?></h6>
                                         </div>
-                                        <div class="col-6 pb-2">
-                                            <h6 class="font-weight-bold">Código de Desconto:</h6>
-                                            <h6>??</h6>
                                         </div>
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Estimativa Preço Final:</h6>
-                                            <h6>??</h6>
+                                            <h6><?= ($modelEncomenda->idProduto0->preco)-($modelEncomenda->desconto) ?></h6>
                                         </div>
                                     </div>
                                 </div>
