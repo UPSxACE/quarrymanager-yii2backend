@@ -160,7 +160,7 @@ class Produto extends \yii\db\ActiveRecord
     }
 
     public function quantidadeVendida($idProduto){
-        $sum = Pedido::find()->where(['idProduto' => $idProduto])->innerJoinWith('estadoPedidos', 'estadoPedidos.idPedido = id')->andWhere(['last' => '1'])->andWhere(['>=', 'idEstado', 2])->sum('pedido.quantidade');
+        $sum = Pedido::find()->where(['idProduto' => $idProduto])->innerJoinWith('estadoPedidos', 'estadoPedidos.idPedido = id')->andWhere(['last' => '1'])->andWhere(['>=', 'idEstado', 8])->andWhere(['<', 'idEstado', 10])->sum('pedido.quantidade');
         if ($sum>0){return $sum;} else return 0;
     }
 
