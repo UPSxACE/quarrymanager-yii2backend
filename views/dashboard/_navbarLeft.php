@@ -17,7 +17,7 @@ use yii\bootstrap4\Nav;
         ['label' => 'Cores', 'url' => ['/dashboard/cores']],
         ['label' => 'Encomendas', 'url' => ['/dashboard/encomendas']],
         ['label' => 'Transportadoras', 'url' => ['/dashboard/transportadoras']],
-        ['label' => '--Loja', 'url' => ['/dashboard/loja']],
+        ['label' => 'Loja', 'url' => ['/dashboard/loja']],
         ['label' => 'Clientes', 'url' => ['/dashboard/clientes']],
         ['label' => 'Operários', 'url' => ['/dashboard/operarios']],
         ['label' => 'Gestores', 'url' => ['/dashboard/gestores']],
