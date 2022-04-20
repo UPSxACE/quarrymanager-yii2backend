@@ -29,11 +29,7 @@ $context = 0;
                 </div>
             </div>
             <!-- isto vai se tornar CONDICIONAL -->
-            <div class="col-12">
-                <div class="bd-callout bd-callout-warning">
-                    <h4>Há <mark>5</mark> pedidos <mark>em espera</mark>.</h4>
-                </div>
-            </div>
+
         </div>
         <div class="container-fluid mt-4">
             <div class="row">
