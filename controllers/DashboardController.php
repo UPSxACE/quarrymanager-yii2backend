@@ -58,6 +58,10 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function actionEncomendasActionTooltipStep(){
+        $step =
+    }
+
     public function actionEncomendasMobilizacao($id){
         $this->layout = 'main-fluid';
         $modelEncomenda = new Pedido();

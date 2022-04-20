@@ -45,9 +45,7 @@ $context = 0;
                 <div class="col-12 dashboardDiv mb-5">
                     <div class="row pl-5 pr-5 pb-5 pt-5">
                         <div class="col-6 pl-0 pr-3">
-                            <div class="dashboardInnerDiv h-100">
-                                <span><i>O</i> Status: </span><span>*</span>
-                            </div>
+                            <?= $this->render('_encomendaTooltip') ?>
                         </div>
                         <div class="col-6 d-flex justify-content-end">
                             <div class="d-flex flex-column text-right">
