@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider' => $listaProdutos,
                 'itemView' => '_produto',             //para cada entrada da base de dados, vai ser aplicado o código deste view
                 'options' => [
-                        'class' => 'row'
+                        'class' => ''
                 ],
                 'itemOptions' => [
                         'class' => 'col-4'

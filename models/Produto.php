@@ -191,8 +191,9 @@ class Produto extends \yii\db\ActiveRecord
         $model->tituloArtigo = $this->tituloArtigo;
         $model->preco = $this->preco;
         $model->descricaoProduto = $this->descricaoProduto;
+        $model->na_loja = 1;
 
-        $model->imageFile = UploadedFile::getInstance($this, 'imageFile');
+
 
 
                 if ($this->uploadProductPicture()) {
@@ -203,8 +204,8 @@ class Produto extends \yii\db\ActiveRecord
                         return false;
                         //código para lidar com erro ao guardar imagem(irá ser feito futuramente)
                     } else {
-                        $this->idFotografia = $modelFotografia->id;
-                        if (!$this->save()) {
+                        $model->idFotografia = $modelFotografia->id;
+                        if (!$model->save()) {
                             return false; // mais tarde fazer alguma forma de destinguir erros dos diferentes modelos
                             //código para lidar com erro ao guardar imagem(irá ser feito futuramente)
                         }
