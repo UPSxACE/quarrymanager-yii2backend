@@ -33,7 +33,7 @@ class DashboardController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['home', 'index', 'lotes', 'novo-lote', 'stock', 'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action', 'encomendas-mobilizacao', 'encomendas-agendar' ],
+                        'actions' => ['home', 'index', 'lotes', 'novo-lote', 'stock', 'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action', 'encomendas-mobilizacao', 'encomendas-agendar'],
                         'allow' => true,
                         'roles' => ['operario'],
                     ],
@@ -61,19 +61,20 @@ class DashboardController extends Controller
     }
 
 
-
-
-    public function actionIndex(){
+    public function actionIndex()
+    {
         $this->layout = 'main-fluid';
         return $this->redirect(['home']);
     }
 
-    public function actionHome(){
+    public function actionHome()
+    {
         $this->layout = 'main-fluid';
         return $this->render('home');
     }
 
-    public function actionEncomendas(){
+    public function actionEncomendas()
+    {
         $this->layout = 'main-fluid';
         $query = EstadoPedido::find()->where(['last' => '1']);
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -88,7 +89,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionEncomendasAction($id){
+    public function actionEncomendasAction($id)
+    {
         $this->layout = 'main-fluid';
         $modelEncomenda = new Pedido();
         $modelEncomenda = $modelEncomenda->find()->where(['id' => $id])->one();
@@ -98,12 +100,14 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionEncomendasActionTooltipStep(){
+    public function actionEncomendasActionTooltipStep()
+    {
         //$step =
         $this->redirect('produtos'); // teste
     }
 
-    public function actionEncomendasMobilizacao($id){
+    public function actionEncomendasMobilizacao($id)
+    {
         $this->layout = 'main-fluid';
         $modelEncomenda = new Pedido();
         $modelEncomenda = $modelEncomenda->find()->where(['id' => $id])->one();
@@ -123,7 +127,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionEncomendasAgendar($idEncomenda){
+    public function actionEncomendasAgendar($idEncomenda)
+    {
         $this->layout = 'main-fluid';
         $modelEncomenda = new Pedido();
         $modelEncomenda = $modelEncomenda->find()->where(['id' => $idEncomenda])->one();
@@ -137,7 +142,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionProdutos(){
+    public function actionProdutos()
+    {
         $this->layout = 'main-fluid';
         $query = Produto::find();
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -152,7 +158,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionLoja(){
+    public function actionLoja()
+    {
         $this->layout = 'main-fluid';
         $query = Produto::find();
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -167,7 +174,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionNovoProduto(){
+    public function actionNovoProduto()
+    {
         $this->layout = 'main-fluid';
         $modelProduto = new Produto(['scenario' => Produto::SCENARIO_ADICIONARPRODUTO]);
         $arrayMateriais = Material::getAllAsArray();
@@ -175,7 +183,7 @@ class DashboardController extends Controller
 
         //caso post
         if ($this->request->isPost) {
-            if($modelProduto->load($this->request->post()) && $modelProduto->save()){
+            if ($modelProduto->load($this->request->post()) && $modelProduto->save()) {
                 return $this->redirect(['dashboard/produtos']);
             }
         }
@@ -187,7 +195,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionNovoProdutoLoja(){
+    public function actionNovoProdutoLoja()
+    {
         $this->layout = 'main-fluid';
         $modelProduto = new Produto(['scenario' => Produto::SCENARIO_ADICIONARLOJA]);
         $modelFotografia = new Fotografia();
@@ -221,7 +230,7 @@ class DashboardController extends Controller
                 CODIGO ANTIGO */
                 $modelProduto->load($this->request->post());
                 $modelProduto->imageFile = UploadedFile::getInstance($modelProduto, 'imageFile');
-                if($modelProduto->adicionarLoja()){
+                if ($modelProduto->adicionarLoja()) {
                     //sucesso no post
                     return $this->redirect(['dashboard/produtos']);
                 }
@@ -229,7 +238,6 @@ class DashboardController extends Controller
         } else {
             //$modelPerfil->loadDefaultValues();
         }
-
 
 
         return $this->render('novoProdutoLoja', [
@@ -240,7 +248,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionLotes(){
+    public function actionLotes()
+    {
         $this->layout = 'main-fluid';
         $query = Lote::find();
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -255,7 +264,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionStock(){
+    public function actionStock()
+    {
         $this->layout = 'main-fluid';
         $query = Produto::find();
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -270,7 +280,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionClientes(){
+    public function actionClientes()
+    {
         $this->layout = 'main-fluid';
         $query = User::find()->where(['role_id' => '4']);
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -285,7 +296,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionOperarios(){
+    public function actionOperarios()
+    {
         $this->layout = 'main-fluid';
         $query = User::find()->where(['role_id' => '3']);
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -300,7 +312,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionGestores(){
+    public function actionGestores()
+    {
         $this->layout = 'main-fluid';
         $query = User::find()->where(['role_id' => '2']);
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -315,7 +328,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionAdministradores(){
+    public function actionAdministradores()
+    {
         $this->layout = 'main-fluid';
         $query = User::find()->where(['role_id' => '1']);
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -330,7 +344,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionLogs(){
+    public function actionLogs()
+    {
         $this->layout = 'main-fluid';
         $query = Logs::find();
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -345,7 +360,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionMateriais(){
+    public function actionMateriais()
+    {
         $this->layout = 'main-fluid';
         $query = Material::find();
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -360,7 +376,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionCores(){
+    public function actionCores()
+    {
         $this->layout = 'main-fluid';
         $query = Cor::find();
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -375,7 +392,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionTransportadoras(){
+    public function actionTransportadoras()
+    {
         $this->layout = 'main-fluid';
         $query = Transportadora::find();
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -390,7 +408,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionLocaisExtracao(){
+    public function actionLocaisExtracao()
+    {
         $this->layout = 'main-fluid';
         $query = LocalExtracao::find();
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -405,7 +424,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionLocaisArmazens(){
+    public function actionLocaisArmazens()
+    {
         $this->layout = 'main-fluid';
         $query = LocalArmazem::find();
         $provider = new ActiveDataProvider([ // cria objeto data provider
@@ -420,40 +440,98 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionNovoLote(){
+    public function actionNovoLote()
+    {
         $this->layout = 'main-fluid';
 
         $this->render('novoLote');
     }
 
-    public function actionNovoMaterial(){
+    public function actionNovoMaterial()
+    {
         $this->layout = 'main-fluid';
+        $modelMaterial = new Material();
 
-        $this->render('novoMaterial');
+        //caso post
+        if ($this->request->isPost) {
+            if ($modelMaterial->load($this->request->post()) && $modelMaterial->save()) {
+                return $this->redirect(['dashboard/materiais']);
+            }
+        }
+
+        return $this->render('novoMaterial', [
+            'modelMaterial' => $modelMaterial,
+        ]);
+
     }
 
-    public function actionNovaCor(){
+    public function actionNovaCor()
+    {
         $this->layout = 'main-fluid';
+        $modelCor = new Cor();
 
-        $this->render('novaCor');
+        //caso post
+        if ($this->request->isPost) {
+            if ($modelCor->load($this->request->post()) && $modelCor->save()) {
+                return $this->redirect(['dashboard/cores']);
+            }
+        }
+
+        return $this->render('novaCor', [
+            'modelCor' => $modelCor,
+        ]);
     }
 
-    public function actionNovaTransportadora(){
+    public function actionNovaTransportadora()
+    {
         $this->layout = 'main-fluid';
+        $modelTransportadora = new Transportadora();
 
-        $this->render('novaTransportadora');
+        //caso post
+        if ($this->request->isPost) {
+            if ($modelTransportadora->load($this->request->post()) && $modelTransportadora->save()) {
+                return $this->redirect(['dashboard/transportadoras']);
+            }
+        }
+
+        return $this->render('novaTransportadora', [
+            'modelTransportadora' => $modelTransportadora,
+        ]);
     }
 
-    public function actionNovoLocalArmazem(){
+    public function actionNovoLocalArmazem()
+    {
         $this->layout = 'main-fluid';
+        $modelLocalArmazem = new LocalArmazem();
 
-        $this->render('novoLocalArmazem');
+        //caso post
+        if ($this->request->isPost) {
+            if ($modelLocalArmazem->load($this->request->post()) && $modelLocalArmazem->save()) {
+                return $this->redirect(['dashboard/locais-armazens']);
+            }
+        }
+
+        return $this->render('novoLocalArmazem', [
+            'modelLocalArmazem' => $modelLocalArmazem,
+        ]);
     }
 
-    public function actionNovoLocalExtracao(){
+    public function actionNovoLocalExtracao()
+    {
         $this->layout = 'main-fluid';
+        $modelLocalExtracao = new LocalExtracao();
 
-        $this->render('novoLocalExtracao');
+        //caso post
+        if ($this->request->isPost) {
+            if ($modelLocalExtracao->load($this->request->post()) && $modelLocalExtracao->save()) {
+                return $this->redirect(['dashboard/locais-extracao']);
+            }
+        }
+
+        return $this->render('novoLocalExtracao', [
+            'modelLocalExtracao' => $modelLocalExtracao,
+        ]);
+
     }
 
 }

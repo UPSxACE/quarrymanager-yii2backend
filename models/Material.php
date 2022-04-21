@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property int $id
  * @property string $nome
+ * @property string $prefixo
  *
  * @property Produto[] $produtos
  */
@@ -38,6 +39,7 @@ class Material extends \yii\db\ActiveRecord
         return [
             [['nome'], 'required'],
             [['nome'], 'string', 'max' => 100],
+            [['prefixo'], 'string', 'max' => 3],
         ];
     }
 
@@ -49,6 +51,7 @@ class Material extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nome' => 'Nome',
+            'prefixo' => 'Prefixo'
         ];
     }
 

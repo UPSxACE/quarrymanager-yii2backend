@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="col-10">
         <div class="d-flex align-items-center w-100">
-            <h1>Produtos</h1>
+            <h1><?= $this->title ?></h1>
             <a style="margin-left:auto" href="/dashboard/novo-produto-loja"><button type="button" class="btn btn-primary" style="height:100%">Adicionar Produto à Loja</button></a>
         </div>
         <?php

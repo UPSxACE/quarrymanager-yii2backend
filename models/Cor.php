@@ -37,6 +37,7 @@ class Cor extends \yii\db\ActiveRecord
         return [
             [['nome'], 'required'],
             [['nome'], 'string', 'max' => 100],
+            [['prefixo'], 'string', 'max' => 3],
         ];
     }
 
