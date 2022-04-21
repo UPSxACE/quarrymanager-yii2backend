@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-10">
         <div class="d-flex align-items-center w-100">
             <h1> <?= $this->title ?> </h1>
+            <a style="margin-left:auto" href="/dashboard/novo-local-armazem"><button type="button" class="btn btn-primary" style="height:100%">Novo Local de Armazém</button></a>
         </div>
         <?php
 

@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
         </div>
         <div class="col-10">
-            <h1>Stock</h1>
+            <h1><?= $this->title ?></h1>
         </div>
     </div>
 
