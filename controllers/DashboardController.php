@@ -193,7 +193,7 @@ class DashboardController extends Controller
         $modelFotografia = new Fotografia();
         $arrayMateriais = Material::getAllAsArray();
         $arrayCores = Cor::getAllAsArray();
-        $arrayProdutos = Produto::getAllAsArray();
+        $arrayProdutos = Produto::getAllForaDaLojaAsArray();
 
         //caso post
         if ($this->request->isPost) {
@@ -220,6 +220,7 @@ class DashboardController extends Controller
                 }
                 CODIGO ANTIGO */
                 $modelProduto->load($this->request->post());
+                $modelProduto->imageFile = UploadedFile::getInstance($modelProduto, 'imageFile');
                 if($modelProduto->adicionarLoja()){
                     //sucesso no post
                     return $this->redirect(['dashboard/produtos']);

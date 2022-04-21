@@ -191,8 +191,9 @@ class Produto extends \yii\db\ActiveRecord
         $model->tituloArtigo = $this->tituloArtigo;
         $model->preco = $this->preco;
         $model->descricaoProduto = $this->descricaoProduto;
+        $model->na_loja = 1;
 
-        $model->imageFile = UploadedFile::getInstance($this, 'imageFile');
+
 
 
                 if ($this->uploadProductPicture()) {
@@ -203,8 +204,8 @@ class Produto extends \yii\db\ActiveRecord
                         return false;
                         //código para lidar com erro ao guardar imagem(irá ser feito futuramente)
                     } else {
-                        $this->idFotografia = $modelFotografia->id;
-                        if (!$this->save()) {
+                        $model->idFotografia = $modelFotografia->id;
+                        if (!$model->save()) {
                             return false; // mais tarde fazer alguma forma de destinguir erros dos diferentes modelos
                             //código para lidar com erro ao guardar imagem(irá ser feito futuramente)
                         }
@@ -218,6 +219,13 @@ class Produto extends \yii\db\ActiveRecord
     public static function getAllAsArray(){
         $res = Produto::find()->asArray()->all();
         $arrayProdutos = ArrayHelper::map($res, 'id', 'tituloArtigo');
+        return $arrayProdutos;
+    }
+
+    public static function getAllForaDaLojaAsArray(){
+        $res = Produto::find()->where(['na_loja' => '0'])->asArray()->all();
+        $arrayProdutos = ArrayHelper::map($res, 'id', 'id');
+        //loop que vai iterar por todos os valores do array, e converter o id em nome do material + nome da cor
         return $arrayProdutos;
     }
 }
