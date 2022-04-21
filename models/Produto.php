@@ -225,7 +225,15 @@ class Produto extends \yii\db\ActiveRecord
     public static function getAllForaDaLojaAsArray(){
         $res = Produto::find()->where(['na_loja' => '0'])->asArray()->all();
         $arrayProdutos = ArrayHelper::map($res, 'id', 'id');
-        //loop que vai iterar por todos os valores do array, e converter o id em nome do material + nome da cor
+        //loop que vai iterar por todos os valores do array, e converter o id em uma string no formato: nome do material + nome da cor
+        foreach ($arrayProdutos as $chave => $valor){
+            $produto = Produto::find()->where(['id' => $chave])->one();
+
+            $material = $produto->idMaterial0->nome;
+            $cor = $produto->idCor0->nome;
+
+            $arrayProdutos[$chave] = $material . ' ' . $cor;
+        }
         return $arrayProdutos;
     }
 }

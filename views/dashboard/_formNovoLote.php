@@ -57,15 +57,18 @@ use yii\widgets\ActiveForm;
     <div class="col-3">
         <div class="form-group">
             <label>Coordenadas_X</label>
+            <div class="input-group">
+                <input class="form-control" readonly value="teste">
+            </div>
         </div>
-        <div class="input-group">
-            <input readonly value="teste">
-        </div>
-
-
     </div>
     <div class="col-3">
-        <?= $form->field($modelLote, 'codigo_lote')->textInput() ?>
+        <div class="form-group">
+            <label>Coordenadas_X</label>
+            <div class="input-group">
+                <input class="form-control" readonly value="teste">
+            </div>
+        </div>
     </div>
 
 
