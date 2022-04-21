@@ -29,6 +29,13 @@
     border-radius: .25rem;
 }
 
+.input-group > .input-group-prepend > .input-group-text{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0.25rem!important;
+    border-bottom-right-radius: 0.25rem!important;
+}
+
 .bd-callout+.bd-callout {
     margin-top: -.25rem;
 }

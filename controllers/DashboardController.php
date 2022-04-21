@@ -443,8 +443,17 @@ class DashboardController extends Controller
     public function actionNovoLote()
     {
         $this->layout = 'main-fluid';
+        $modelLote = new Lote();
+        $arrayProdutos = Produto::getAllAsArray();
+        $arrayLocaisArmazens = LocalArmazem::getAllAsArray();
+        $arrayLocaisExtracoes = LocalExtracao::getAllAsArray();
 
-        $this->render('novoLote');
+        return $this->render('novoLote', [
+            'modelLote' => $modelLote,
+            'arrayProdutos' => $arrayProdutos,
+            'arrayLocaisArmazens' => $arrayLocaisArmazens,
+            'arrayLocaisExtracoes' => $arrayLocaisExtracoes,
+        ]);
     }
 
     public function actionNovoMaterial()
