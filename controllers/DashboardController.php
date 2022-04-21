@@ -418,4 +418,41 @@ class DashboardController extends Controller
             'listaLocaisArmazens' => $provider,
         ]);
     }
+
+    public function actionNovoLote(){
+        $this->layout = 'main-fluid';
+
+        $this->render('novoLote');
+    }
+
+    public function actionNovoMaterial(){
+        $this->layout = 'main-fluid';
+
+        $this->render('novoMaterial');
+    }
+
+    public function actionNovaCor(){
+        $this->layout = 'main-fluid';
+
+        $this->render('novaCor');
+    }
+
+    public function actionNovaTransportadora(){
+        $this->layout = 'main-fluid';
+
+        $this->render('novaTransportadora');
+    }
+
+    public function actionNovoLocalArmazem(){
+        $this->layout = 'main-fluid';
+
+        $this->render('novoLocalArmazem');
+    }
+
+    public function actionNovoLocalExtracao(){
+        $this->layout = 'main-fluid';
+
+        $this->render('novoLocalExtracao');
+    }
+
 }
