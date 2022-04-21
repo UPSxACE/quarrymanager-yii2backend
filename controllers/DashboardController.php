@@ -100,7 +100,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function actionEncomendasActionTooltipStep()
+    public function actionEncomendasNextStep($id)
     {
         //$step =
         $this->redirect('produtos'); // teste

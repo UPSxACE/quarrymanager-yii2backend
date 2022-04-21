@@ -85,7 +85,8 @@ $config = [
                 'loja/produto/<id:\d+>' => 'loja/produto',
                 'dashboard/encomendas/<id:\d+>' => 'dashboard/encomendas-action',
                 'dashboard/encomendas/<id:\d+>/mobilizacao' => 'dashboard/encomendas-mobilizacao',
-                'dashboard/encomendas/<idEncomenda:\d+>/agendar-recolha' => 'dashboard/encomendas-agendar'
+                'dashboard/encomendas/<idEncomenda:\d+>/agendar-recolha' => 'dashboard/encomendas-agendar',
+                'dashboard/encomendas/<id:\d+>/step' => 'dashboard/encomendas-next-step',
             ],
         ],
         'formatter' => [
