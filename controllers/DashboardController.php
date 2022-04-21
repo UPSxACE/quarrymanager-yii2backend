@@ -193,7 +193,7 @@ class DashboardController extends Controller
         $modelFotografia = new Fotografia();
         $arrayMateriais = Material::getAllAsArray();
         $arrayCores = Cor::getAllAsArray();
-        $arrayProdutos = Produto::getAllAsArray();
+        $arrayProdutos = Produto::getAllForaDaLojaAsArray();
 
         //caso post
         if ($this->request->isPost) {
