@@ -36,16 +36,18 @@ switch($estado){
     case 8: //estado = recebido
         $dica = 'À espera do feedback do Cliente';
         $botao = '';
+        break;
     case 9: //estado = finalizado
         $dica = 'Cliente apresentou feedback';
         $botao = '';
+        break;
     case 10: //estado = cancelado
         $dica = '';
         $botao = '';
+        break;
 
 }
 ?>
-
 <div class="dashboardInnerDiv h-100">
     <span><i>O</i> Status: </span><span><?= $modelEncomenda->ultimoEstadoNome() ?></span><span> (<?= $dica ?>)</span>
     <br>
