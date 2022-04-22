@@ -37,6 +37,12 @@ $context = 1;
                     <div class="row p-5">
                         <div class="col-12">
                             <div class="pb-5">
+                                <h3><strong>Lote a ser recolhido: </strong><?= $modelPedidoLote->codigoLote ?></h3>
+                                <h3><strong>Transportadora: </strong><?= $modelPedidoLote->idTransportadora0->nome ?></h3>
+                                <?= $this->render('_formConfirmarRecolha',[
+                                        'modelEncomenda' => $modelEncomenda,
+                                        'modelPedidoLote' => $modelPedidoLote,
+                                ]) ?>
                                 <!--
                                 <span class="h2">Produto: </span><span class="h2 font-weight-normal">??</span>
                                 <br>

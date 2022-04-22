@@ -81,9 +81,9 @@ $context = 1;
                                         //'attribute' => 'dataHoraAgendamento',
                                         'content' => function ($model, $key, $index, $column) {
                                             if($model->dataHoraRecolha === null){
-                                                return '<h4 class="p-0 m-0">Não</h4><span style="text-decoration: underline">(Confirmar Recolha)</span>';
+                                                return '<h4 class="p-0 m-0">Não</h4><a href="/dashboard/encomendas/'.$model->idPedido.'/mobilizacao/confirmar-recolha/'.$model->id.'"><span style="text-decoration: underline; color:black;">(Confirmar Recolha)</span></a>';
                                             } else
-                                            return '<h4 class="p-0 m-0">Sim</h4><span style="text-decoration: underline">(Anular Recolha)</span>' ;
+                                            return '<h4 class="p-0 m-0">Sim</h4><span style="">(Recolhido)</span>' ;
                                         },
                                         'format'=>'text',
                                         'label' => 'Recolhido',

@@ -174,9 +174,28 @@ class DashboardController extends Controller
     public function actionConfirmarRecolha($idEncomenda, $idRecolha){
         $this->layout = 'main-fluid';
         $modelEncomenda = Pedido::find()->where(['id' => $idEncomenda])->one();
+        $modelPedidoLote = PedidoLote::find()->where(['id' => $idRecolha])->one();
+
+        //codigo para que seja redirecionado caso lote já tenha sido recolhido(dataHora definida)
+        if(isset($modelPedidoLote->dataHora)){
+            $this->redirect(['dashboard/encomendas']);
+        }
+
+        //caso post
+        if ($this->request->isPost) {
+            if ($modelPedidoLote->load($this->request->post())) {
+                $modelPedidoLote->dataHoraRecolha = date('Y-m-d H:i:s');
+                if($modelPedidoLote->save()){
+                    return $this->redirect([('dashboard/encomendas/' . $idEncomenda)]);
+                }
+            }
+        } else {
+            //$model->loadDefaultValues();
+        }
 
         return $this->render('confirmar-recolha',[
             'modelEncomenda' => $modelEncomenda,
+            'modelPedidoLote' => $modelPedidoLote
         ]);
     }
 
