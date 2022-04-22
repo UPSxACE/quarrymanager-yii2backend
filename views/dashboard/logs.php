@@ -47,7 +47,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'yii\grid\DataColumn', // this line is optional
                     'attribute' => 'idTipoAcao0.nome',
                     'format'=>'text',
-                    'label' => 'Ação',
+                    'label' => 'Tipo de Ação',
+                ],
+                [
+                    'class' => 'yii\grid\DataColumn', // this line is optional
+                    'attribute' => 'descricao',
+                    'format'=>'text',
+                    'label' => 'Descrição',
                 ],
                 [
                     'class' => 'yii\grid\DataColumn', // this line is optional

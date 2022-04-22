@@ -40,7 +40,7 @@ class DashboardController extends Controller
                     ],
 
                     [
-                        'actions' => ['encomendas-next-step', 'cancelar-encomenda','transportadoras', 'nova-transportadora', 'loja', 'novo-produto-loja', 'clientes', 'operarios'],
+                        'actions' => ['encomendas-next-step', 'cancelar-encomenda','transportadoras', 'nova-transportadora', 'loja', 'novo-produto-loja', 'clientes', 'operarios', 'logs'],
                         'allow' => true,
                         'roles' => ['gestor'],
                     ],
@@ -109,7 +109,7 @@ class DashboardController extends Controller
         $estadoAtual = $modelEncomenda->ultimoEstadoId();
         if($estadoAtual < 9){
             $modelEncomenda->nextState($id);
-
+            Logs::registrarLogUser(Yii::$app->user->identity->id, 3, "O estado da encomenda #" . $modelEncomenda->id . " foi atualizada.");
             return $this->redirect(['dashboard/encomendas']);
         }
         else {
@@ -193,6 +193,7 @@ class DashboardController extends Controller
             if ($modelPedidoLote->load($this->request->post())) {
                 $modelPedidoLote->dataHoraRecolha = date('Y-m-d H:i:s');
                 if($modelPedidoLote->save()){
+                    Logs::registrarLogUser(Yii::$app->user->identity->id, 2, "Foi confirmada a recolha de ID #" . $modelPedidoLote->id . ", do lote " . $modelPedidoLote->codigoLote . ".");
                     return $this->redirect([('dashboard/encomendas/' . $idEncomenda)]);
                 }
             }
@@ -248,6 +249,7 @@ class DashboardController extends Controller
         //caso post
         if ($this->request->isPost) {
             if ($modelProduto->load($this->request->post()) && $modelProduto->save()) {
+                Logs::registrarLogUser(Yii::$app->user->identity->id, 2, "O produto de ID #" . $modelProduto->id . " foi criado.");
                 return $this->redirect(['dashboard/produtos']);
             }
         }
@@ -296,6 +298,7 @@ class DashboardController extends Controller
                 $modelProduto->imageFile = UploadedFile::getInstance($modelProduto, 'imageFile');
                 if ($modelProduto->adicionarLoja()) {
                     //sucesso no post
+                    Logs::registrarLogUser(Yii::$app->user->identity->id, 3, "O produto '" . $modelProduto->tituloArtigo . "' foi adicionado à Loja.");
                     return $this->redirect(['dashboard/produtos']);
                 }
             }
@@ -411,7 +414,7 @@ class DashboardController extends Controller
     public function actionLogs()
     {
         $this->layout = 'main-fluid';
-        $query = Logs::find();
+        $query = Logs::find()->orderBy(['dataHora' => SORT_DESC]);
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
@@ -518,6 +521,7 @@ class DashboardController extends Controller
                 $uploadFormLote->imageFiles = UploadedFile::getInstances($uploadFormLote, 'imageFiles');
                 if ($uploadFormLote->uploadLotePictures($uploadFormLote->idProduto)) {
                     // file is uploaded successfully
+                    Logs::registrarLogUser(Yii::$app->user->identity->id, 2, "O lote " . $uploadFormLote->codigo_lote . " foi adicionado.");
                     return $this->redirect(['dashboard/lotes']);
                 }
 
@@ -540,6 +544,7 @@ class DashboardController extends Controller
         //caso post
         if ($this->request->isPost) {
             if ($modelMaterial->load($this->request->post()) && $modelMaterial->save()) {
+                Logs::registrarLogUser(Yii::$app->user->identity->id, 2, "O material '" . $modelMaterial->nome . "' foi criado.");
                 return $this->redirect(['dashboard/materiais']);
             }
         }
@@ -558,6 +563,7 @@ class DashboardController extends Controller
         //caso post
         if ($this->request->isPost) {
             if ($modelCor->load($this->request->post()) && $modelCor->save()) {
+                Logs::registrarLogUser(Yii::$app->user->identity->id, 2, "A cor '" . $modelCor->nome . "' foi criada.");
                 return $this->redirect(['dashboard/cores']);
             }
         }
@@ -575,6 +581,7 @@ class DashboardController extends Controller
         //caso post
         if ($this->request->isPost) {
             if ($modelTransportadora->load($this->request->post()) && $modelTransportadora->save()) {
+                Logs::registrarLogUser(Yii::$app->user->identity->id, 3, "A transportadora '" . $modelTransportadora->nome . "' foi adicionada.");
                 return $this->redirect(['dashboard/transportadoras']);
             }
         }
@@ -592,6 +599,7 @@ class DashboardController extends Controller
         //caso post
         if ($this->request->isPost) {
             if ($modelLocalArmazem->load($this->request->post()) && $modelLocalArmazem->save()) {
+                Logs::registrarLogUser(Yii::$app->user->identity->id, 2, "O local de armazém '" . $modelLocalArmazem->nome . "' foi criado.");
                 return $this->redirect(['dashboard/locais-armazens']);
             }
         }
@@ -609,6 +617,7 @@ class DashboardController extends Controller
         //caso post
         if ($this->request->isPost) {
             if ($modelLocalExtracao->load($this->request->post()) && $modelLocalExtracao->save()) {
+                Logs::registrarLogUser(Yii::$app->user->identity->id, 2, "O local de extração '" . $modelLocalExtracao->nome . "' foi criado.");
                 return $this->redirect(['dashboard/locais-extracao']);
             }
         }
