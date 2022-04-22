@@ -71,9 +71,9 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
-    <div class="col-12">
-        <?= $form->field($modelLote, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
-    </div>
+    <!-- <div class="col-12">
+        <php //$form->field($modelLote, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+   <</div> -->
 
 
     <div class="col-12">

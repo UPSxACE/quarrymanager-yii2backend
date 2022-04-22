@@ -112,4 +112,9 @@ class Lote extends \yii\db\ActiveRecord
     {
         return $this->hasMany(PedidoLote::className(), ['codigoLote' => 'codigo_lote']);
     }
+
+    public function countProducts($idProduto){
+        $count = Lote::find()->where(['idProduto' => $idProduto])->count();
+        return $count;
+    }
 }
