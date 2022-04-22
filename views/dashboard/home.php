@@ -20,6 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-10">
             <h1><?= $this->title ?></h1>
+            <p>Bem-vindo ao dashboard!<br>Navegue pelo menu da esquerda.</p>
         </div>
     </div>
 

@@ -48,28 +48,28 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'class' => 'yii\grid\DataColumn', // this line is optional
                         //'attribute' => 'idMaterial',
-                        'attribute' => 'idProduto0.Res_Compressao',
+                        'attribute' => 'Res_Compressao',
                         'format' => 'text',
                         'label' => 'Res. à Compressão',
                     ],
                     [
                         'class' => 'yii\grid\DataColumn', // this line is optional
                         //'attribute' => 'idMaterial',
-                        'attribute' => 'idProduto0.Res_Flexao',
+                        'attribute' => 'Res_Flexao',
                         'format' => 'text',
                         'label' => 'Res. à Flexão',
                     ],
                     [
                         'class' => 'yii\grid\DataColumn', // this line is optional
                         //'attribute' => 'idMaterial',
-                        'attribute' => 'idProduto0.Massa_Vol_Aparente',
+                        'attribute' => 'Massa_Vol_Aparente',
                         'format' => 'text',
                         'label' => 'Massa Vol. Aparente',
                     ],
                     [
                         'class' => 'yii\grid\DataColumn', // this line is optional
                         //'attribute' => 'idMaterial',
-                        'attribute' => 'idProduto0.Absorcao_Agua',
+                        'attribute' => 'Absorcao_Agua',
                         'format' => 'text',
                         'label' => 'Absorção de Água',
                     ],

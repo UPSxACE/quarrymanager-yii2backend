@@ -299,7 +299,7 @@ class DashboardController extends Controller
                 if ($modelProduto->adicionarLoja()) {
                     //sucesso no post
                     Logs::registrarLogUser(Yii::$app->user->identity->id, 3, "O produto '" . $modelProduto->tituloArtigo . "' foi adicionado à Loja.");
-                    return $this->redirect(['dashboard/produtos']);
+                    return $this->redirect(['dashboard/loja']);
                 }
             }
         } else {
