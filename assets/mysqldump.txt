@@ -1,1 +1,1 @@
-c:\xampp\mysql\bin\mysqldump gestorpedreira -u root -p > assets/registrosBaseDeDados.sql
+c:\xampp\mysql\bin\mysqldump gestorpedreira -u root -p > assets/mysqldump.sql
