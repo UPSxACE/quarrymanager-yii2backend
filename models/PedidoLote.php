@@ -60,7 +60,7 @@ class PedidoLote extends \yii\db\ActiveRecord
             'codigoLote' => 'Codigo Lote',
             'trackingID' => 'Tracking ID',
             'quantidade' => 'Quantidade',
-            'idTransportadora' => 'Id Transportadora',
+            'idTransportadora' => 'Transportadora',
             'matricula_Veiculo_recolha' => 'Matricula Veiculo Recolha',
             'dataHoraRecolha' => 'Data Hora Recolha',
         ];
