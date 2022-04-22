@@ -95,6 +95,35 @@ class Pedido extends \yii\db\ActiveRecord
         return $estado->id ;
     }
 
+    public function nextState($id){
+        $EstadoPedidoAtual = EstadoPedido::find()->where(['idPedido' => $this->id])->andWhere(['last' => '1'])->one();
+        $estadoAtual = $EstadoPedidoAtual->idEstado;
+        $EstadoPedidoAtual->last = '0';
+        if($EstadoPedidoAtual->save()){
+            $modelEstadoPedido = new EstadoPedido();
+
+            //$modelEncomenda = Pedido::find()->where(['id'=>$id])->one();
+            //$estadoAtual = $modelEncomenda->ultimoEstadoId();
+            ;
+
+            $modelEstadoPedido->idEstado = $estadoAtual+1;
+            $modelEstadoPedido->idPedido = $id;
+            $modelEstadoPedido->dataEstado = date('Y-m-d H:i:s');//;
+            $modelEstadoPedido->last = 1;
+
+            if($modelEstadoPedido->save()){
+                return true;
+            }
+
+            return false;
+        }
+        return false;
+
+
+
+
+    }
+
     public function ultimoEstadoNome(){
         //$estado = new EstadoPedido();
         //$estado->idEstado0->afterFind()

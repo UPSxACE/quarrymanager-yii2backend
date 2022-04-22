@@ -39,7 +39,7 @@ class DashboardController extends Controller
                     ],
 
                     [
-                        'actions' => ['transportadoras', 'nova-transportadora', 'loja', 'novo-produto-loja', 'clientes', 'operarios'],
+                        'actions' => ['encomendas-next-step','transportadoras', 'nova-transportadora', 'loja', 'novo-produto-loja', 'clientes', 'operarios'],
                         'allow' => true,
                         'roles' => ['gestor'],
                     ],
@@ -103,7 +103,18 @@ class DashboardController extends Controller
     public function actionEncomendasNextStep($id)
     {
         //$step =
-        $this->redirect('produtos'); // teste
+
+        $modelEncomenda = Pedido::find()->where(['id'=>$id])->one();
+        $estadoAtual = $modelEncomenda->ultimoEstadoId();
+        if($estadoAtual < 9){
+            $modelEncomenda->nextState($id);
+
+            return $this->redirect(['dashboard/encomendas']);
+        }
+        else {
+            return $this->redirect(['dashboard/encomendas']); // teste
+        }
+
     }
 
     public function actionEncomendasMobilizacao($id)

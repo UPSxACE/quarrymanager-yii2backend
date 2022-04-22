@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'content' => function ($model, $key, $index, $column) {
-                        return '<a class="fa-solid fa-angle-right h3" href="encomendas/' . $model->idPedido0->id . '">' ;
+                        return '<a class="fa-solid fa-angle-right h3" href="/dashboard/encomendas/' . $model->idPedido0->id . '">' ;
                     },
                 ],
             ]
