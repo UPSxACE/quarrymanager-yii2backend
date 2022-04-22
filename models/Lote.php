@@ -145,4 +145,13 @@ class Lote extends \yii\db\ActiveRecord
 
         return $arrayLotes;
     }
+
+    public static function reservarQuantidade($codigoLote, $quantidade){
+        $lote = Lote::find()->where(['codigo_lote' => $codigoLote])->one();
+        $lote->quantidade = $lote->quantidade - $quantidade;
+        if($lote->save()){
+            return true;
+        }
+        return false;
+    }
 }

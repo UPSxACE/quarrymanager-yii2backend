@@ -148,7 +148,21 @@ class DashboardController extends Controller
 
         $arrayLotes = Lote::getAllOfSpecificProductAsArray($modelEncomenda->idProduto);
 
-        //data provider
+        //caso post
+        if ($this->request->isPost) {
+            if ($modelPedidoLote->load($this->request->post())) {
+                $modelPedidoLote->idPedido = $idEncomenda;
+                if($modelPedidoLote->save()){
+                    if(Lote::reservarQuantidade($modelPedidoLote->codigoLote, $modelPedidoLote->quantidade)){
+                        return $this->redirect([('dashboard/encomendas/' . $idEncomenda)]);
+                    }
+
+                }
+
+            }
+        } else {
+            //$model->loadDefaultValues();
+        }
 
         return $this->render('encomendas_agendar', [
             'modelEncomenda' => $modelEncomenda,
