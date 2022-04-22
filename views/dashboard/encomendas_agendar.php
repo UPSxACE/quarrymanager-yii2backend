@@ -48,6 +48,7 @@ $context = 1;
                                         'modelEncomenda' => $modelEncomenda,
                                         'modelPedidoLote' => $modelPedidoLote,
                                         'arrayLotes' => $arrayLotes,
+                                        'arrayTransportadoras' => $arrayTransportadoras,
                                 ]) ?>
                             </div>
                         </div>

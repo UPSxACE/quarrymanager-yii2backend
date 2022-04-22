@@ -19,6 +19,13 @@ use yii\widgets\ActiveForm;
         <?= $form->field($modelPedidoLote, 'quantidade')->textInput() ?>
     </div>
     <div class="col-12">
+        <?php
+        echo $form->field($modelPedidoLote, 'idTransportadora')->dropdownList($arrayTransportadoras,
+            ['text' => 'teste', 'prompt'=>'Selecione uma transportadora'],
+        );
+        ?>
+    </div>
+    <div class="col-12">
         <div class="form-group">
             <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
             <a class="btn btn-danger" href="/dashboard/encomendas/<?= $modelEncomenda->id ?>">Cancel</a>

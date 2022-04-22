@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "transportadora".
@@ -52,5 +53,12 @@ class Transportadora extends \yii\db\ActiveRecord
     public function getPedidoLotes()
     {
         return $this->hasMany(PedidoLote::className(), ['idTransportadora' => 'id']);
+    }
+
+    public static function getAllAsArray(){
+
+        $res = Transportadora::find()->asArray()->all();
+        $arrayTransportadoras = ArrayHelper::map($res, 'id', 'nome');
+        return $arrayTransportadoras;
     }
 }

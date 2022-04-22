@@ -154,6 +154,7 @@ class DashboardController extends Controller
         $modelPedidoLote = new PedidoLote();
 
         $arrayLotes = Lote::getAllOfSpecificProductAsArray($modelEncomenda->idProduto);
+        $arrayTransportadoras = Transportadora::getAllAsArray();
 
         //caso post
         if ($this->request->isPost) {
@@ -175,6 +176,7 @@ class DashboardController extends Controller
             'modelEncomenda' => $modelEncomenda,
             'modelPedidoLote' => $modelPedidoLote,
             'arrayLotes' => $arrayLotes,
+            'arrayTransportadoras' => $arrayTransportadoras
         ]);
     }
 
