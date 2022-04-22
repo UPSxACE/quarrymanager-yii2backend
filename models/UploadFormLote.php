@@ -38,10 +38,10 @@ class UploadFormLote extends Model
     public function attributeLabels()
     {
         return [
-            'idProduto' => 'Id Produto',
+            'idProduto' => 'Produto',
             'quantidade' => 'Quantidade',
-            'idLocalExtracao' => 'Id Local Extracao',
-            'idLocalArmazem' => 'Id Local Armazem',
+            'idLocalExtracao' => 'Local Extracão',
+            'idLocalArmazem' => 'Local Armazem',
             'dataHora' => 'Data Hora',
         ];
     }

@@ -56,10 +56,10 @@ class Lote extends \yii\db\ActiveRecord
     {
         return [
             'codigo_lote' => 'Codigo Lote',
-            'idProduto' => 'Id Produto',
+            'idProduto' => 'Produto',
             'quantidade' => 'Quantidade',
-            'idLocalExtracao' => 'Id Local Extracao',
-            'idLocalArmazem' => 'Id Local Armazem',
+            'idLocalExtracao' => 'Local Extracão',
+            'idLocalArmazem' => 'Local Armazem',
             'dataHora' => 'Data Hora',
         ];
     }

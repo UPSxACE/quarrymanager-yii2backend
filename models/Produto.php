@@ -87,9 +87,10 @@ class Produto extends \yii\db\ActiveRecord
             'Res_Flexao' => 'Res Flexao',
             'Massa_Vol_Aparente' => 'Massa Vol Aparente',
             'Absorcao_Agua' => 'Absorcao Agua',
-            'tituloArtigo' => 'Titulo Artigo',
-            'descricaoProduto' => 'Descricao Produto',
-            'preco' => 'Preco',
+            'tituloArtigo' => 'Título Artigo',
+            'descricaoProduto' => 'Descrição do Produto',
+            'preco' => 'Preço',
+            'idProductToUpdate' => 'Produto'
         ];
     }
 
