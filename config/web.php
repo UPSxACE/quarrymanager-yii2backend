@@ -85,6 +85,7 @@ $config = [
                 'loja/produto/<id:\d+>' => 'loja/produto',
                 'dashboard/encomendas/<id:\d+>' => 'dashboard/encomendas-action',
                 'dashboard/encomendas/<id:\d+>/mobilizacao' => 'dashboard/encomendas-mobilizacao',
+                'dashboard/encomendas/<idEncomenda:\d+>/cancelar' => 'dashboard/cancelar-encomenda',
                 'dashboard/encomendas/<idEncomenda:\d+>/agendar-recolha' => 'dashboard/encomendas-agendar',
                 'dashboard/encomendas/<id:\d+>/step' => 'dashboard/encomendas-next-step',
                 'dashboard/encomendas/<idEncomenda:\d+>/mobilizacao/confirmar-recolha/<idRecolha:\d+>' => 'dashboard/confirmar-recolha',

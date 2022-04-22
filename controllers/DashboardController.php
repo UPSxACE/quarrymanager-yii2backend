@@ -40,7 +40,7 @@ class DashboardController extends Controller
                     ],
 
                     [
-                        'actions' => ['encomendas-next-step','transportadoras', 'nova-transportadora', 'loja', 'novo-produto-loja', 'clientes', 'operarios'],
+                        'actions' => ['encomendas-next-step', 'cancelar-encomenda','transportadoras', 'nova-transportadora', 'loja', 'novo-produto-loja', 'clientes', 'operarios'],
                         'allow' => true,
                         'roles' => ['gestor'],
                     ],
@@ -137,6 +137,13 @@ class DashboardController extends Controller
             'modelEncomenda' => $modelEncomenda,
             'listaPedidoLote' => $provider
         ]);
+    }
+
+
+    public function actionCancelarEncomenda($idEncomenda){
+        if(EstadoPedido::cancelarPedido($idEncomenda)){
+            $this->redirect('/dashboard/encomendas');
+        }
     }
 
     public function actionEncomendasAgendar($idEncomenda)

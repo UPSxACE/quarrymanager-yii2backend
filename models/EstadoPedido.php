@@ -71,4 +71,23 @@ class EstadoPedido extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Pedido::className(), ['id' => 'idPedido']);
     }
+
+    public static function cancelarPedido($idPedido){
+        $EstadoPedido = EstadoPedido::find()->where(['idPedido' => $idPedido])->andWhere(['last' => '1'])->one();
+        $EstadoPedido->last = 0;
+        if ($EstadoPedido->save()){
+            $novoEstadoPedido = new EstadoPedido();
+            $novoEstadoPedido->idEstado = 10;
+            $novoEstadoPedido->idPedido = $idPedido;
+            $novoEstadoPedido->dataEstado = date('Y-m-d H:i:s');
+            $novoEstadoPedido->last = 1;
+            if($novoEstadoPedido->save()){
+                return true;
+            }
+        }
+
+        return false;
+
+
+    }
 }
