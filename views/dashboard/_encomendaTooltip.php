@@ -30,19 +30,19 @@ switch($estado){
         $botao = '<a href="/dashboard/encomendas/' . $modelEncomenda->id . '/step" class="btn btn-secondary w-100" style="font-size: 1.5rem">Agendei as recolhas</a>';
         break;
     case 7: //estado = recolhas agendadas
-        $dica = '';
-        $botao = '';
+        $dica = 'Aguarde';
+        $botao = '<a href="/dashboard/encomendas/' . $modelEncomenda->id . '/step" class="btn btn-secondary w-100" style="font-size: 1.5rem">(forçar mudança de estado)</a>';
         break;
     case 8: //estado = recebido
         $dica = 'À espera do feedback do Cliente';
-        $botao = '';
+        $botao = '<a href="/dashboard/encomendas/' . $modelEncomenda->id . '/step" class="btn btn-secondary w-100" style="font-size: 1.5rem">(forçar mudança de estado)</a>';
         break;
     case 9: //estado = finalizado
         $dica = 'Cliente apresentou feedback';
-        $botao = '';
+        $botao = '<a href="/dashboard/encomendas/' . $modelEncomenda->id . '/step" class="btn btn-secondary w-100" style="font-size: 1.5rem">(forçar mudança de estado)</a>';
         break;
     case 10: //estado = cancelado
-        $dica = '';
+        $dica = '-';
         $botao = '';
         break;
 

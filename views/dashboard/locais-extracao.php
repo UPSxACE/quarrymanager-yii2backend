@@ -32,6 +32,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format'=>'text',
                     'label' => 'Nome',
                 ],
+                [
+                    'class' => 'yii\grid\DataColumn', // this line is optional
+                    'attribute' => 'coordenadasGPS_X',
+                    'format'=>'text',
+                    'label' => 'Coordenadas GPS X',
+                ],[
+                    'class' => 'yii\grid\DataColumn', // this line is optional
+                    'attribute' => 'coordenadasGPS_Y',
+                    'format'=>'text',
+                    'label' => 'Coordenadas GPS Y',
+                ],
             ]
         ]);
         ?>
