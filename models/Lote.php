@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "lote".
@@ -126,5 +127,22 @@ class Lote extends \yii\db\ActiveRecord
 
         $codigo_lote = $material_prefixo . '_' . $cor_prefixo . '_' . str_pad($idNumerico, 5, '0', STR_PAD_LEFT);
         return $codigo_lote;
+    }
+
+    public static function getAllOfSpecificProductAsArray($idProduto){
+
+        $res = Lote::find()->where(['idProduto' => $idProduto])->asArray()->all();
+        $arrayLotes = ArrayHelper::map($res, 'codigo_lote', 'codigo_lote');
+
+        //loop que vai iterar por todos os valores do array, e converter o id em uma string no formato: nome do material + nome da cor
+        foreach ($arrayLotes as $chave => $valor){
+            $lote = Lote::find()->where(['codigo_lote' => $chave])->one();
+
+            $quantidade = $lote->codigo_lote . ' (' . strval($lote->quantidade) . 'm² disponível)';
+
+            $arrayLotes[$chave] = $quantidade;
+        }
+
+        return $arrayLotes;
     }
 }

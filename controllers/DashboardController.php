@@ -146,11 +146,14 @@ class DashboardController extends Controller
         $modelEncomenda = $modelEncomenda->find()->where(['id' => $idEncomenda])->one();
         $modelPedidoLote = new PedidoLote();
 
+        $arrayLotes = Lote::getAllOfSpecificProductAsArray($modelEncomenda->idProduto);
+
         //data provider
 
         return $this->render('encomendas_agendar', [
             'modelEncomenda' => $modelEncomenda,
-            'modelPedidoLote' => $modelPedidoLote
+            'modelPedidoLote' => $modelPedidoLote,
+            'arrayLotes' => $arrayLotes,
         ]);
     }
 
