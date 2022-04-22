@@ -15,6 +15,7 @@ use app\models\PedidoLote;
 use app\models\Produto;
 use app\models\Profile;
 use app\models\Transportadora;
+use app\models\UploadFormLote;
 use app\models\User;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -454,13 +455,25 @@ class DashboardController extends Controller
     public function actionNovoLote()
     {
         $this->layout = 'main-fluid';
-        $modelLote = new Lote();
         $arrayProdutos = Produto::getAllAsArray();
         $arrayLocaisArmazens = LocalArmazem::getAllAsArray();
         $arrayLocaisExtracoes = LocalExtracao::getAllAsArray();
+        $uploadFormLote = new UploadFormLote();
+
+        // caso POST
+        if ($this->request->isPost) {
+            if ($uploadFormLote->load($this->request->post())) {
+                $uploadFormLote->imageFiles = UploadedFile::getInstances($uploadFormLote, 'imageFiles');
+                if ($uploadFormLote->uploadLotePictures($uploadFormLote->idProduto)) {
+                    // file is uploaded successfully
+                    return $this->redirect(['dashboard/lotes']);
+                }
+
+            }
+        }
 
         return $this->render('novoLote', [
-            'modelLote' => $modelLote,
+            'modelLote' => $uploadFormLote,
             'arrayProdutos' => $arrayProdutos,
             'arrayLocaisArmazens' => $arrayLocaisArmazens,
             'arrayLocaisExtracoes' => $arrayLocaisExtracoes,

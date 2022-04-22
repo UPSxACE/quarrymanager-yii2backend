@@ -6,16 +6,12 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="novolote-form row">
-    <div class="col-3"><?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <div class="col-6"><?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <?php
         echo $form->field($modelLote, 'idProduto')->dropdownList($arrayProdutos,
             ['text' => 'teste', 'prompt'=>'Selecione um Produto'],
         );
         ?>
-    </div>
-
-    <div class="col-3">
-        <?= $form->field($modelLote, 'codigo_lote')->textInput() ?>
     </div>
 
     <div class="col-6">
@@ -54,6 +50,7 @@ use yii\widgets\ActiveForm;
         "])->textInput() ?>
     </div>
 
+    <!--
     <div class="col-3">
         <div class="form-group">
             <label>Coordenadas_X</label>
@@ -69,11 +66,11 @@ use yii\widgets\ActiveForm;
                 <input class="form-control" readonly value="JAVASCRIPT">
             </div>
         </div>
-    </div>
+    </div>-->
 
-    <!-- <div class="col-12">
-        <php //$form->field($modelLote, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
-   <</div> -->
+    <div class="col-12">
+        <?= $form->field($modelLote, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+   </div>
 
 
     <div class="col-12">

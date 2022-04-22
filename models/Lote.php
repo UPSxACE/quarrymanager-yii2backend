@@ -113,8 +113,18 @@ class Lote extends \yii\db\ActiveRecord
         return $this->hasMany(PedidoLote::className(), ['codigoLote' => 'codigo_lote']);
     }
 
-    public function countProducts($idProduto){
+    public static function countProducts($idProduto){
         $count = Lote::find()->where(['idProduto' => $idProduto])->count();
         return $count;
+    }
+
+    public static function gerarCodigoLote($idProduto){
+        $produto = Produto::find()->where(['id' => $idProduto])->one();
+        $material_prefixo = $produto->idMaterial0->prefixo;
+        $cor_prefixo = $produto->idCor0->prefixo;
+        $idNumerico =  Lote::countProducts($idProduto) + 1;
+
+        $codigo_lote = $material_prefixo . '_' . $cor_prefixo . '_' . str_pad($idNumerico, 5, '0', STR_PAD_LEFT);
+        return $codigo_lote;
     }
 }
