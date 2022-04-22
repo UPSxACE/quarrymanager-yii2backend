@@ -34,7 +34,7 @@ class DashboardController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['home', 'index', 'lotes', 'novo-lote', 'stock', 'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action', 'encomendas-mobilizacao', 'encomendas-agendar'],
+                        'actions' => ['home', 'index', 'lotes', 'novo-lote', 'stock', 'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action', 'encomendas-mobilizacao', 'encomendas-agendar', 'confirmar-recolha'],
                         'allow' => true,
                         'roles' => ['operario'],
                     ],
@@ -168,6 +168,15 @@ class DashboardController extends Controller
             'modelEncomenda' => $modelEncomenda,
             'modelPedidoLote' => $modelPedidoLote,
             'arrayLotes' => $arrayLotes,
+        ]);
+    }
+
+    public function actionConfirmarRecolha($idEncomenda, $idRecolha){
+        $this->layout = 'main-fluid';
+        $modelEncomenda = Pedido::find()->where(['id' => $idEncomenda])->one();
+
+        return $this->render('confirmar-recolha',[
+            'modelEncomenda' => $modelEncomenda,
         ]);
     }
 
