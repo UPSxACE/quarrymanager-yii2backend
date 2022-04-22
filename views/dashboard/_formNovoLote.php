@@ -58,7 +58,7 @@ use yii\widgets\ActiveForm;
         <div class="form-group">
             <label>Coordenadas_X</label>
             <div class="input-group">
-                <input class="form-control" readonly value="teste">
+                <input class="form-control" readonly value="JAVASCRIPT">
             </div>
         </div>
     </div>
@@ -66,9 +66,13 @@ use yii\widgets\ActiveForm;
         <div class="form-group">
             <label>Coordenadas_X</label>
             <div class="input-group">
-                <input class="form-control" readonly value="teste">
+                <input class="form-control" readonly value="JAVASCRIPT">
             </div>
         </div>
+    </div>
+
+    <div class="col-12">
+        <?= $form->field($modelLote, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
     </div>
 
 
