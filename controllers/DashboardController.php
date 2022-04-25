@@ -35,7 +35,7 @@ class DashboardController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['home', 'index', 'lotes', 'novo-lote', 'lotes-action', 'update-lote', 'stock', 'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action', 'encomendas-mobilizacao', 'encomendas-agendar', 'confirmar-recolha'],
+                        'actions' => ['home', 'index', 'lotes', 'novo-lote', 'lotes-action', 'update-lote', 'delete-lote', 'stock', 'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action', 'encomendas-mobilizacao', 'encomendas-agendar', 'confirmar-recolha'],
                         'allow' => true,
                         'roles' => ['operario'],
                     ],
@@ -372,6 +372,14 @@ class DashboardController extends Controller
             'arrayLocaisArmazens' => $arrayLocaisArmazens,
             'arrayLocaisExtracoes' => $arrayLocaisExtracoes,
         ]);
+    }
+    public function actionDeleteLote($codigo_lote)
+    {
+        $modelLote = Lote::find()->where(['codigo_lote' => $codigo_lote])->one();
+        if($modelLote->delete()){
+            Logs::registrarLogUser(Yii::$app->user->identity->id, 2, "O lote " . $modelLote->codigo_lote . " foi apagado.");
+            $this->redirect(['/dashboard/lotes']);
+        };
     }
 
 
