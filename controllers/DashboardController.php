@@ -111,10 +111,10 @@ class DashboardController extends Controller
         if($estadoAtual < 9){
             $modelEncomenda->nextState($id);
             Logs::registrarLogUser(Yii::$app->user->identity->id, 3, "O estado da encomenda #" . $modelEncomenda->id . " foi atualizada.");
-            return $this->redirect(['dashboard/encomendas']);
+            return $this->redirect(['dashboard/encomendas/'.$modelEncomenda->id]);
         }
         else {
-            return $this->redirect(['dashboard/encomendas']); // teste
+            return $this->redirect(['dashboard/encomendas/'.$modelEncomenda->id]); // teste
         }
 
     }
