@@ -35,7 +35,7 @@ class DashboardController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['home', 'index', 'lotes', 'novo-lote', 'stock', 'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action', 'encomendas-mobilizacao', 'encomendas-agendar', 'confirmar-recolha', 'lotes-action'],
+                        'actions' => ['home', 'index', 'lotes', 'novo-lote', 'lotes-action', 'update-lote', 'stock', 'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action', 'encomendas-mobilizacao', 'encomendas-agendar', 'confirmar-recolha'],
                         'allow' => true,
                         'roles' => ['operario'],
                     ],
@@ -350,6 +350,27 @@ class DashboardController extends Controller
         return $this->render('lotes_action', [
             'modelLote' => $modelLote,
             'listaFotografias' => $provider
+        ]);
+    }
+
+    public function actionUpdateLote($codigo_lote){
+        $this->layout = 'main-fluid';
+        $arrayProdutos = Produto::getAllAsArray();
+        $arrayLocaisArmazens = LocalArmazem::getAllAsArray();
+        $arrayLocaisExtracoes = LocalExtracao::getAllAsArray();
+        $modelLote = new Lote();
+        $modelLote = $modelLote->find()->where(['codigo_lote' => $codigo_lote])->one();
+
+        if ($this->request->isPost && $modelLote->load($this->request->post()) && $modelLote->save()) {
+            Logs::registrarLogUser(Yii::$app->user->identity->id, 2, "O lote " . $modelLote->codigo_lote . " foi modificado.");
+            return $this->redirect(['/dashboard/lotes/'.$codigo_lote]);
+        }
+
+        return $this->render('lotes_update', [
+            'modelLote' => $modelLote,
+            'arrayProdutos' => $arrayProdutos,
+            'arrayLocaisArmazens' => $arrayLocaisArmazens,
+            'arrayLocaisExtracoes' => $arrayLocaisExtracoes,
         ]);
     }
 
