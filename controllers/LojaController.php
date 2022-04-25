@@ -16,23 +16,6 @@ use yii\filters\VerbFilter;
 
 class LojaController extends Controller{
     public function actionIndex(){
-
-        //$listaProdutos = Produto::getAllProducts();
-        //foreach($listaProdutos as $produto){
-        //$tituloProduto = $produto->tituloArtigo;
-        //echo "<h1>" . $tituloProduto . "<h1>";
-        //}
-
-        /*
-        $listaProdutos = Produto::getAllProducts();
-        */
-
-        //$query = Produto::find(); //busca todos os produtos da base de dados
-
-
-        //$produtoQuery = new Query;
-        //$produtoQuery->select('produto.id, tituloArtigo, descricaoProduto, preco, material.nome, cor.nome')->from('produto')->innerJoin("material", "material.id=produto.idMaterial")->innerJoin("cor", "cor.id=produto.idCor")->all();
-        //$query = $produtoQuery; //busca todos os produtos da base de dados
         $query = Produto::find()->where(['na_loja' => '1'])->orderBy('id DESC'); // não adicionar o all(), porque o all() executa a query, e quem vai executar a query vai ser o objeto do ActiveDataProvider
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,

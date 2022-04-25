@@ -2,15 +2,21 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\Url;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
+/* @var $searchModel app\models\ProdutoSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $listaFotografias \yii\data\ActiveDataProvider*/
 
 $this->title = $modelLote->codigo_lote;
-$this->params['breadcrumbs'][] = ['label' => 'Lotes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+
 ?>
-<div class="local-armazem-view">
+
+<div class="lotes-action-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -38,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $modelLote->idProduto0->idCor0->nome,
             ],
             [
-                'label' => 'Quantidade Disponível em Stock',
+                'label' => 'Quantidade',
                 'value' => $modelLote->quantidade . 'm²',
             ],
             [
@@ -55,5 +61,23 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]) ?>
+
+    <div>
+        <?php
+        echo \yii\widgets\ListView::widget([
+            'dataProvider' => $listaFotografias,
+            'itemView' => '_lotesFotografia',             //para cada entrada da base de dados, vai ser aplicado o código deste view
+            'options' => [
+                'class' => ''
+            ],
+            'itemOptions' => [
+                'class' => 'col-2'
+            ],
+            //'layout' => "<div class='row col-12 justify-content-center d-flex'>{summary}</div><div class='row'>{items}</div><div class='row col-12 justify-content-center d-flex'>{pager}</div>"
+            'layout' => "<div class='container-fluid'><div class='row'>{summary}</div><div class='row'>{items}</div><div class='row'>{pager}</div></div>"
+        ])
+        ?>
+    </div>
+
 
 </div>

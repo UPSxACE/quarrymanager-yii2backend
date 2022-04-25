@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Cor;
 use app\models\EstadoPedido;
 use app\models\Fotografia;
+use app\models\FotografiaLote;
 use app\models\LocalArmazem;
 use app\models\LocalExtracao;
 use app\models\Logs;
@@ -324,7 +325,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -338,8 +339,17 @@ class DashboardController extends Controller
         $modelLote = new Lote();
         $modelLote = $modelLote->find()->where(['codigo_lote' => $codigo_lote])->one();
 
+        $queryFotografias = FotografiaLote::find()->where(['codigoLote' => $codigo_lote])->orderBy('id ASC');
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $queryFotografias,
+            'pagination' => [
+                'pageSize' => 6,
+            ],
+        ]);
+
         return $this->render('lotes_action', [
             'modelLote' => $modelLote,
+            'listaFotografias' => $provider
         ]);
     }
 
@@ -351,7 +361,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -367,7 +377,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -383,7 +393,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -399,7 +409,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -415,7 +425,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -431,7 +441,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -447,7 +457,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -463,7 +473,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -479,7 +489,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -495,7 +505,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -511,7 +521,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
