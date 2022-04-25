@@ -30,7 +30,7 @@ class FotografiaProduto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'idProduto', 'idFotografia'], 'required'],
+            [['idProduto', 'idFotografia'], 'required'],
             [['id', 'idProduto', 'idFotografia'], 'integer'],
             [['id'], 'unique'],
             [['idFotografia'], 'exist', 'skipOnError' => true, 'targetClass' => Fotografia::className(), 'targetAttribute' => ['idFotografia' => 'id']],
@@ -76,5 +76,15 @@ class FotografiaProduto extends \yii\db\ActiveRecord
         $find_fotografia = Fotografia::find()->where(['id' => $idFotografia])->one();
         $link = $find_fotografia->link;
         return($link);
+    }
+
+    public static function registrarFotografiaProduto($idProduto, $idFotografia){
+        $model = new FotografiaProduto();
+        $model->idProduto = $idProduto;
+        $model->idFotografia = $idFotografia;
+        if($model->save()){
+            return true;
+        }
+        return false;
     }
 }

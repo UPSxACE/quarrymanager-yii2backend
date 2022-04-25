@@ -209,6 +209,8 @@ class Produto extends \yii\db\ActiveRecord
                         if (!$model->save()) {
                             return false; // mais tarde fazer alguma forma de destinguir erros dos diferentes modelos
                             //código para lidar com erro ao guardar imagem(irá ser feito futuramente)
+                        } else {
+                            FotografiaProduto::registrarFotografiaProduto($model->id, $modelFotografia->id);
                         }
                     }
                 }

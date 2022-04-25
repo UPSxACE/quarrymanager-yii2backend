@@ -55,7 +55,7 @@ class Lote extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'codigo_lote' => 'Codigo Lote',
+            'codigo_lote' => 'Código do Lote',
             'idProduto' => 'Produto',
             'quantidade' => 'Quantidade',
             'idLocalExtracao' => 'Local Extracão',

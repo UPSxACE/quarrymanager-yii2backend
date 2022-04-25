@@ -30,7 +30,7 @@ class FotografiaLote extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'codigoLote', 'idFotografia'], 'required'],
+            [['codigoLote', 'idFotografia'], 'required'],
             [['id', 'idFotografia'], 'integer'],
             [['codigoLote'], 'string', 'max' => 50],
             [['id'], 'unique'],
@@ -69,5 +69,15 @@ class FotografiaLote extends \yii\db\ActiveRecord
     public function getIdFotografia0()
     {
         return $this->hasOne(Fotografia::className(), ['id' => 'idFotografia']);
+    }
+
+    public static function registrarFotografiaLote($codigoLote, $idFotografia){
+        $model = new FotografiaLote();
+        $model->codigoLote = $codigoLote;
+        $model->idFotografia = $idFotografia;
+        if($model->save()){
+            return true;
+        }
+        return false;
     }
 }
