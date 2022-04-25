@@ -76,7 +76,7 @@ use yii\widgets\ActiveForm;
     <div class="col-12">
         <div class="form-group">
             <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-            <a class="btn btn-danger" href="/dashboard/loja">Cancel</a>
+            <a class="btn btn-danger" href="/dashboard/lotes">Cancel</a>
         </div>
         <?php ActiveForm::end(); ?>
     </div>
