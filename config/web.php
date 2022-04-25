@@ -89,7 +89,7 @@ $config = [
                 'dashboard/encomendas/<idEncomenda:\d+>/agendar-recolha' => 'dashboard/encomendas-agendar',
                 'dashboard/encomendas/<id:\d+>/step' => 'dashboard/encomendas-next-step',
                 'dashboard/encomendas/<idEncomenda:\d+>/mobilizacao/confirmar-recolha/<idRecolha:\d+>' => 'dashboard/confirmar-recolha',
-
+                'dashboard/lotes/<codigo_lote:\w+>' => 'dashboard/lotes-action',
             ],
         ],
         'formatter' => [

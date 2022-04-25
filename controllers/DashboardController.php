@@ -34,7 +34,7 @@ class DashboardController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['home', 'index', 'lotes', 'novo-lote', 'stock', 'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action', 'encomendas-mobilizacao', 'encomendas-agendar', 'confirmar-recolha'],
+                        'actions' => ['home', 'index', 'lotes', 'novo-lote', 'stock', 'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action', 'encomendas-mobilizacao', 'encomendas-agendar', 'confirmar-recolha', 'lotes-action'],
                         'allow' => true,
                         'roles' => ['operario'],
                     ],
@@ -332,6 +332,17 @@ class DashboardController extends Controller
             'listaLotes' => $provider,
         ]);
     }
+
+    public function actionLotesAction($codigo_lote){
+        $this->layout = 'main-fluid';
+        $modelLote = new Lote();
+        $modelLote = $modelLote->find()->where(['codigo_lote' => $codigo_lote])->one();
+
+        return $this->render('lotes_action', [
+            'modelLote' => $modelLote,
+        ]);
+    }
+
 
     public function actionStock()
     {
