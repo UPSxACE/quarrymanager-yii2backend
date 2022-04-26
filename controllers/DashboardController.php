@@ -161,6 +161,7 @@ class DashboardController extends Controller
         if ($this->request->isPost) {
             if ($modelPedidoLote->load($this->request->post())) {
                 $modelPedidoLote->idPedido = $idEncomenda;
+                $modelPedidoLote->dataHoraAgendamento = date('Y-m-d H:i:s');
                 if($modelPedidoLote->save()){
                     if(Lote::reservarQuantidade($modelPedidoLote->codigoLote, $modelPedidoLote->quantidade)){
                         return $this->redirect([('dashboard/encomendas/' . $idEncomenda)]);

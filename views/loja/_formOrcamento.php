@@ -35,6 +35,9 @@ use yii\widgets\ActiveForm;
     <div class="col-6">
         <?= $form->field($modelPedido, 'localidade',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->localidade, 'class'=>'form-control']])->textInput() ?>
     </div>
+    <div class="col-12">
+        <?= $form->field($modelPedido, 'mensagem',['inputOptions' => ['style'=>'height:250px', 'class'=>'form-control']])->textarea() ?>
+    </div>
 
     <div class="col-12">
         <div class="form-group">
