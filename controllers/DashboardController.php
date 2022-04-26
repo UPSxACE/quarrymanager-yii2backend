@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Cor;
 use app\models\EstadoPedido;
 use app\models\Fotografia;
+use app\models\FotografiaLote;
 use app\models\LocalArmazem;
 use app\models\LocalExtracao;
 use app\models\Logs;
@@ -34,7 +35,7 @@ class DashboardController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['home', 'index', 'lotes', 'novo-lote', 'stock', 'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action', 'encomendas-mobilizacao', 'encomendas-agendar', 'confirmar-recolha'],
+                        'actions' => ['home', 'index', 'lotes', 'novo-lote', 'lotes-action', 'update-lote', 'delete-lote', 'stock', 'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action', 'encomendas-mobilizacao', 'encomendas-agendar', 'confirmar-recolha'],
                         'allow' => true,
                         'roles' => ['operario'],
                     ],
@@ -110,10 +111,10 @@ class DashboardController extends Controller
         if($estadoAtual < 9){
             $modelEncomenda->nextState($id);
             Logs::registrarLogUser(Yii::$app->user->identity->id, 3, "O estado da encomenda #" . $modelEncomenda->id . " foi atualizada.");
-            return $this->redirect(['dashboard/encomendas']);
+            return $this->redirect(['dashboard/encomendas/'.$modelEncomenda->id]);
         }
         else {
-            return $this->redirect(['dashboard/encomendas']); // teste
+            return $this->redirect(['dashboard/encomendas/'.$modelEncomenda->id]); // teste
         }
 
     }
@@ -324,7 +325,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -333,6 +334,55 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function actionLotesAction($codigo_lote){
+        $this->layout = 'main-fluid';
+        $modelLote = new Lote();
+        $modelLote = $modelLote->find()->where(['codigo_lote' => $codigo_lote])->one();
+
+        $queryFotografias = FotografiaLote::find()->where(['codigoLote' => $codigo_lote])->orderBy('id ASC');
+        $provider = new ActiveDataProvider([ // cria objeto data provider
+            'query' => $queryFotografias,
+            'pagination' => [
+                'pageSize' => 6,
+            ],
+        ]);
+
+        return $this->render('lotes_action', [
+            'modelLote' => $modelLote,
+            'listaFotografias' => $provider
+        ]);
+    }
+
+    public function actionUpdateLote($codigo_lote){
+        $this->layout = 'main-fluid';
+        $arrayProdutos = Produto::getAllAsArray();
+        $arrayLocaisArmazens = LocalArmazem::getAllAsArray();
+        $arrayLocaisExtracoes = LocalExtracao::getAllAsArray();
+        $modelLote = new Lote();
+        $modelLote = $modelLote->find()->where(['codigo_lote' => $codigo_lote])->one();
+
+        if ($this->request->isPost && $modelLote->load($this->request->post()) && $modelLote->save()) {
+            Logs::registrarLogUser(Yii::$app->user->identity->id, 2, "O lote " . $modelLote->codigo_lote . " foi modificado.");
+            return $this->redirect(['/dashboard/lotes/'.$codigo_lote]);
+        }
+
+        return $this->render('lotes_update', [
+            'modelLote' => $modelLote,
+            'arrayProdutos' => $arrayProdutos,
+            'arrayLocaisArmazens' => $arrayLocaisArmazens,
+            'arrayLocaisExtracoes' => $arrayLocaisExtracoes,
+        ]);
+    }
+    public function actionDeleteLote($codigo_lote)
+    {
+        $modelLote = Lote::find()->where(['codigo_lote' => $codigo_lote])->one();
+        if($modelLote->delete()){
+            Logs::registrarLogUser(Yii::$app->user->identity->id, 2, "O lote " . $modelLote->codigo_lote . " foi apagado.");
+            $this->redirect(['/dashboard/lotes']);
+        };
+    }
+
+
     public function actionStock()
     {
         $this->layout = 'main-fluid';
@@ -340,7 +390,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -356,7 +406,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -372,7 +422,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -388,7 +438,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -404,7 +454,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -420,7 +470,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -436,7 +486,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -452,7 +502,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -468,7 +518,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -484,7 +534,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -500,7 +550,7 @@ class DashboardController extends Controller
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
-                'pageSize' => 12,
+                'pageSize' => 10,
             ],
         ]);
 

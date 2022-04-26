@@ -75,4 +75,13 @@ class Fotografia extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Utilizador::className(), ['idFotografia' => 'id']);
     }
+
+    public static function registrarFotografia($link){
+        $model = new Fotografia();
+        $model->link = $link;
+        if($model->save()){
+            return $model->id;
+        }
+        return false;
+    }
 }

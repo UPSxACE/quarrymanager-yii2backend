@@ -65,8 +65,10 @@ class UploadFormLote extends Model
 
         FileHelper::createDirectory('uploads/lotes/' . $codigo_lote . '/', 0775);
         if ($this->validate(['imageFiles'])) {
+            $fotografiasIDs = array();
             foreach ($this->imageFiles as $file) {
-                $file->saveAs('uploads/lotes/' . $codigo_lote . '/' . $file->baseName . '.' . $file->extension);
+                $file->saveAs('lotes/' . $codigo_lote . '/' . $file->baseName . '.' . $file->extension);
+                array_push($fotografiasIDs, Fotografia::registrarFotografia('lotes/' . $codigo_lote . '/' . $file->baseName . '.' . $file->extension));
             }
 
             $modelLote = new Lote();
@@ -80,6 +82,9 @@ class UploadFormLote extends Model
             $modelLote->dataHora = $this->dataHora;
 
             if($modelLote->validate() && $modelLote->save()){
+                foreach ($fotografiasIDs as $id){
+                    FotografiaLote::registrarFotografiaLote($modelLote->codigo_lote, $id);
+                }
                 return true;
             } else {
                 return false;

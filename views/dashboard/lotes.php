@@ -74,7 +74,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format'=>'datetime',
                     'label' => 'Data',
                 ],
-
+                [
+                    'content' => function ($model, $key, $index, $column) {
+                        return '<a class="fa-solid fa-angle-right h3" href="/dashboard/lotes/' . $model->codigo_lote . '">' ;
+                    },
+                ],
             ]
         ]);
         ?>

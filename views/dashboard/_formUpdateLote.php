@@ -50,33 +50,10 @@ use yii\widgets\ActiveForm;
         "])->textInput() ?>
     </div>
 
-    <!--
-    <div class="col-3">
-        <div class="form-group">
-            <label>Coordenadas_X</label>
-            <div class="input-group">
-                <input class="form-control" readonly value="JAVASCRIPT">
-            </div>
-        </div>
-    </div>
-    <div class="col-3">
-        <div class="form-group">
-            <label>Coordenadas_X</label>
-            <div class="input-group">
-                <input class="form-control" readonly value="JAVASCRIPT">
-            </div>
-        </div>
-    </div>-->
-
-    <div class="col-12">
-        <?= $form->field($modelLote, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
-   </div>
-
-
     <div class="col-12">
         <div class="form-group">
             <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-            <a class="btn btn-danger" href="/dashboard/lotes">Cancel</a>
+            <a class="btn btn-danger" href="/dashboard/lotes/<?=$modelLote->codigo_lote?>">Cancel</a>
         </div>
         <?php ActiveForm::end(); ?>
     </div>
