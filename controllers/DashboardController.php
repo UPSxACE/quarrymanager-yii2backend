@@ -35,13 +35,16 @@ class DashboardController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['home', 'index', 'lotes', 'novo-lote', 'lotes-action', 'update-lote', 'delete-lote', 'stock', 'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action', 'encomendas-mobilizacao', 'encomendas-agendar', 'confirmar-recolha'],
+                        'actions' => ['home', 'index', 'lotes', 'novo-lote', 'lotes-action', 'update-lote', 'delete-lote', 'stock',
+                            'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action',
+                            'encomendas-mobilizacao', 'encomendas-agendar', 'confirmar-recolha'],
                         'allow' => true,
                         'roles' => ['operario'],
                     ],
 
                     [
-                        'actions' => ['encomendas-next-step', 'cancelar-encomenda','transportadoras', 'nova-transportadora', 'loja', 'novo-produto-loja', 'clientes', 'operarios', 'logs'],
+                        'actions' => ['encomendas-next-step', 'cancelar-encomenda','transportadoras', 'nova-transportadora', 'loja',
+                            'novo-produto-loja', 'clientes', 'operarios', 'logs'],
                         'allow' => true,
                         'roles' => ['gestor'],
                     ],

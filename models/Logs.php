@@ -87,9 +87,6 @@ class Logs extends \yii\db\ActiveRecord
     }
 
     static public function registrarLogUser($idUser, $idTipoAcao, $descricao){
-        /*
-         *
-         */
 
         $model = new Logs();
         $model->idUser = $idUser;

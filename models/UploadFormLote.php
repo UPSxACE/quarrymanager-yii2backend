@@ -72,8 +72,6 @@ class UploadFormLote extends Model
             }
 
             $modelLote = new Lote();
-
-
             $modelLote->idProduto = $this->idProduto;
             $modelLote->codigo_lote = $this->codigo_lote;
             $modelLote->idLocalArmazem = $this->idLocalArmazem;
