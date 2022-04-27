@@ -139,7 +139,7 @@ CREATE TABLE `fotografia` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `link` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +148,7 @@ CREATE TABLE `fotografia` (
 
 LOCK TABLES `fotografia` WRITE;
 /*!40000 ALTER TABLE `fotografia` DISABLE KEYS */;
-INSERT INTO `fotografia` VALUES (1,'profilePictures/genericUserProfilePicture.svg'),(2,'profilePictures/CEO3.jpg'),(3,'profilePictures/CEO2.jpg'),(4,'profilePictures/CEO1.jpg'),(5,'productPictures/granito laranja.jpg'),(6,'productPictures/granito vermelho.jpg'),(7,'productPictures/marmore amarelo.jpg'),(8,'productPictures/pedra branca.jpg');
+INSERT INTO `fotografia` VALUES (1,'profilePictures/genericUserProfilePicture.svg'),(2,'profilePictures/CEO3.jpg'),(3,'profilePictures/CEO2.jpg'),(4,'profilePictures/CEO1.jpg'),(5,'productPictures/granito laranja.jpg'),(6,'productPictures/granito vermelho.jpg'),(7,'productPictures/marmore amarelo.jpg'),(8,'productPictures/pedra branca.jpg'),(9,'lotes/GRN_LRJ_00001/1.jpg'),(10,'lotes/GRN_LRJ_00002/1.jpg'),(11,'lotes/GRN_VRM_00001/1.jpg'),(12,'lotes/GRN_VRM_00002/1.jpg'),(13,'lotes/GRN_VRM_00003/1.jpg'),(14,'lotes/GRN_VRM_00004/1.jpg'),(15,'lotes/MRM_AMR_00001/1.jpg'),(16,'lotes/PDR_BRC_00001/1.jpg'),(17,'lotes/PDR_BRC_00002/1.jpg'),(18,'lotes/PDR_BRC_00003/1.jpg');
 /*!40000 ALTER TABLE `fotografia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +160,7 @@ DROP TABLE IF EXISTS `fotografia_lote`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fotografia_lote` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigoLote` varchar(50) NOT NULL,
   `idFotografia` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -168,7 +168,7 @@ CREATE TABLE `fotografia_lote` (
   KEY `fk_Fotografia_Lote_Fotografia1_idx` (`idFotografia`),
   CONSTRAINT `fk_Fotografia_Lote_Fotografia1` FOREIGN KEY (`idFotografia`) REFERENCES `fotografia` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Fotografia_Lote_Lote1` FOREIGN KEY (`codigoLote`) REFERENCES `lote` (`codigo_lote`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,6 +177,7 @@ CREATE TABLE `fotografia_lote` (
 
 LOCK TABLES `fotografia_lote` WRITE;
 /*!40000 ALTER TABLE `fotografia_lote` DISABLE KEYS */;
+INSERT INTO `fotografia_lote` VALUES (1,'GRN_LRJ_00001',9),(2,'GRN_LRJ_00002',10),(3,'GRN_VRM_00001',11),(4,'GRN_VRM_00002',12),(5,'GRN_VRM_00003',13),(6,'GRN_VRM_00004',14),(7,'MRM_AMR_00001',15),(8,'PDR_BRC_00001',16),(9,'PDR_BRC_00002',17),(10,'PDR_BRC_00003',18);
 /*!40000 ALTER TABLE `fotografia_lote` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +189,7 @@ DROP TABLE IF EXISTS `fotografia_produto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fotografia_produto` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `idProduto` int(11) NOT NULL,
   `idFotografia` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -196,7 +197,7 @@ CREATE TABLE `fotografia_produto` (
   KEY `fk_Fotografia_Produto_Fotografia1_idx` (`idFotografia`),
   CONSTRAINT `fk_Fotografia_Produto_Fotografia1` FOREIGN KEY (`idFotografia`) REFERENCES `fotografia` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Fotografia_Produto_Produto1` FOREIGN KEY (`idProduto`) REFERENCES `produto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,6 +206,7 @@ CREATE TABLE `fotografia_produto` (
 
 LOCK TABLES `fotografia_produto` WRITE;
 /*!40000 ALTER TABLE `fotografia_produto` DISABLE KEYS */;
+INSERT INTO `fotografia_produto` VALUES (1,2,5),(2,1,6),(3,3,7),(4,4,8);
 /*!40000 ALTER TABLE `fotografia_produto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -751,4 +753,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-22 23:35:00
+-- Dump completed on 2022-04-27  2:07:56
