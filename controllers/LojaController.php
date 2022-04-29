@@ -6,6 +6,7 @@ use app\models\EstadoPedido;
 use app\models\Loja;
 use app\models\Pedido;
 use app\models\Produto;
+use app\models\Profile;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Query;
@@ -34,6 +35,7 @@ class LojaController extends Controller{
         $produto = $produto->find()->where(['id' => $id])->one();
         $modelPedido = new Pedido();
         $modelEstadoPedido = new EstadoPedido();
+        $modelPerfil = new Profile();
 
 
 
@@ -60,7 +62,8 @@ class LojaController extends Controller{
 
         return $this->render('produto', [
             'produto' => $produto,
-            'modelPedido' => $modelPedido
+            'modelPedido' => $modelPedido,
+            'modelPerfil' => $modelPerfil
         ]);
     }
 }

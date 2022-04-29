@@ -18,22 +18,22 @@ use yii\widgets\ActiveForm;
         <?= $form->field($modelPedido, 'codigo_desconto')->textInput() ?>
     </div>
     <div class="col-12">
-        <?= $form->field($modelPedido, 'nome',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->full_name, 'class'=>'form-control']])->textInput() ?>
+        <?= $form->field($modelPerfil, 'nome',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->full_name, 'class'=>'form-control', 'readonly'=>'']])->textInput() ?>
     </div>
     <div class="col-6">
-        <?= $form->field($modelPedido, 'email',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->email, 'class'=>'form-control']])->textInput() ?>
+        <?= $form->field($modelPerfil, 'email',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->email, 'class'=>'form-control', 'readonly'=>'']])->textInput() ?>
     </div>
     <div class="col-6">
-        <?= $form->field($modelPedido, 'telefone',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->telefone, 'class'=>'form-control']])->textInput() ?>
+        <?= $form->field($modelPerfil, 'telefone',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->telefone, 'class'=>'form-control', 'readonly'=>'']])->textInput() ?>
     </div>
     <div class="col-12">
-        <?= $form->field($modelPedido, 'morada',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->morada, 'class'=>'form-control']])->textInput() ?>
+        <?= $form->field($modelPerfil, 'morada',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->morada, 'class'=>'form-control', 'readonly'=>'']])->textInput() ?>
     </div>
     <div class="col-6">
-        <?= $form->field($modelPedido, 'codPostal',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->codPostal, 'class'=>'form-control']])->textInput() ?>
+        <?= $form->field($modelPerfil, 'codPostal',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->codPostal, 'class'=>'form-control', 'readonly'=>'']])->textInput() ?>
     </div>
     <div class="col-6">
-        <?= $form->field($modelPedido, 'localidade',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->localidade, 'class'=>'form-control']])->textInput() ?>
+        <?= $form->field($modelPerfil, 'localidade',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->localidade, 'class'=>'form-control', 'readonly'=>'']])->textInput() ?>
     </div>
     <div class="col-12">
         <?= $form->field($modelPedido, 'mensagem',['inputOptions' => ['style'=>'height:250px', 'class'=>'form-control']])->textarea() ?>

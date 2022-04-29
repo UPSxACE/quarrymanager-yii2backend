@@ -45,6 +45,7 @@ $this->title = 'Produto ' . $produto->id;
                 <?php endif; ?>
                 <?= $this->render('_formOrcamento',[
                     'modelPedido' => $modelPedido,
+                    'modelPerfil' => $modelPerfil
                 ]); ?>
             </div>
         </div>

@@ -41,13 +41,11 @@ class Pedido extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idUser', 'nome', 'dataHoraPedido'], 'required'],
-            [['idUser', 'idProduto', 'nif'], 'integer'],
+            [['idUser', 'dataHoraPedido'], 'required'],
+            [['idUser', 'idProduto'], 'integer'],
             [['desconto', 'quantidade'], 'number'],
             [['dataHoraPedido'], 'safe'],
-            [['nome', 'morada', 'mensagem'], 'string', 'max' => 150],
-            [['telefone'], 'string', 'max' => 15],
-            [['email'], 'string', 'max' => 70],
+            [['mensagem'], 'string', 'max' => 150],
             [['idProduto'], 'exist', 'skipOnError' => true, 'targetClass' => Produto::className(), 'targetAttribute' => ['idProduto' => 'id']],
             [['idUser'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['idUser' => 'id']],
         ];
@@ -65,12 +63,7 @@ class Pedido extends \yii\db\ActiveRecord
             'desconto' => 'Desconto',
             'codigo_desconto' => 'Código de Desconto',
             'quantidade' => 'Quantidade(m²)',
-            'nome' => 'Nome',
-            'morada' => 'Morada',
-            'telefone' => 'Telefone',
-            'email' => 'Email',
             'mensagem' => 'Mensagem',
-            'nif' => 'Nif',
             'dataHoraPedido' => 'Data Hora Pedido',
         ];
     }

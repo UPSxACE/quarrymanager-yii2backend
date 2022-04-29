@@ -64,19 +64,19 @@ $context = 0;
                                     <div class="row p-2">
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Nome:</h6>
-                                            <h6><?= $modelEncomenda->nome ?></h6>
+                                            <h6><?= $modelEncomenda->idUser0->profile0->full_name ?></h6>
                                         </div>
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Morada:</h6>
-                                            <h6><?= $modelEncomenda->morada ?></h6>
+                                            <h6><?= $modelEncomenda->idUser0->profile0->morada ?></h6>
                                         </div>
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Email:</h6>
-                                            <h6><?= $modelEncomenda->email ?></h6>
+                                            <h6><?= $modelEncomenda->idUser0->profile0->email ?></h6>
                                         </div>
                                         <div class="col-6 pb-2">
                                             <h6 class="font-weight-bold">Telefone:</h6>
-                                            <h6><?= $modelEncomenda->telefone ?></h6>
+                                            <h6><?= $modelEncomenda->idUser0->profile0->telefone ?></h6>
                                         </div>
                                         <div class="col-12 pb-2">
                                             <span style="text-decoration: underline;">Detalhes da Conta do Utilizador</span>
