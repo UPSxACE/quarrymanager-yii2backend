@@ -24,7 +24,7 @@ use yii\bootstrap4\Nav;
         ['label' => 'Administradores', 'url' => ['/dashboard/administradores'], 'visible' => Yii::$app->user->can('admin')],
         ['label' => 'Locais de Armazéns', 'url' => ['/dashboard/locais-armazens'], 'visible' => Yii::$app->user->can('admin')],
         ['label' => 'Locais de Extração', 'url' => ['/dashboard/locais-extracao'], 'visible' => Yii::$app->user->can('admin')],
-        ['label' => 'Logs', 'url' => ['/dashboard/logs'], 'visible' => Yii::$app->user->can('admin')],
+        ['label' => 'Logs', 'url' => ['/dashboard/logs'], 'visible' => Yii::$app->user->can('gestor')],
         //['label' => 'Ajuda', 'url' => ['/dashboard/help']],
     ]
 ]); ?>
