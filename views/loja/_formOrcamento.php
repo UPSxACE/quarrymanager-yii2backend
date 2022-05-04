@@ -22,8 +22,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($modelPerfil, 'nome',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->full_name, 'class'=>'form-control', 'readonly'=>'']])->textInput() ?>
         </div>
         <div class="col-6">
-            <?= $form->field($modelPerfil, 'email',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->email, 'class'=>'form-control', 'readonly'=>'']])->textInput() ?>
-        </div>
+            <?= $form->field($modelPerfil, 'email',['inputOptions' => ['value'=>Yii::$app->user->identity->email, 'class'=>'form-control', 'readonly'=>'']])->textInput() ?>        </div>
         <div class="col-6">
             <?= $form->field($modelPerfil, 'telefone',['inputOptions' => ['value'=>Yii::$app->user->identity->profile->telefone, 'class'=>'form-control', 'readonly'=>'']])->textInput() ?>
         </div>
