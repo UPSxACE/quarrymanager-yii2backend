@@ -19,6 +19,10 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'lVZtY6X1loBW9EuIRX6PAcqKCQtUpXJI',
+            //código para o aceitar dados em json:
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -82,14 +86,27 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'loja/produto/<id:\d+>' => 'loja/produto',
-                'dashboard/encomendas/<id:\d+>' => 'dashboard/encomendas-action',
-                'dashboard/encomendas/<id:\d+>/mobilizacao' => 'dashboard/encomendas-mobilizacao',
-                'dashboard/encomendas/<idEncomenda:\d+>/cancelar' => 'dashboard/cancelar-encomenda',
-                'dashboard/encomendas/<idEncomenda:\d+>/agendar-recolha' => 'dashboard/encomendas-agendar',
-                'dashboard/encomendas/<id:\d+>/step' => 'dashboard/encomendas-next-step',
-                'dashboard/encomendas/<idEncomenda:\d+>/mobilizacao/confirmar-recolha/<idRecolha:\d+>' => 'dashboard/confirmar-recolha',
-                'dashboard/lotes/<codigo_lote:\w+>' => 'dashboard/lotes-action',
+                [
+                    /*
+                    'loja/produto/<id:\d+>' => 'loja/produto',
+                    'dashboard/encomendas/<id:\d+>' => 'dashboard/encomendas-action',
+                    'dashboard/encomendas/<id:\d+>/mobilizacao' => 'dashboard/encomendas-mobilizacao',
+                    'dashboard/encomendas/<idEncomenda:\d+>/cancelar' => 'dashboard/cancelar-encomenda',
+                    'dashboard/encomendas/<idEncomenda:\d+>/agendar-recolha' => 'dashboard/encomendas-agendar',
+                    'dashboard/encomendas/<id:\d+>/step' => 'dashboard/encomendas-next-step',
+                    'dashboard/encomendas/<idEncomenda:\d+>/mobilizacao/confirmar-recolha/<idRecolha:\d+>' => 'dashboard/confirmar-recolha',
+                    'dashboard/lotes/<codigo_lote:\w+>' => 'dashboard/lotes-action',
+                    */
+
+                    //serviços
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => [
+                        'api/auth',
+                        //'api/material',
+                    ],
+                    'pluralize' => false,
+                ]
+
             ],
         ],
         'formatter' => [
@@ -103,12 +120,16 @@ $config = [
         'user' => [
             'class' => 'amnah\yii2\user\Module',
             // set custom module properties here ...
-            'requireEmail' => true,
+            'requireEmail' => false,
             'requireUsername' => true,
             'modelClasses' => [
                 'Role' => 'app\models\Role',
-		'User' => 'app\models\User',
+		        'User' => 'app\models\User',
             ]
+        ],
+        'api' => [
+            'class' => 'app\modules\api\RestAPI',
+            // ... other configurations for the module ...
         ],
     ],
     /* ^ added because of amnah/yii-user ^ */
