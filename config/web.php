@@ -52,7 +52,7 @@ $config = [
                 'host' => 'smtp.gmail.com',
                 'port' => '587',
                 'username' => 'gestorapedreira@gmail.com',
-                'password' => 'CTeSP-DS-Grupo03',
+                'password' => 'CTeSP_DS_Grupo03',
             ],        
         ],
         */
