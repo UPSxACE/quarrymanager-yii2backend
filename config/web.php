@@ -110,6 +110,7 @@ $config = [
                         'api/material',
                         'api/produto',
                         'api/transportadora',
+                        //'OPTIONS api/<module:\w+>s/<action>' => 'api/base/options',
                         //'api/material',
                     ],
                     'pluralize' => false,
