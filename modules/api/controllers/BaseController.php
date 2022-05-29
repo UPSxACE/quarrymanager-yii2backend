@@ -25,7 +25,6 @@ class BaseController extends ActiveController
                     'allow' => true,
                     'roles' => ['operario'],
                 ],*/
-
             ],
             'denyCallback' => function ($rule, $action) {
                 throw new ForbiddenHttpException("You're not allowed to access");
