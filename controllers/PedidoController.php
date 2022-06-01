@@ -9,7 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PedidoController implements the CRUD actions for Pedido model.
+ * PedidoLoteController implements the CRUD actions for Pedido model.
  */
 class PedidoController extends Controller
 {
