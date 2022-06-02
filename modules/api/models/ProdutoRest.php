@@ -6,7 +6,9 @@ use app\models\Produto;
 
 class ProdutoRest extends Produto
 {
-    public function extraFields(){
-        //return ['idUser0'];
+    /*
+    public function fields(){
+        return ['idCor'];
     }
+    */
 }

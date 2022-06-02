@@ -6,7 +6,5 @@ use app\models\Logs;
 
 class LogsRest extends Logs
 {
-    public function extraFields(){
-        //return ['idUser0'];
-    }
+
 }
