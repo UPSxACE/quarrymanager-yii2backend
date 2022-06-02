@@ -6,5 +6,7 @@ use app\models\Material;
 
 class MaterialRest extends Material
 {
-
+    public function fields(){
+        return ['nome'];
+    }
 }

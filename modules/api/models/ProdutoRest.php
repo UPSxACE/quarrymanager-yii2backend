@@ -6,9 +6,14 @@ use app\models\Produto;
 
 class ProdutoRest extends Produto
 {
-    /*
+
     public function fields(){
-        return ['idCor'];
+        return [];
     }
-    */
+
+
+    public function getIdMaterial0()
+    {
+        return $this->hasOne(MaterialRest::className(), ['id' => 'idMaterial']);
+    }
 }
