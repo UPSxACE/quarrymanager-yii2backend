@@ -3,10 +3,9 @@
 namespace app\modules\api\controllers;
 
 
-use app\modules\api\models\LoteRest;
 use app\modules\api\models\ProdutoRest;
 use Yii;
-use yii\rest\ActiveController;
+
 
 class ProdutoController extends BaseController
 {

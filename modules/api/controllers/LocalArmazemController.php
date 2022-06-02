@@ -4,9 +4,8 @@ namespace app\modules\api\controllers;
 
 
 use app\modules\api\models\LocalArmazemRest;
-use app\modules\api\models\LoteRest;
 use Yii;
-use yii\rest\ActiveController;
+
 
 class LocalArmazemController extends BaseController
 {
