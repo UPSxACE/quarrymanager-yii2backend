@@ -8,10 +8,13 @@ use yii\data\ActiveDataProvider;
 class LoteRest extends Lote
 {
 
+
+    public function fields(){
+        return ['codigo_lote', 'quantidade', 'dataHora','idProduto0', 'idLocalExtracao0'];
+    }
+
     public function dadosListar($params){
-        $query = LoteRest::find()
-        ->innerJoinWith('idProduto0.idMaterial0')
-        ->innerJoinWith('idLocalExtracao0');
+        $query = LoteRest::find();
         //->joinWith(['idProduto0']);
 
         $dataProvider = new ActiveDataProvider([
