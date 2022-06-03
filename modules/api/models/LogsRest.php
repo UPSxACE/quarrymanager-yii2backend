@@ -20,11 +20,22 @@ class LogsRest extends Logs
 
         $this->load($params, "");
 
+        if(isset($params["tipoAcao"])){
+            $query->innerJoinWith('idTipoAcao0')->andFilterWhere([
+                'tipoacao.id' => $params["tipoAcao"]
+            ]);
+        }
+
         return $dataProvider;
     }
 
     public function getIdTipoAcao0()
     {
         return $this->hasOne(TipoAcaoRest::className(), ['id' => 'idTipoAcao']);
+    }
+
+    public function getIdUser0()
+    {
+        return $this->hasOne(UserRest::className(), ['id' => 'idUser']);
     }
 }

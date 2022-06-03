@@ -22,7 +22,7 @@ class UserRest extends User
     }
 
     public function fields(){
-        return ['username', 'profile'];
+        return ['username', 'profile', 'role'];
     }
 
     public function dadosListar($params){
@@ -44,5 +44,10 @@ class UserRest extends User
     public function getProfile()
     {
         return $this->hasOne(ProfileRest::className(), ['user_id' => 'id']);
+    }
+
+    public function getRole()
+    {
+        return $this->hasOne(RoleRest::className(), ['id' => 'role_id']);
     }
 }
