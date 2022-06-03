@@ -5,7 +5,7 @@ namespace app\modules\api\controllers;
 
 use app\modules\api\models\ProdutoRest;
 use Yii;
-
+use yii\rest\ActiveController;
 
 class ProdutoController extends BaseController
 {
@@ -23,6 +23,7 @@ class ProdutoController extends BaseController
     }
 
     public function actionListar(){
+        //$model = new ProdutoRest(['scenario' => ProdutoRest::SCENARIO_LOJA]);
         $model = new ProdutoRest();
         $get = Yii::$app->request->get(); //esta linha de código vai buscar os parâmetros de query do REQUEST (ex: ?grau="licensiatura)
         $dataProvider = $model->dadosListar($get);

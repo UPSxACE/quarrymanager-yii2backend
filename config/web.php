@@ -35,6 +35,7 @@ $config = [
         */
         'user' => [
             'class' => 'amnah\yii2\user\components\User',
+            //'identityClass' => 'app\models\User',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -110,6 +111,7 @@ $config = [
                         'api/material',
                         'api/produto',
                         'api/transportadora',
+                        'api/user'
                         //'OPTIONS api/<module:\w+>s/<action>' => 'api/base/options',
                         //'api/material',
                     ],

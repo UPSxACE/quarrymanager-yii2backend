@@ -2,17 +2,17 @@
 
 namespace app\modules\api\models;
 
-use app\models\Cor;
+use app\models\Role;
 use yii\data\ActiveDataProvider;
 
-class CorRest extends Cor
+class RoleRest extends Role
 {
     public function fields(){
-        return ['nome', 'prefixo'];
+        return ['name'];
     }
 
     public function dadosListar($params){
-        $query = CorRest::find();
+        $query = RoleRest::find();
 
         $dataProvider = new ActiveDataProvider([
             'query'=>$query

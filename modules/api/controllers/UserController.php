@@ -3,13 +3,14 @@
 namespace app\modules\api\controllers;
 
 
-use app\modules\api\models\CorRest;
+use app\modules\api\models\TransportadoraRest;
+use app\modules\api\models\UserRest;
 use Yii;
 use yii\rest\ActiveController;
 
-class CorController extends BaseController
+class UserController extends BaseController
 {
-    public $modelClass = CorRest::class;
+    public $modelClass = UserRest::class;
 
     public function behaviors(){
         $behaviors = parent::behaviors();
@@ -23,7 +24,7 @@ class CorController extends BaseController
     }
 
     public function actionListar(){
-        $model = new CorRest();
+        $model = new UserRest();
         $get = Yii::$app->request->get(); //esta linha de código vai buscar os parâmetros de query do REQUEST (ex: ?grau="licensiatura)
         $dataProvider = $model->dadosListar($get);
 

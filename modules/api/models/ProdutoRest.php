@@ -8,10 +8,18 @@ use app\models\Produto;
 use yii\data\ActiveDataProvider;
 
 class ProdutoRest extends Produto
-{
+{/*
+    const SCENARIO_LOJA = 'loja';
 
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_LOJA => ['tituloArtigo', 'idMaterial0', 'idCor0', 'preco'],
+        ];
+    }*/
 
-    public function dadosListar($params){
+    public function dadosListar($params)
+    {
         $query = ProdutoRest::find();
         //  ->innerJoinWith('idCor0');
         //->joinWith(['idMaterial0']);
@@ -23,23 +31,35 @@ class ProdutoRest extends Produto
 
         $this->load($params, "");
 
+
         return $dataProvider;
     }
 
     public function fields(){
-        return ['tituloArtigo', 'idMaterial0', 'idCor0', 'preco'  ];
 
+        return ['tituloArtigo','na_loja', 'Res_Compressao', 'Res_Flexao', 'Massa_Vol_Aparente', 'Absorcao_Agua', 'idMaterial0', 'idCor0', 'preco' ];
+
+        /*
+                switch ($this->scenario) {
+                    case 'loja':
+                        return ['tituloArtigo', 'idMaterial0', 'idCor0', 'preco'  ];
+
+            default:
+                return ['idMaterial0','na_loja', 'Res_Compressao', 'Res_Flexao', 'Massa_Vol_Aparente', 'Absorcao_Agua', ];
+        }*/
     }
 
-    public function getIdCor0()
-    {
-        return $this->hasOne(CorRest::className(), ['id' => 'idCor']);
-    }
 
     public function getIdMaterial0()
     {
         return $this->hasOne(MaterialRest::className(), ['id' => 'idMaterial']);
     }
 
+
+
+    public function getIdCor0()
+    {
+        return $this->hasOne(CorRest::className(), ['id' => 'idCor']);
+    }
 
 }
