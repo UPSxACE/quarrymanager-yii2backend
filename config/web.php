@@ -86,8 +86,8 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                [
-                    /*
+
+
                     'loja/produto/<id:\d+>' => 'loja/produto',
                     'dashboard/encomendas/<id:\d+>' => 'dashboard/encomendas-action',
                     'dashboard/encomendas/<id:\d+>/mobilizacao' => 'dashboard/encomendas-mobilizacao',
@@ -96,25 +96,10 @@ $config = [
                     'dashboard/encomendas/<id:\d+>/step' => 'dashboard/encomendas-next-step',
                     'dashboard/encomendas/<idEncomenda:\d+>/mobilizacao/confirmar-recolha/<idRecolha:\d+>' => 'dashboard/confirmar-recolha',
                     'dashboard/lotes/<codigo_lote:\w+>' => 'dashboard/lotes-action',
-                    */
 
-                    //serviços
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => [
-                        'api/auth',
-                        'api/cor',
-                        'api/local-armazem',
-                        'api/local-extracao',
-                        'api/logs',
-                        'api/lote',
-                        'api/material',
-                        'api/produto',
-                        'api/transportadora',
-                        //'OPTIONS api/<module:\w+>s/<action>' => 'api/base/options',
-                        //'api/material',
-                    ],
-                    'pluralize' => false,
-                ]
+
+
+
 
             ],
         ],
@@ -139,6 +124,54 @@ $config = [
         'api' => [
             'class' => 'app\modules\api\RestAPI',
             // ... other configurations for the module ...
+            'components' => [
+                'urlManager' => [
+                    'class' => 'yii\web\UrlManager',
+                    'enablePrettyUrl' => true,
+                    'showScriptName' => false,
+                    'rules' => [
+                        [
+                            /*
+                            'loja/produto/<id:\d+>' => 'loja/produto',
+                            'dashboard/encomendas/<id:\d+>' => 'dashboard/encomendas-action',
+                            'dashboard/encomendas/<id:\d+>/mobilizacao' => 'dashboard/encomendas-mobilizacao',
+                            'dashboard/encomendas/<idEncomenda:\d+>/cancelar' => 'dashboard/cancelar-encomenda',
+                            'dashboard/encomendas/<idEncomenda:\d+>/agendar-recolha' => 'dashboard/encomendas-agendar',
+                            'dashboard/encomendas/<id:\d+>/step' => 'dashboard/encomendas-next-step',
+                            'dashboard/encomendas/<idEncomenda:\d+>/mobilizacao/confirmar-recolha/<idRecolha:\d+>' => 'dashboard/confirmar-recolha',
+                            'dashboard/lotes/<codigo_lote:\w+>' => 'dashboard/lotes-action',
+                            */
+
+                            //serviços
+                            'class' => 'yii\rest\UrlRule',
+                            'controller' => [
+                                'api/auth',
+                                'api/cor',
+                                'api/local-armazem',
+                                'api/local-extracao',
+                                'api/logs',
+                                'api/lote',
+                                'api/material',
+                                'api/produto',
+                                'api/transportadora',
+                                //'OPTIONS api/<module:\w+>s/<action>' => 'api/base/options',
+                                //'api/material',
+                            ],
+                            'pluralize' => false,
+                        ]
+
+                    ],
+                ],
+                'request' => [
+                    'class'=> 'yii\web\Request',
+                    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+                    'cookieValidationKey' => 'lVZtY6X1loBW9EuIRX6PAcqKCQtUpXJI',
+                    //código para o aceitar dados em json:
+                    'parsers' => [
+                        'application/json' => 'yii\web\JsonParser',
+                    ]
+                ],
+            ]
         ],
     ],
     /* ^ added because of amnah/yii-user ^ */
