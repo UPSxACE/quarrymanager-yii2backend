@@ -29,7 +29,10 @@ class UserRest extends User
         $query = UserRest::find();
 
         $dataProvider = new ActiveDataProvider([
-            'query'=>$query
+            'query'=>$query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         $this->load($params, "");

@@ -14,7 +14,10 @@ class LocalExtracaoRest extends LocalExtracao
 
 
         $dataProvider = new ActiveDataProvider([
-            'query'=>$query
+            'query'=>$query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         $this->load($params, "");

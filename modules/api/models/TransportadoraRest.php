@@ -15,7 +15,10 @@ class TransportadoraRest extends Transportadora
         $query = TransportadoraRest::find();
 
         $dataProvider = new ActiveDataProvider([
-            'query'=>$query
+            'query'=>$query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         $this->load($params, "");

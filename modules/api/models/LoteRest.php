@@ -18,7 +18,10 @@ class LoteRest extends Lote
         //->joinWith(['idProduto0']);
 
         $dataProvider = new ActiveDataProvider([
-            'query'=>$query
+            'query'=>$query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         $this->load($params, "");

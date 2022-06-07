@@ -15,7 +15,10 @@ class CorRest extends Cor
         $query = CorRest::find();
 
         $dataProvider = new ActiveDataProvider([
-            'query'=>$query
+            'query'=>$query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         $this->load($params, "");

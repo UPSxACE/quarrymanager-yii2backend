@@ -15,7 +15,11 @@ class LogsRest extends Logs
         $query = LogsRest::find();
 
         $dataProvider = new ActiveDataProvider([
-            'query'=>$query
+            'query'=>$query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+
         ]);
 
         $this->load($params, "");
