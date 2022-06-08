@@ -20,12 +20,15 @@ class HomeController extends BaseController
         return $behaviors;
     }
 
+
+
     public function actionStats(){
-        $model = new StatsRest();
-        $get = Yii::$app->request->get(); //esta linha de código vai buscar os parâmetros de query do REQUEST (ex: ?grau="licensiatura)
-        $dataProvider = $model->cardStats($get);
+        $encomendaPendente = StatsRest::calcular(1);
+        $encomendaConfirmada = StatsRest::calcular(3);
+        $encomendaFinalizada = StatsRest::calcular(9);
+        $encomendaCancelada = StatsRest::calcular(10);
+        $financas = 5000;
 
-        return $dataProvider;
+        return ['pendentes' => $encomendaPendente, 'confirmados' => $encomendaConfirmada, 'finalizados' => $encomendaFinalizada, 'cancelados' => $encomendaCancelada, 'financas' => $financas];
     }
-
 }

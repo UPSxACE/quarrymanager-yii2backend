@@ -27,8 +27,18 @@ class StatsRest extends EstadoPedido
 
 
     public function fields(){
-        return ['id'];
+        return ['encomendas_pendentes' => function($model) {
+
+            return $model->calcular(1);
+
+
+        }];
 
     }
 
+
+    public static function calcular($idEstado){
+        return EstadoPedido::find()->andWhere(['idEstado' => $idEstado])->andWhere(['last' => '1'])->count();
+        // return
+    }
 }
