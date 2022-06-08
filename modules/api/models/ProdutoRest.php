@@ -41,7 +41,8 @@ class ProdutoRest extends Produto
     public function fields(){
 
         return ['tituloArtigo','na_loja', 'Res_Compressao', 'Res_Flexao', 'Massa_Vol_Aparente', 'Absorcao_Agua', 'idMaterial0', 'idCor0', 'preco',
-            'quantidade_vendida' => function ($model) {return $model->numeroPedidos($model->id);}
+            'quantidade_vendida' => function ($model) {return $model->numeroPedidos($model->id);}, 'numero_pedidos' => function ($model)
+            { return $model->quantidadeVendida($model->id);}
         ];
 
         /*
