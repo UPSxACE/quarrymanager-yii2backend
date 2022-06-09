@@ -87,7 +87,5 @@ class EstadoPedido extends \yii\db\ActiveRecord
         }
 
         return false;
-
-
     }
 }
