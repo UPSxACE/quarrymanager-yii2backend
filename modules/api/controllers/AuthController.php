@@ -57,6 +57,8 @@ class AuthController extends Controller{
             }
         }
 
+        //codigo de registrar perfil
+
         return $user;
     }
 
