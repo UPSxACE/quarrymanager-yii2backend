@@ -11,7 +11,7 @@ class EstadoPedidoRest extends EstadoPedido
 
     public function fields()
     {
-        return ['dataEstado','idPedido','idPedido0'];
+        return ['dataEstado','idPedido','idPedido0', 'idEstado0'];
     }
 
     public function dadosListar($params)
@@ -39,5 +39,9 @@ class EstadoPedidoRest extends EstadoPedido
         return $this->hasOne(PedidoRest::className(), ['id' => 'idPedido']);
     }
 
+    public function getIdEstado0()
+    {
+        return $this->hasOne(EstadoRest::className(), ['id' => 'idEstado']);
+    }
 
 }
