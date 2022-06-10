@@ -3,8 +3,9 @@
 namespace  app\modules\api\controllers;
 
 use amnah\yii2\user\models\forms\LoginForm;
-use amnah\yii2\user\models\Role;
+use app\models\Role;
 use amnah\yii2\user\models\UserToken;
+use app\models\Profile;
 use app\models\User;
 use Yii;
 use yii\rest\Controller;
@@ -50,14 +51,11 @@ class AuthController extends Controller{
 
             if($user->validate()){
                 // Os dados estão validados e na instância user
-
                 $user->setRegisterAttributes(Role::ROLE_USER);
                 $user->save();
                 $this->afterRegister($user);
             }
         }
-
-        //codigo de registrar perfil
 
         return $user;
     }
@@ -86,5 +84,16 @@ class AuthController extends Controller{
         } else {
             Yii::$app->user->login($user, $this->module->loginDuration);
         }
+
+        //codigo de registrar perfil
+        $profileModel = new Profile();
+        $profileModel->user_id = $user->id;
+        $profileModel->idFotografia = 1;
+        $profileModel->created_at = date('Y-m-d H:i:s');
+        $profileModel->updated_at = date('Y-m-d H:i:s');
+        if($profileModel->validate()) {
+            $profileModel->save();
+        }
+
     }
 }
