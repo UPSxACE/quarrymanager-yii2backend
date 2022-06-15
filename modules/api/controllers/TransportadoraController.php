@@ -14,7 +14,7 @@ class TransportadoraController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'editar' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -33,6 +33,13 @@ class TransportadoraController extends BaseController
     public function actionAdd(){
         $model = new TransportadoraRest();
         $model->load(Yii::$app->request->post(), '');
+        $model->save();
+        return $model;
+    }
+
+    public function actionEditar(){
+        $model = TransportadoraRest::find()->where(['id' =>Yii::$app->request->post('id')])->one();
+        $model->load(yii::$app->request->post(), '');
         $model->save();
         return $model;
     }
