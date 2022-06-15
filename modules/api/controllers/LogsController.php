@@ -32,4 +32,6 @@ class LogsController extends BaseController
 
         return $dataProvider;
     }
+
+
 }
