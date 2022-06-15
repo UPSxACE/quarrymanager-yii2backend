@@ -84,6 +84,7 @@ $config = [
         'db' => $db,
 
         'urlManager' => [
+
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
@@ -124,6 +125,7 @@ $config = [
             'components' => [
                 'urlManager' => [
                     'class' => 'yii\web\UrlManager',
+                    'enableStrictParsing' => false,
                     'enablePrettyUrl' => true,
                     'showScriptName' => false,
                     'rules' => [
