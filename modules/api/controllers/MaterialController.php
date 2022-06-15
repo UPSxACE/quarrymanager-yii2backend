@@ -14,7 +14,7 @@ class MaterialController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-material' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -35,5 +35,21 @@ class MaterialController extends BaseController
         $model->load(Yii::$app->request->post(), '');
         $model->save();
         return $model;
+    }
+
+    public function actionDeleteMaterial(){
+
+        if (Yii::$app->request->post('prefixo')){
+
+            $model = MaterialRest::find()->where(['prefixo' => Yii::$app->request->post('prefixo')])->one();
+
+        }
+        else{
+            $model = MaterialRest::find()->where(['id' => Yii::$app->request->post('id')])->one();
+
+        }
+
+        $model->delete();
+        return "Deletado com sucesso";
     }
 }

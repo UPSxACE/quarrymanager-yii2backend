@@ -7,6 +7,8 @@ use yii\data\ActiveDataProvider;
 
 class CorRest extends Cor
 {
+
+
     public function fields(){
         return ['nome', 'prefixo'];
     }
