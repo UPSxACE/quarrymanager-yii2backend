@@ -39,13 +39,13 @@ class CorController extends BaseController
 
     public function actionDeleteCor(){
 
-        if (isset($_GET['prefixo'])){
+        if (Yii::$app->request->post('prefixo')){
 
-            $model =  CorRest::find()->where(['prefixo' => $_GET['prefixo']])->one();
+            $model =  CorRest::find()->where(['prefixo' => Yii::$app->request->post('prefixo')])->one();
 
         }
         else{
-            $model = CorRest::find()->where(['id' => $_GET['id']])->one();
+            $model = CorRest::find()->where(['id' => Yii::$app->request->post('id')])->one();
 
         }
 

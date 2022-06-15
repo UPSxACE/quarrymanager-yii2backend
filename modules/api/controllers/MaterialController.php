@@ -39,13 +39,13 @@ class MaterialController extends BaseController
 
     public function actionDeleteMaterial(){
 
-        if (isset($_GET['prefixo'])){
+        if (Yii::$app->request->post('prefixo')){
 
-            $model =  MaterialRest::find()->where(['prefixo' => $_GET['prefixo']])->one();
+            $model = MaterialRest::find()->where(['prefixo' => Yii::$app->request->post('prefixo')])->one();
 
         }
         else{
-            $model = MaterialRest::find()->where(['id' => $_GET['id']])->one();
+            $model = MaterialRest::find()->where(['id' => Yii::$app->request->post('id')])->one();
 
         }
 

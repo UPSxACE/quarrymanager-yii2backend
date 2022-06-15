@@ -7,13 +7,7 @@ use yii\data\ActiveDataProvider;
 
 class CorRest extends Cor
 {
-    public static function primaryKey()
-    {
-        return [
-            'id',
-            'prefixo',
-        ];
-    }
+
 
     public function fields(){
         return ['nome', 'prefixo'];
