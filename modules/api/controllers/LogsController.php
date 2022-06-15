@@ -14,7 +14,7 @@ class LogsController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -33,5 +33,12 @@ class LogsController extends BaseController
         return $dataProvider;
     }
 
+    public function actionAdd(){
+        $model = new LogsRest();
+        $model->load(Yii::$app->request->post(), '');
+        $model->dataHora = date('y-m-d H:i:s', time());
+        $model->save();
+        return $model;
+    }
 
 }
