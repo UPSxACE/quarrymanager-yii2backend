@@ -125,7 +125,6 @@ $config = [
             'components' => [
                 'urlManager' => [
                     'class' => 'yii\web\UrlManager',
-                    'enableStrictParsing' => false,
                     'enablePrettyUrl' => true,
                     'showScriptName' => false,
                     'rules' => [
