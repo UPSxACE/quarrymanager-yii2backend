@@ -14,7 +14,7 @@ class MaterialController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'editar' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -28,5 +28,11 @@ class MaterialController extends BaseController
         $dataProvider = $model->dadosListar($get);
 
         return $dataProvider;
+    }
+    public function actionEditar(){
+        $model = MaterialRest::find()->where(['id' =>Yii::$app->request->post('id')])->one();
+        $model->load(yii::$app->request->post(), '');
+        $model->save();
+        return $model;
     }
 }
