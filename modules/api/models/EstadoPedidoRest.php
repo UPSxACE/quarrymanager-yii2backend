@@ -74,54 +74,42 @@ class EstadoPedidoRest extends EstadoPedido
         $mes1 = EstadoPedidoRest::find()
             ->andWhere(['last' => '1'])->andWhere(['>=', 'idEstado', 8])
             ->andWhere(['last' => '1'])->andWhere(['<', 'idEstado', 10])
-            ->andWhere(['last' => '1'])->andWhere(['<', 'idEstado', 10])
-            //->andWhere(['=', "timestampdiff(month, estado_pedido.dataEstado,'" . $ultimo_1 . "')", 0])
             ->andWhere(["month(estado_pedido.dataEstado)" => $meses[0][0]])
             ->andWhere(["year(estado_pedido.dataEstado)" => $meses[0][1]])
             ->count();
         $mes2 = EstadoPedidoRest::find()
             ->andWhere(['last' => '1'])->andWhere(['>=', 'idEstado', 8])
             ->andWhere(['last' => '1'])->andWhere(['<', 'idEstado', 10])
-            ->andWhere(['last' => '1'])->andWhere(['<', 'idEstado', 10])
-            //->andWhere(['=', "timestampdiff(month, estado_pedido.dataEstado,'" . $ultimo_2 . "')", 0])
             ->andWhere(["month(estado_pedido.dataEstado)" => $meses[1][0]])
             ->andWhere(["year(estado_pedido.dataEstado)" => $meses[1][1]])
             ->count();
         $mes3 = EstadoPedidoRest::find()
             ->andWhere(['last' => '1'])->andWhere(['>=', 'idEstado', 8])
             ->andWhere(['last' => '1'])->andWhere(['<', 'idEstado', 10])
-            ->andWhere(['last' => '1'])->andWhere(['<', 'idEstado', 10])
-            //->andWhere(['=', "timestampdiff(month, estado_pedido.dataEstado,'" . $ultimo_3 . "')", 0])
             ->andWhere(["month(estado_pedido.dataEstado)" => $meses[2][0]])
             ->andWhere(["year(estado_pedido.dataEstado)" => $meses[2][1]])
             ->count();
         $mes4 = EstadoPedidoRest::find()
             ->andWhere(['last' => '1'])->andWhere(['>=', 'idEstado', 8])
             ->andWhere(['last' => '1'])->andWhere(['<', 'idEstado', 10])
-            ->andWhere(['last' => '1'])->andWhere(['<', 'idEstado', 10])
-            //->andWhere(['=', "timestampdiff(month, estado_pedido.dataEstado,'" . $ultimo_4 . "')", 0])
             ->andWhere(["month(estado_pedido.dataEstado)" => $meses[3][0]])
             ->andWhere(["year(estado_pedido.dataEstado)" => $meses[3][1]])
             ->count();
         $mes5 = EstadoPedidoRest::find()
             ->andWhere(['last' => '1'])->andWhere(['>=', 'idEstado', 8])
             ->andWhere(['last' => '1'])->andWhere(['<', 'idEstado', 10])
-            ->andWhere(['last' => '1'])->andWhere(['<', 'idEstado', 10])
-            //->andWhere(['=', "timestampdiff(month, estado_pedido.dataEstado,'" . $ultimo_5 . "')", 0])
             ->andWhere(["month(estado_pedido.dataEstado)" => $meses[4][0]])
             ->andWhere(["year(estado_pedido.dataEstado)" => $meses[4][1]])
             ->count();
         $mes6 = EstadoPedidoRest::find()
             ->andWhere(['last' => '1'])->andWhere(['>=', 'idEstado', 8])
             ->andWhere(['last' => '1'])->andWhere(['<', 'idEstado', 10])
-            ->andWhere(['last' => '1'])->andWhere(['<', 'idEstado', 10])
-            //->andWhere(['=', "timestampdiff(month, estado_pedido.dataEstado,'" . $ultimo_6 . "')", 0])
             ->andWhere(["month(estado_pedido.dataEstado)" => $meses[5][0]])
             ->andWhere(["year(estado_pedido.dataEstado)" => $meses[5][1]])
             ->count();
 
 
 
-        return ['1' => $mes1, '2' => $mes2, '3' => $mes3, '4' => $mes4, '5' => $mes5, '6' => $mes6];
+        return [0 => $mes1, -1 => $mes2, -2 => $mes3, -3 => $mes4, -4 => $mes5, -5 => $mes6];
     }
 }
