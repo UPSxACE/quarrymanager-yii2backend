@@ -31,9 +31,9 @@ class LoteController extends BaseController
     }
 
     public function actionAdd(){
-        $modelLote = new LoteRest();
-        $modelLote->load(Yii::$app->request->post(), '');
-        $modelLote->save();
-        return $modelLote;
+        $model = new LoteRest();
+        $model->load(Yii::$app->request->post(), '');
+        $model->save();
+        return $model;
     }
 }

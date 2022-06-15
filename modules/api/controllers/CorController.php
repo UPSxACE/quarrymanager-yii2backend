@@ -31,9 +31,9 @@ class CorController extends BaseController
     }
 
     public function actionAdd(){
-        $modelCor = new CorRest();
-        $modelCor->load(Yii::$app->request->post(), '');
-        $modelCor->save();
-        return $modelCor;
+        $model = new CorRest();
+        $model->load(Yii::$app->request->post(), '');
+        $model->save();
+        return $model;
     }
 }

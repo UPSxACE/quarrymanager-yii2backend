@@ -31,9 +31,9 @@ class MaterialController extends BaseController
     }
 
     public function actionAdd(){
-        $modelMaterial = new MaterialRest();
-        $modelMaterial->load(Yii::$app->request->post(), '');
-        $modelMaterial->save();
-        return $modelMaterial;
+        $model = new MaterialRest();
+        $model->load(Yii::$app->request->post(), '');
+        $model->save();
+        return $model;
     }
 }
