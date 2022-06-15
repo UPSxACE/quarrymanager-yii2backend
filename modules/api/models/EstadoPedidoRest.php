@@ -9,6 +9,9 @@ use yii\data\ActiveDataProvider;
 class EstadoPedidoRest extends EstadoPedido
 {
 
+    public static $estado_inicial = 1; // estado inicial de uma encomenda
+
+
     public function fields()
     {
         return ['dataEstado','idPedido','idPedido0', 'idEstado0'];
@@ -42,6 +45,16 @@ class EstadoPedidoRest extends EstadoPedido
     public function getIdEstado0()
     {
         return $this->hasOne(EstadoRest::className(), ['id' => 'idEstado']);
+    }
+
+    public static function registrarNovoPedido($idPedido){
+        $model = new EstadoPedido();
+        $model->idPedido = $idPedido;
+        $model->idEstado = EstadoPedidoRest::$estado_inicial;
+        $model->dataEstado = date('Y-m-d H:i:s');
+        $model->last = 1;
+        $model->save();
+        return $model;
     }
 
     public function ultimosSeisMeses(){

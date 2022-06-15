@@ -31,9 +31,9 @@ class LocalArmazemController extends BaseController
     }
 
     public function actionAdd(){
-        $modelProduto = new LocalArmazemRest();
-        $modelProduto->load(Yii::$app->request->post(), '');
-        $modelProduto->save();
-        return $modelProduto;
+        $model = new LocalArmazemRest();
+        $model->load(Yii::$app->request->post(), '');
+        $model->save();
+        return $model;
     }
 }

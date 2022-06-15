@@ -31,9 +31,9 @@ class TransportadoraController extends BaseController
     }
 
     public function actionAdd(){
-        $modelProduto = new TransportadoraRest();
-        $modelProduto->load(Yii::$app->request->post(), '');
-        $modelProduto->save();
-        return $modelProduto;
+        $model = new TransportadoraRest();
+        $model->load(Yii::$app->request->post(), '');
+        $model->save();
+        return $model;
     }
 }

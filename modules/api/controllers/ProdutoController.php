@@ -33,9 +33,9 @@ class ProdutoController extends BaseController
     }
 
     public function actionAdd(){
-        $modelProduto = new ProdutoRest();
-        $modelProduto->load(Yii::$app->request->post(), '');
-        $modelProduto->save();
-        return $modelProduto;
+        $model = new ProdutoRest();
+        $model->load(Yii::$app->request->post(), '');
+        $model->save();
+        return $model;
     }
 }

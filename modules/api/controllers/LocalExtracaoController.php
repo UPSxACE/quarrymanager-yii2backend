@@ -30,9 +30,9 @@ class LocalExtracaoController extends BaseController
     }
 
     public function actionAdd(){
-        $modelProduto = new LocalExtracaoRest();
-        $modelProduto->load(Yii::$app->request->post(), '');
-        $modelProduto->save();
-        return $modelProduto;
+        $model = new LocalExtracaoRest();
+        $model->load(Yii::$app->request->post(), '');
+        $model->save();
+        return $model;
     }
 }
