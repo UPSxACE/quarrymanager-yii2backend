@@ -40,10 +40,7 @@ class ProdutoController extends BaseController
     }
 
     public function actionDeleteProduto(){
-
-
         $model =  ProdutoRest::find()->where(['id' => Yii::$app->request->post('id')])->one();
-
         $model->delete();
         return "Deletado com sucesso";
     }
