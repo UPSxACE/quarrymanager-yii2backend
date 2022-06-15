@@ -3,6 +3,7 @@
 namespace app\modules\api\controllers;
 
 
+use app\models\Produto;
 use app\modules\api\models\ProdutoRest;
 use Yii;
 use yii\rest\ActiveController;
@@ -14,7 +15,7 @@ class ProdutoController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -29,5 +30,12 @@ class ProdutoController extends BaseController
         $dataProvider = $model->dadosListar($get);
 
         return $dataProvider;
+    }
+
+    public function actionAdd(){
+        $modelProduto = new Produto();
+        $modelProduto->load(Yii::$app->request->post(), '');
+        $modelProduto->save();
+        return $modelProduto;
     }
 }
