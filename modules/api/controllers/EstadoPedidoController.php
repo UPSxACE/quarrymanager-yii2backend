@@ -4,6 +4,7 @@ namespace app\modules\api\controllers;
 
 
 use app\modules\api\models\EstadoPedidoRest;
+use app\modules\api\models\PedidoRest;
 use Yii;
 use yii\rest\ActiveController;
 
@@ -35,4 +36,6 @@ class EstadoPedidoController extends BaseController
         $model = new EstadoPedidoRest();
         return $model->ultimosSeisMeses();
     }
+
+
 }

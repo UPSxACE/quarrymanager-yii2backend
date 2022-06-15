@@ -13,7 +13,7 @@ class LocalExtracaoController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -27,5 +27,12 @@ class LocalExtracaoController extends BaseController
         $dataProvider = $model->dadosListar($get);
 
         return $dataProvider;
+    }
+
+    public function actionAdd(){
+        $model = new LocalExtracaoRest();
+        $model->load(Yii::$app->request->post(), '');
+        $model->save();
+        return $model;
     }
 }
