@@ -4,6 +4,7 @@ namespace app\modules\api\controllers;
 
 
 use app\modules\api\models\CorRest;
+use app\modules\api\models\LoteRest;
 use Yii;
 use yii\rest\ActiveController;
 
@@ -14,7 +15,8 @@ class CorController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-cor' ],
+
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-cor','editar' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -29,6 +31,7 @@ class CorController extends BaseController
 
         return $dataProvider;
     }
+
 
     public function actionAdd(){
         $model = new CorRest();
@@ -52,4 +55,12 @@ class CorController extends BaseController
         $model->delete();
         return "Deletado com sucesso";
     }
+
+    public function actionEditar(){
+        $model = CorRest::find()->where(['id' =>Yii::$app->request->post('id')])->one();
+        $model->load(yii::$app->request->post(), '');
+        $model->save();
+        return $model;
+    }
+
 }

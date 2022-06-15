@@ -15,7 +15,8 @@ class ProdutoController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-produto' ],
+
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-produto', 'editar' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -39,9 +40,20 @@ class ProdutoController extends BaseController
         return $model;
     }
 
+
     public function actionDeleteProduto(){
         $model =  ProdutoRest::find()->where(['id' => Yii::$app->request->post('id')])->one();
         $model->delete();
         return "Deletado com sucesso";
     }
+
+
+    public function actionEditar(){
+        $model = ProdutoRest::find()->where(['id' =>Yii::$app->request->post('id')])->one();
+        $model->load(yii::$app->request->post(), '');
+        $model->save();
+        return $model;
+    }
 }
+
+

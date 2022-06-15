@@ -14,7 +14,8 @@ class LoteController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-lote' ],
+
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-lote', 'editar' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -29,6 +30,7 @@ class LoteController extends BaseController
 
         return $dataProvider;
     }
+
 
     public function actionAdd(){
         $model = new LoteRest();
@@ -45,4 +47,12 @@ class LoteController extends BaseController
         $model->delete();
         return "Deletado com sucesso";
     }
+
+    public function actionEditar(){
+        $model = LoteRest::find()->where(['codigo_lote' =>Yii::$app->request->post('codigo_lote')])->one();
+        $model->load(yii::$app->request->post(), '');
+        $model->save();
+        return $model;
+    }
+
 }
