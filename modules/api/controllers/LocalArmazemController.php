@@ -37,5 +37,9 @@ class LocalArmazemController extends BaseController
         return $model;
     }
 
-
+    public function actionDeleteLocalArmazem(){
+        $model =  LocalArmazemRest::find()->where(['id' => Yii::$app->request->post('id')])->one();
+        $model->delete();
+        return "Deletado com sucesso";
+    }
 }
