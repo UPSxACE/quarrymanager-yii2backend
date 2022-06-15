@@ -23,7 +23,7 @@ class LogsController extends BaseController
     }
 
     public function actionListar(){
-        if($_GET["teste"] === "1"){
+        if(isset($_GET["teste"]) && $_GET["teste"] === "1"){
             return ["sucesso"];
         }
         $model = new LogsRest();
