@@ -55,5 +55,4 @@ class LocalExtracaoController extends BaseController
         $model = LocalExtracaoRest::find()->where(['id'=>Yii::$app->request->get('id')])->one();
         return $model;
     }
-
 }
