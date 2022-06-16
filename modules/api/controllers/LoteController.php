@@ -46,12 +46,14 @@ class LoteController extends BaseController
         $model->delete();
         return "Deletado com sucesso";
     }
+
     public function actionEditar(){
         $model = LoteRest::find()->where(['codigo_lote' =>Yii::$app->request->post('codigo_lote')])->one();
         $model->load(yii::$app->request->post(), '');
         $model->save();
         return $model;
     }
+
     public function actionFind(){
         $model = LoteRest::find()->where(['codigo_lote'=>Yii::$app->request->get('codigo_lote')])->one();
         return $model;
