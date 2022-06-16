@@ -14,7 +14,7 @@ class LocalExtracaoController extends BaseController
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
 
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-local-extracao', 'editar' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-local-extracao', 'editar', 'find' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -51,4 +51,9 @@ class LocalExtracaoController extends BaseController
         return $model;
 
     }
+    public function actionFind(){
+        $model = LocalExtracaoRest::find()->where(['id'=>Yii::$app->request->get('id')])->one();
+        return $model;
+    }
+
 }
