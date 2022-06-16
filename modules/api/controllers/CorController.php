@@ -65,7 +65,17 @@ class CorController extends BaseController
 
 
     public function actionFind(){
-        $model = CorRest::find()->where(['id'=>Yii::$app->request->get('id')])->one();
+        if (Yii::$app->request->post('prefixo')){
+
+            $model =  CorRest::find()->where(['prefixo' => Yii::$app->request->get('prefixo')])->one();
+
+        }
+        else{
+            $model = CorRest::find()->where(['id' => Yii::$app->request->get('id')])->one();
+
+        }
+
+
         return $model;
     }
 }
