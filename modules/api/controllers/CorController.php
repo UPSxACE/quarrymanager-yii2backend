@@ -16,7 +16,7 @@ class CorController extends BaseController
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
 
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-cor','editar' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-cor','editar','find'  ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -63,4 +63,9 @@ class CorController extends BaseController
         return $model;
     }
 
+
+    public function actionFind(){
+        $model = CorRest::find()->where(['id'=>Yii::$app->request->get('id')])->one();
+        return $model;
+    }
 }
