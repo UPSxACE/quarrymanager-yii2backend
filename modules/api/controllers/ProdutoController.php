@@ -16,7 +16,7 @@ class ProdutoController extends BaseController
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
 
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-produto', 'editar' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-produto', 'editar', 'find' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -52,6 +52,11 @@ class ProdutoController extends BaseController
         $model = ProdutoRest::find()->where(['id' =>Yii::$app->request->post('id')])->one();
         $model->load(yii::$app->request->post(), '');
         $model->save();
+        return $model;
+    }
+
+    public function actionFind(){
+        $model = ProdutoRest::find()->where(['id'=>Yii::$app->request->get('id')])->one();
         return $model;
     }
 }
