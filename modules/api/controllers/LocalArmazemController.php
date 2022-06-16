@@ -15,7 +15,7 @@ class LocalArmazemController extends BaseController
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
 
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-local-armazem', 'editar' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-local-armazem', 'editar', 'find' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -51,5 +51,9 @@ class LocalArmazemController extends BaseController
         $model->save();
         return $model;
 
+    }
+    public function actionFind(){
+        $model = LocalArmazemRest::find()->where(['id'=>Yii::$app->request->get('id')])->one();
+        return $model;
     }
 }
