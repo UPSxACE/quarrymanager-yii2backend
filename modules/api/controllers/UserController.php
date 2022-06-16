@@ -15,7 +15,7 @@ class UserController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'find' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -29,5 +29,17 @@ class UserController extends BaseController
         $dataProvider = $model->dadosListar($get);
 
         return $dataProvider;
+    }
+
+    public function actionFind()
+    {
+        if (Yii::$app->request->get('username')) {
+            $model = UserRest::find()->where(['username' => Yii::$app->request->get('username')])->one();
+        } elseif (Yii::$app->request->get('email')){
+            $model = UserRest::find()->where(['email' => Yii::$app->request->get('email')])->one();
+        } else {
+            $model = UserRest::find()->where(['id' => Yii::$app->request->get('id')])->one();
+        }
+        return $model;
     }
 }
