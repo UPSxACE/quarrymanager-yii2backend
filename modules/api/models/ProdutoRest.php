@@ -55,6 +55,11 @@ class ProdutoRest extends Produto
         }*/
     }
 
+    public function extraFields()
+    {
+        return ['id'];
+    }
+
     public static function listarProdutosLoja(){
         $query = ProdutoRest::find()->where(['na_loja' => 1]);
 
