@@ -7,22 +7,68 @@ use app\models\Role;
 use amnah\yii2\user\models\UserToken;
 use app\models\Profile;
 use app\models\User;
+use app\modules\api\models\UserRest;
 use Yii;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\HttpBasicAuth;
+use yii\filters\auth\HttpBearerAuth;
 use yii\rest\Controller;
 use yii\web\ServerErrorHttpException;
 
 class AuthController extends Controller{
-
-    public function verbs()
+public function verbs()
     {
         return [
-            'register' => ['POST'],
-            'login' => ['POST']
+            'register' => ['POST', 'OPTIONS'],
+            'login' => ['POST', 'OPTIONS']
         ];
     }
 
-    public function actionLogin(){
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
 
+        unset($behaviors['authenticator']);
+
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::class,
+            'cors' => [
+                'Origin' => ['*'],
+                'Access-Control-Request-Headers' => ['*'],
+            ],
+        ];
+        $behaviors['authenticator'] = [
+            'class' => CompositeAuth::class,
+            'authMethods' => [
+                HttpBasicAuth::class,
+                HttpBearerAuth::class //mecanismo de autenticação que o JWT vai utilizar
+            ]
+        ];
+        $behaviors['authenticator']['except'] = ['options', 'login', 'register', 'check-permission'];
+
+        /*
+        $behaviors['access'] = [
+            'class' => AccessControl::className(),
+            'rules' => [
+                /*[
+                    'actions' => ['home', 'index', 'lotes', 'novo-lote', 'lotes-action', 'update-lote', 'delete-lote', 'stock',
+                        'produtos', 'novo-produto', 'materiais', 'novo-material', 'cores', 'nova-cor', 'encomendas', 'encomendas-action',
+                        'encomendas-mobilizacao', 'encomendas-agendar', 'confirmar-recolha'],
+                    'allow' => true,
+                    'roles' => ['operario'],
+                ],*/
+        /*],
+        'denyCallback' => function ($rule, $action) {
+            throw new ForbiddenHttpException("You're not allowed to access");
+        }];*/
+
+        return $behaviors;
+
+    }
+
+
+
+    public function actionLogin(){
         $model = new LoginForm();
         $model->load(Yii::$app->request->post(),'');
 
@@ -96,4 +142,22 @@ class AuthController extends Controller{
         }
 
     }
+
+    public function actionCheckPermission(){
+        $access_header = Yii::$app->request->headers->get("Authorization");
+
+        $access_token = str_replace("Basic ", "", $access_header);
+        $access_token = base64_decode($access_token);
+        $access_token = str_replace(":", "", $access_token);
+
+        $permission = Yii::$app->request->get("permission");
+        $user = UserRest::findOne(["access_token"=>$access_token]);
+
+        if ($user->can($permission)) {
+            return true;
+        }
+
+        return false;
+    }
+
 }
