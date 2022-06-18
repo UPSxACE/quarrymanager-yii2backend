@@ -57,8 +57,6 @@ class ProdutoController extends BaseController
     }
 
 
-
-
     public function actionEditar(){
         $model = ProdutoRest::find()->where(['id' =>Yii::$app->request->post('id')])->one();
         $model->load(yii::$app->request->post(), '');
