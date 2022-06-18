@@ -27,7 +27,7 @@ class LocalExtracaoRest extends LocalExtracao
 
 
     public function fields(){
-        return ['nome', 'coordenadasGPS_X', 'coordenadasGPS_Y'];
+        return ['id', 'nome', 'coordenadasGPS_X', 'coordenadasGPS_Y'];
     }
 
 

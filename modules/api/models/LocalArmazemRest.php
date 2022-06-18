@@ -27,7 +27,7 @@ class LocalArmazemRest extends LocalArmazem
 
 
     public function fields(){
-        return ['nome'];
+        return ['id', 'nome'];
 
     }
 }

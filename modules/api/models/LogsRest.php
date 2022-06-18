@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 class LogsRest extends Logs
 {
     public function fields(){
-        return ['descricao','dataHora', 'idUser0', 'idTipoAcao0'];
+        return ['id', 'descricao','dataHora', 'idUser0', 'idTipoAcao0'];
     }
 
     public function dadosListar($params){

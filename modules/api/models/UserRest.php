@@ -22,7 +22,7 @@ class UserRest extends User
     }
 
     public function fields(){
-        return ['username', 'profile', 'role'];
+        return ['id', 'username', 'profile', 'role'];
     }
 
     public function dadosListar($params){

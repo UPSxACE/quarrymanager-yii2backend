@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 class TransportadoraRest extends Transportadora
 {
     public function fields(){
-        return ['nome'];
+        return ['id', 'nome'];
     }
 
     public function dadosListar($params){
