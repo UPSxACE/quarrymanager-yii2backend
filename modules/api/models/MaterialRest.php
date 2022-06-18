@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 class MaterialRest extends Material
 {
     public function fields(){
-        return ['nome', 'prefixo'];
+        return [ 'id', 'nome', 'prefixo'];
     }
 
     public function dadosListar($params){

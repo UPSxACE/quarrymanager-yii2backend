@@ -10,7 +10,7 @@ class CorRest extends Cor
 
 
     public function fields(){
-        return ['nome', 'prefixo'];
+        return ['id', 'nome', 'prefixo'];
     }
 
     public function dadosListar($params){
