@@ -54,7 +54,7 @@ class LocalExtracaoController extends BaseController
         $access_token = str_replace(":", "", $access_token);
         $user = UserRest::findOne(["access_token"=>$access_token]);
 
-        $model =  LocalExtracaoRest::find()->where(['id' => Yii::$app->request->post('id')])->one();
+        $model =  LocalExtracaoRest::find()->where(['id' => Yii::$app->request->get('id')])->one();
         $model->delete();
         Logs::registrarLogUser($user->id, 2, "O local de extração " . $model->codigo_lote . " foi eliminado.");
         return "Deletado com sucesso";
