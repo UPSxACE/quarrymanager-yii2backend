@@ -153,7 +153,8 @@ public function verbs()
         $permission = Yii::$app->request->get("permission");
         $user = UserRest::findOne(["access_token"=>$access_token]);
 
-        if ($user->can($permission)) {
+
+        if ($user !== null && $user->can($permission)) {
             return true;
         }
 

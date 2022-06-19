@@ -168,6 +168,7 @@ $config = [
                     //código para o aceitar dados em json:
                     'parsers' => [
                         'application/json' => 'yii\web\JsonParser',
+                        'multipart/form-data' => 'yii\web\MultipartFormDataParser',
                     ]
                 ],
             ]

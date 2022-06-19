@@ -97,6 +97,7 @@ class Logs extends \yii\db\ActiveRecord
         if($model->validate()){
             $model->save();
         }
+
     }
 
 }
