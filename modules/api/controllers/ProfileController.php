@@ -16,7 +16,7 @@ class ProfileController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'get-profile', 'test-image-upload' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'get-profile', 'test-image-upload', 'editar' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -48,10 +48,22 @@ class ProfileController extends BaseController
         return $response;
 
 
-
         return $_FILES["file2"]["name"];
         move_uploaded_file($_FILES["file"]["tmp_name"], "uploads/profilePictures/" . $_FILES["file"]["name"]);
         return Yii::$app->request->post();
         return "Sucesso no upload";
+    }
+
+    public function actionEditar(){
+        $access_header = Yii::$app->request->headers->get("Authorization");
+        $access_token = str_replace("Basic ", "", $access_header);
+        $access_token = base64_decode($access_token);
+        $access_token = str_replace(":", "", $access_token);
+        $user = UserRest::findOne(["access_token" => $access_token]);
+
+        $model = ProfileRest::find()->where(['user_id' =>Yii::$app->request->post($user->id)])->one();
+        $model->load(yii::$app->request->post(), '');
+        $model->save();
+        return $model;
     }
 }
