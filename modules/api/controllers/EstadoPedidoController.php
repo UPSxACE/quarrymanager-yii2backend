@@ -15,9 +15,14 @@ class EstadoPedidoController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar-encomendas', 'ultimos-meses' ],
+            'actions' =>  ['index', 'view', 'create', 'options', 'listar-encomendas', 'ultimos-meses' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
+        ];
+        $behaviors['access']['rules'][] = [
+            'actions' =>  ['update', 'delete' ],
+            'allow' => true,
+            'roles' => ['gestor'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
 
         return $behaviors;

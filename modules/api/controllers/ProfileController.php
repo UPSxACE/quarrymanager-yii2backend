@@ -48,9 +48,7 @@ class ProfileController extends BaseController
         $access_token = str_replace(":", "", $access_token);
 
         $user = UserRest::findOne(["access_token"=>$access_token]);
-        return(
-    ["username" => $user->username, "email" => $user->email]
-        );
+        return(["username" => $user->username, "email" => $user->email]);
     }
 
     public function actionTestImageUpload(){
@@ -98,10 +96,18 @@ class ProfileController extends BaseController
         $access_token = str_replace(":", "", $access_token);
         $user = UserRest::findOne(["access_token" => $access_token]);
 
-        if(Yii::$app->request->post("email") !== $user->email){
-            $profile = Profile::findOne($user->id);
-            $profile->email = Yii::$app->request->post("email");
-            $profile->save();
+        if(Yii::$app->security->validatePassword(Yii::$app->request->post("password"), $user->password)) {
+
+            if(Yii::$app->request->post("email") !== $user->email){
+                $profile = Profile::findOne($user->id);
+                $profile->email = Yii::$app->request->post("email");
+                $profile->save();
+                $user->email = Yii::$app->request->post("email");
+                $user->save();
+            }
+
+        } else {
+            return "Password errada.";
         }
     }
 }
