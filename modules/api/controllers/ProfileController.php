@@ -39,14 +39,14 @@ class ProfileController extends BaseController
     }
 
     public function actionTestImageUpload(){
-        /*
+
         $response = \Yii::$app->response;
         $response->format = yii\web\Response::FORMAT_RAW;
         $response->headers->add('content-type', 'image/jpg');
-        $img_data = file_get_contents('images/ab.jpg');
+        $img_data = file_get_contents('uploads\profilePictures/CEO1.jpg');
         $response->data = $img_data;
         return $response;
-        */
+
 
 
         return $_FILES["file2"]["name"];
