@@ -48,8 +48,15 @@ class TransportadoraController extends BaseController
 
 
     public function actionDeleteTransportadora(){
+        $access_header = Yii::$app->request->headers->get("Authorization");
+        $access_token = str_replace("Basic ", "", $access_header);
+        $access_token = base64_decode($access_token);
+        $access_token = str_replace(":", "", $access_token);
+        $user = UserRest::findOne(["access_token" => $access_token]);
+
         $model =  TransportadoraRest::find()->where(['id' => Yii::$app->request->post('id')])->one();
         $model->delete();
+        Logs::registrarLogUser($user->id, 3, "A transportadora" . $model->id . "' foi eliminada.");
         return "Deletado com sucesso";
     }
 
