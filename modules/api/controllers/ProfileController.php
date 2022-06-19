@@ -18,7 +18,7 @@ class ProfileController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'get-profile', 'test-image-upload', 'editar', 'editar-definicoes-perfil' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'get-profile', 'test-image-upload', 'editar', 'editar-definicoes-perfil', 'get-profile-definicoes' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -37,6 +37,19 @@ class ProfileController extends BaseController
         $profile = ProfileRest::findOne(["user_id"=>$user->id]);
         return(
             $profile
+        );
+    }
+
+    public function actionGetProfileDefinicoes(){
+        $access_header = Yii::$app->request->headers->get("Authorization");
+
+        $access_token = str_replace("Basic ", "", $access_header);
+        $access_token = base64_decode($access_token);
+        $access_token = str_replace(":", "", $access_token);
+
+        $user = UserRest::findOne(["access_token"=>$access_token]);
+        return(
+    ["username" => $user->username, "email" => $user->email]
         );
     }
 
