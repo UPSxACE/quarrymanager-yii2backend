@@ -49,6 +49,11 @@ class MaterialController extends BaseController
     }
 
     public function actionDeleteMaterial(){
+        $access_header = Yii::$app->request->headers->get("Authorization");
+        $access_token = str_replace("Basic ", "", $access_header);
+        $access_token = base64_decode($access_token);
+        $access_token = str_replace(":", "", $access_token);
+        $user = UserRest::findOne(["access_token"=>$access_token]);
 
         if (Yii::$app->request->post('prefixo')){
 
@@ -61,6 +66,7 @@ class MaterialController extends BaseController
         }
 
         $model->delete();
+        Logs::registrarLogUser($user->id, 2, "O Produto de ID #" . $model->codigo_lote . " foi eliminado.");
         return "Deletado com sucesso";
     }
 
