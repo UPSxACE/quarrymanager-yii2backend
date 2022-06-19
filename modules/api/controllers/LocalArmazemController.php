@@ -71,7 +71,7 @@ class LocalArmazemController extends BaseController
         $model = LocalArmazemRest::find()->where(['id' =>Yii::$app->request->post('id')])->one();
         $model->load(yii::$app->request->post(), '');
         $model->save();
-        Logs::registrarLogUser($user->id, 2, "O local de armazém " . $model->codigo_lote . " foi modificado.");
+        Logs::registrarLogUser($user->id, 2, "O local de armazém " . $model->codigo_lote . " foi eliminado.");
         return $model;
 
     }

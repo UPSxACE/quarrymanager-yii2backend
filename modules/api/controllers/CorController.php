@@ -67,7 +67,7 @@ class CorController extends BaseController
         }
 
         $model->delete();
-        Logs::registrarLogUser($user->id, 2, "A cor" . $model->codigo_lote . " foi apagada.");
+        Logs::registrarLogUser($user->id, 2, "A cor" . $model->codigo_lote . " foi eliminada.");
         return "Deletado com sucesso";
     }
 
