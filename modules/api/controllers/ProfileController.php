@@ -4,6 +4,7 @@ namespace app\modules\api\controllers;
 
 
 use app\models\Fotografia;
+use app\models\Profile;
 use app\models\UploadForm;
 use app\modules\api\models\ProfileRest;
 use app\modules\api\models\UserRest;
@@ -17,7 +18,7 @@ class ProfileController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'get-profile', 'test-image-upload', 'editar' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'get-profile', 'test-image-upload', 'editar', 'editar-definicoes-perfil' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -75,5 +76,19 @@ class ProfileController extends BaseController
 
         $model->save();
         return $model;
+    }
+
+    public function actionEditarDefinicoesPerfil(){
+        $access_header = Yii::$app->request->headers->get("Authorization");
+        $access_token = str_replace("Basic ", "", $access_header);
+        $access_token = base64_decode($access_token);
+        $access_token = str_replace(":", "", $access_token);
+        $user = UserRest::findOne(["access_token" => $access_token]);
+
+        if(Yii::$app->request->post("email") !== $user->email){
+            $profile = Profile::findOne($user->id);
+            $profile->email = Yii::$app->request->post("email");
+            $profile->save();
+        }
     }
 }
