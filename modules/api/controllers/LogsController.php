@@ -14,9 +14,14 @@ class LogsController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add' ],
+            'actions' =>  ['index', 'view', 'options', 'listar'],
             'allow' => true,
-            'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
+            'roles' => ['gestor'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
+        ];
+        $behaviors['access']['rules'][] = [
+            'actions' =>  [ 'delete', 'add', 'create', 'update'  ],
+            'allow' => true,
+            'roles' => ['admin'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
 
         return $behaviors;

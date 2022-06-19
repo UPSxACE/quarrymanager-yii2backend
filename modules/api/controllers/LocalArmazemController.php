@@ -19,7 +19,7 @@ class LocalArmazemController extends BaseController
 
             'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-local-armazem', 'editar', 'find' ],
             'allow' => true,
-            'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
+            'roles' => ['gestor'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
 
         return $behaviors;
