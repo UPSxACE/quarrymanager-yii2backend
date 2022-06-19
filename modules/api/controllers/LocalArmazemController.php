@@ -34,7 +34,6 @@ class LocalArmazemController extends BaseController
     }
 
     public function actionAdd(){
-
         $access_header = Yii::$app->request->headers->get("Authorization");
         $access_token = str_replace("Basic ", "", $access_header);
         $access_token = base64_decode($access_token);
