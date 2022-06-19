@@ -15,9 +15,19 @@ class UserController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'find' ],
+            'actions' =>  ['index', 'view', 'options' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
+        ];
+        $behaviors['access']['rules'][] = [
+            'actions' =>  [ 'listar', 'find' ],
+            'allow' => true,
+            'roles' => ['gestor'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
+        ];
+        $behaviors['access']['rules'][] = [
+            'actions' =>  [ 'create', 'update', 'delete' ],
+            'allow' => true,
+            'roles' => ['admin'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
 
         return $behaviors;
