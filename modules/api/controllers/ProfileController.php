@@ -3,6 +3,7 @@
 namespace app\modules\api\controllers;
 
 
+use app\models\Fotografia;
 use app\models\UploadForm;
 use app\modules\api\models\ProfileRest;
 use app\modules\api\models\UserRest;
@@ -61,8 +62,17 @@ class ProfileController extends BaseController
         $access_token = str_replace(":", "", $access_token);
         $user = UserRest::findOne(["access_token" => $access_token]);
 
-        $model = ProfileRest::find()->where(['user_id' =>Yii::$app->request->post($user->id)])->one();
-        $model->load(yii::$app->request->post(), '');
+        $model = ProfileRest::find()->where(['user_id' =>$user->id])->one();
+
+        $model->load(Yii::$app->request->post(), '');
+
+        if(isset($_FILES["file"])){ //atualização imagem perfil
+            if(move_uploaded_file($_FILES["file"]["tmp_name"], "uploads/profilePictures/" . $_FILES["file"]["name"])){
+                $fotografiaModel = Fotografia::registrarFotografia("profilePictures/" . $_FILES["file"]["name"]);
+                $model->idFotografia = $fotografiaModel;
+            }
+        }
+
         $model->save();
         return $model;
     }
