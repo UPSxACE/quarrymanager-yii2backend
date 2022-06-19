@@ -98,15 +98,17 @@ public function verbs()
             if($user->validate()){
                 // Os dados estão validados e na instância user
                 $user->setRegisterAttributes(Role::ROLE_USER);
-                $user->save();
-                $this->afterRegister($user);
+                if($user->save()){
+                    $this->afterRegister($user, $post);
+                }
+
             }
         }
 
         return $user;
     }
 
-    protected function afterRegister($user)
+    protected function afterRegister($user, $post)
     {
         /** @var \amnah\yii2\user\models\UserToken $userToken */
         $userToken = new UserToken();
@@ -133,6 +135,7 @@ public function verbs()
 
         //codigo de registrar perfil
         $profileModel = new Profile();
+        $profileModel->load($post,'');
         $profileModel->user_id = $user->id;
         $profileModel->idFotografia = 1;
         $profileModel->created_at = date('Y-m-d H:i:s');
