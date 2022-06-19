@@ -5,6 +5,7 @@ namespace app\modules\api\controllers;
 
 use app\models\Produto;
 use app\modules\api\models\ProdutoRest;
+use app\modules\api\models\UserRest;
 use Yii;
 use yii\rest\ActiveController;
 
@@ -35,9 +36,17 @@ class ProdutoController extends BaseController
     }
 
     public function actionAdd(){
+
+        $access_header = Yii::$app->request->headers->get("Authorization");
+        $access_token = str_replace("Basic ", "", $access_header);
+        $access_token = base64_decode($access_token);
+        $access_token = str_replace(":", "", $access_token);
+        $user = UserRest::findOne(["access_token" => $access_token]);
+
         $model = new ProdutoRest();
         $model->load(Yii::$app->request->post(), '');
         $model->save();
+        Logs::registrarLogUser($user->id, 3, "O produto de ID #" . $model->id . "' foi adicionado.");
         return $model;
     }
 
