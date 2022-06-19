@@ -39,8 +39,8 @@ class LocalArmazemController extends BaseController
         $access_token = str_replace("Basic ", "", $access_header);
         $access_token = base64_decode($access_token);
         $access_token = str_replace(":", "", $access_token);
-
         $user = UserRest::findOne(["access_token"=>$access_token]);
+
         $model = new LocalArmazemRest();
         $model->load(Yii::$app->request->post(), '');
         $model->save();

@@ -2,6 +2,7 @@
 
 namespace app\modules\api\controllers;
 
+use app\models\Logs;
 use app\modules\api\models\LocalExtracaoRest;
 use Yii;
 
@@ -31,9 +32,17 @@ class LocalExtracaoController extends BaseController
     }
 
     public function actionAdd(){
+
+        $access_header = Yii::$app->request->headers->get("Authorization");
+        $access_token = str_replace("Basic ", "", $access_header);
+        $access_token = base64_decode($access_token);
+        $access_token = str_replace(":", "", $access_token);
+        $user = UserRest::findOne(["access_token"=>$access_token]);
+
         $model = new LocalExtracaoRest();
         $model->load(Yii::$app->request->post(), '');
         $model->save();
+        Logs::registrarLogUser($user->id, 2, "O local de extração '" . $model->nome . "' foi criado.");
         return $model;
     }
 
