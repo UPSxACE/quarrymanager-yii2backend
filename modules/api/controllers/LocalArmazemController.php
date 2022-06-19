@@ -49,8 +49,15 @@ class LocalArmazemController extends BaseController
 
 
     public function actionDeleteLocalArmazem(){
+        $access_header = Yii::$app->request->headers->get("Authorization");
+        $access_token = str_replace("Basic ", "", $access_header);
+        $access_token = base64_decode($access_token);
+        $access_token = str_replace(":", "", $access_token);
+        $user = UserRest::findOne(["access_token"=>$access_token]);
+
         $model =  LocalArmazemRest::find()->where(['id' => Yii::$app->request->post('id')])->one();
         $model->delete();
+        Logs::registrarLogUser($user->id, 2, "O local de armazém " . $model->codigo_lote . " foi apagado.");
         return "Deletado com sucesso";
     }
 
