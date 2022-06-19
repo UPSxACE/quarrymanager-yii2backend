@@ -28,7 +28,7 @@ class BaseController extends ActiveController
                 'Origin' => ['*'],
 
                 // Allow only POST and PUT methods
-                ////'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'OPTIONS'],
+                'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'OPTIONS', 'DELETE'],
                 // Allow only headers 'X-Wsse'
                 //'Access-Control-Request-Headers' => ['X-Wsse'],
                 'Access-Control-Request-Headers' => ['*'],

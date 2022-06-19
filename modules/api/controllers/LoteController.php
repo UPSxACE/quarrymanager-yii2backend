@@ -41,7 +41,7 @@ class LoteController extends BaseController
     public function actionDeleteLote(){
 
 
-        $model =  LoteRest::find()->where(['codigo_lote' => Yii::$app->request->post('codigo_lote')])->one();
+        $model =  LoteRest::find()->where(['codigo_lote' => Yii::$app->request->get('codigo_lote')])->one();
 
         $model->delete();
         return "Deletado com sucesso";
