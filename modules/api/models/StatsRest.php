@@ -16,7 +16,7 @@ class StatsRest extends EstadoPedido
         $dataProvider = new ActiveDataProvider([
             'query'=>$query,
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 7,
             ],
         ]);
 

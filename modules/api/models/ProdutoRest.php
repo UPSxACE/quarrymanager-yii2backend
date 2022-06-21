@@ -28,7 +28,7 @@ class ProdutoRest extends Produto
         $dataProvider = new ActiveDataProvider([
             'query'=>$query,
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 7,
             ],
         ]);
 
@@ -41,8 +41,8 @@ class ProdutoRest extends Produto
     public function fields(){
 
         return ['id', 'tituloArtigo', 'na_loja', 'Res_Compressao', 'Res_Flexao', 'Massa_Vol_Aparente', 'Absorcao_Agua', 'idMaterial0', 'idCor0', 'preco', 'descricaoProduto',
-            'quantidade_vendida' => function ($model) {return $model->numeroPedidos($model->id);}, 'numero_pedidos' => function ($model)
-            { return $model->quantidadeVendida($model->id);}
+            'quantidade_vendida' => function ($model) {return $model->quantidadeVendida($model->id);}, 'numero_pedidos' => function ($model)
+            { return $model->numeroPedidos($model->id);}
         ];
 
         /*

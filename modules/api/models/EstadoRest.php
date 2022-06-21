@@ -18,7 +18,7 @@ class EstadoRest extends Estado
         $dataProvider = new ActiveDataProvider([
             'query'=>$query,
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 7,
             ],
         ]);
 

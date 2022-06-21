@@ -17,7 +17,7 @@ class PedidoLoteController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'options'],
+            'actions' =>  ['index', 'view', 'options', 'recolhas-agendadas'],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -69,5 +69,11 @@ class PedidoLoteController extends BaseController
         $model->delete();
         Logs::registrarLogUser($user->id, 2, "O prodido" . $model->codigo_lote . " foi eliminado.");
         return "Deletado com sucesso";
+    }
+
+    public function actionRecolhasAgendadas(){
+        $idEncomenda = Yii::$app->request->get("id");
+        $dataProvider = PedidoLoteRest::recolhasAgendadadas($idEncomenda);
+        return $dataProvider;
     }
 }

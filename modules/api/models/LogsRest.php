@@ -17,7 +17,7 @@ class LogsRest extends Logs
         $dataProvider = new ActiveDataProvider([
             'query'=>$query,
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 7,
             ],
 
         ]);
