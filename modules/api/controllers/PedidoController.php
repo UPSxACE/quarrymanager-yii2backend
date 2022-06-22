@@ -3,6 +3,7 @@
 namespace app\modules\api\controllers;
 
 
+use app\models\Pedido;
 use app\modules\api\models\EstadoPedidoRest;
 use app\modules\api\models\MaterialRest;
 use app\modules\api\models\PedidoRest;
@@ -17,7 +18,7 @@ class PedidoController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'options', 'find-pedidos-utilizador'],
+            'actions' =>  ['index', 'view', 'options', 'find', 'find-pedidos-utilizador', 'agendar-recolha-options'],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -41,6 +42,11 @@ class PedidoController extends BaseController
         return $modelPedido;
     }
 
+    public function actionFind(){
+        $model = PedidoRest::find()->where(['id'=>Yii::$app->request->get('id')])->one();
+        return $model;
+    }
+
     public function actionFindPedidosUtilizador(){
         $access_header = Yii::$app->request->headers->get("Authorization");
         $access_token = str_replace("Basic ", "", $access_header);
@@ -50,5 +56,11 @@ class PedidoController extends BaseController
 
         $model = PedidoRest::find()->where(['idUser'=>$user->id])->all();
         return $model;
+    }
+
+    public function actionAgendarRecolhaOptions(){
+        $pedido = Pedido::find()->where(["id" => Yii::$app->request->get("idPedido")])->one() ;
+        $idProduto = $pedido->idProduto;
+        return PedidoRest::agendarRecolhaOptions($idProduto);
     }
 }

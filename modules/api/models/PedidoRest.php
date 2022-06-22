@@ -4,9 +4,12 @@ namespace app\modules\api\models;
 
 use app\models\Cor;
 use app\models\Estado;
+use app\models\Lote;
 use app\models\Material;
 use app\models\Pedido;
 use app\models\Produto;
+use app\models\Transportadora;
+use Yii;
 use yii\data\ActiveDataProvider;
 
 class PedidoRest extends Pedido
@@ -30,6 +33,23 @@ class PedidoRest extends Pedido
     public function getIdUser0()
     {
         return $this->hasOne(UserRest::className(), ['id' => 'idUser']);
+    }
+
+    public static function agendarRecolhaOptions($idProduto){
+
+        $lotes = LoteRest::find()->where(["idProduto" => $idProduto])->all();
+        $lotesNomes = [];
+        foreach($lotes as $lote){
+            $lotesNomes[$lote->codigo_lote] = $lote->codigo_lote . " (" . $lote->quantidade . "m² disponível)";
+        }
+        $transporadoras = Transportadora::find()->all();
+        $transporadorasNomes = [];
+        foreach($transporadoras as $transporadora){
+            $transporadorasNomes[$transporadora->id] = $transporadora->nome;
+        }
+
+        return ["lotes" => $lotesNomes, "transportadoras" => $transporadorasNomes];
+
     }
 
 
