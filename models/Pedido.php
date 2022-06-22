@@ -12,6 +12,7 @@ use Yii;
  * @property int|null $idProduto
  * @property float|null $desconto
  * @property float|null $quantidade
+ *  * @property float|null $precoFinal
  * @property string $nome
  * @property string|null $morada
  * @property string|null $telefone
@@ -43,7 +44,7 @@ class Pedido extends \yii\db\ActiveRecord
         return [
             [['idUser', 'dataHoraPedido'], 'required'],
             [['idUser', 'idProduto'], 'integer'],
-            [['desconto', 'quantidade'], 'number'],
+            [['desconto', 'quantidade', 'precoFinal'], 'number'],
             [['dataHoraPedido'], 'safe'],
             [['mensagem'], 'string', 'max' => 150],
             [['idProduto'], 'exist', 'skipOnError' => true, 'targetClass' => Produto::className(), 'targetAttribute' => ['idProduto' => 'id']],
@@ -65,6 +66,7 @@ class Pedido extends \yii\db\ActiveRecord
             'quantidade' => 'Quantidade(m²)',
             'mensagem' => 'Mensagem',
             'dataHoraPedido' => 'Data Hora Pedido',
+            'precoFinal' => 'Preço Final'
         ];
     }
 
