@@ -56,21 +56,21 @@ class LocalExtracaoController extends BaseController
 
         $model =  LocalExtracaoRest::find()->where(['id' => Yii::$app->request->get('id')])->one();
         $model->delete();
-        Logs::registrarLogUser($user->id, 2, "O local de extração " . $model->codigo_lote . " foi eliminado.");
+        Logs::registrarLogUser($user->id, 2, "O local de extração " . $model->id . " foi eliminado.");
         return "Deletado com sucesso";
     }
 
     public function actionEditar(){
+        // return (Yii::$app->request->post());
         $access_header = Yii::$app->request->headers->get("Authorization");
         $access_token = str_replace("Basic ", "", $access_header);
         $access_token = base64_decode($access_token);
         $access_token = str_replace(":", "", $access_token);
         $user = UserRest::findOne(["access_token"=>$access_token]);
-
         $model = LocalExtracaoRest::find()->where(['id' =>Yii::$app->request->post('id')])->one();
-        $model->load(yii::$app->request->post(), '');
+        $model->load(Yii::$app->request->post(), '');
         $model->save();
-        Logs::registrarLogUser($user->id, 2, "O local de extração " . $model->codigo_lote . " foi modificado.");
+        Logs::registrarLogUser($user->id, 2, "O local de extração " . $model->id . " foi modificado.");
         return $model;
 
     }
