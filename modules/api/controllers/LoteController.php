@@ -59,7 +59,7 @@ class LoteController extends BaseController
         $model =  LoteRest::find()->where(['codigo_lote' => Yii::$app->request->get('codigo_lote')])->one();
 
         $model->delete();
-        Logs::registrarLogUser($user->id, 2, "O Produto de ID #" . $model->codigo_lote . " foi eliminado");
+        Logs::registrarLogUser($user->id, 2, "O Lote de ID #" . $model->codigo_lote . " foi eliminado");
         return "Deletado com sucesso";
     }
 
@@ -73,7 +73,7 @@ class LoteController extends BaseController
         $model = LoteRest::find()->where(['codigo_lote' =>Yii::$app->request->post('codigo_lote')])->one();
         $model->load(yii::$app->request->post(), '');
         $model->save();
-        Logs::registrarLogUser($user->id, 2, "O Produto de ID #" . $model->codigo_lote . " foi modificado.");
+        Logs::registrarLogUser($user->id, 2, "O Lote de ID #" . $model->codigo_lote . " foi modificado.");
         return $model;
     }
 

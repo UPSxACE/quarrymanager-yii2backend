@@ -40,7 +40,7 @@ class PedidoLoteController extends BaseController
         $model = new PedidoLoteRest();
         $model->load(Yii::$app->request->post(), '');
         $model->save();
-        Logs::registrarLogUser($user->id, 2, "O prodido" . $model->id . " foi criado.");
+        Logs::registrarLogUser($user->id, 2, "O pedido de ID #" . $model->id . " foi criado.");
         return $model;
     }
 
@@ -54,7 +54,7 @@ class PedidoLoteController extends BaseController
         $model = PedidoLoteRest::find()->where(['id' =>Yii::$app->request->post('id')])->one();
         $model->load(yii::$app->request->post(), '');
         $model->save();
-        Logs::registrarLogUser($user->id, 2, "O prodido" . $model->codigo_lote . " foi modificado.");
+        Logs::registrarLogUser($user->id, 2, "O pedido de ID #" . $model->id . " foi modificado.");
         return $model;
     }
 
@@ -67,7 +67,7 @@ class PedidoLoteController extends BaseController
 
         $model =  PedidoLoteRest::find()->where(['id' => Yii::$app->request->get('id')])->one();
         $model->delete();
-        Logs::registrarLogUser($user->id, 2, "O prodido" . $model->codigo_lote . " foi eliminado.");
+        Logs::registrarLogUser($user->id, 2, "O pedido de ID #" . $model->id . " foi eliminado.");
         return "Deletado com sucesso";
     }
 

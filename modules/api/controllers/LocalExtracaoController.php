@@ -56,7 +56,7 @@ class LocalExtracaoController extends BaseController
 
         $model =  LocalExtracaoRest::find()->where(['id' => Yii::$app->request->get('id')])->one();
         $model->delete();
-        Logs::registrarLogUser($user->id, 2, "O local de extração " . $model->codigo_lote . " foi eliminado.");
+        Logs::registrarLogUser($user->id, 2, "O local de extração '" . $model->nome . "' foi eliminado.");
         return "Deletado com sucesso";
     }
 
@@ -70,7 +70,7 @@ class LocalExtracaoController extends BaseController
         $model = LocalExtracaoRest::find()->where(['id' =>Yii::$app->request->post('id')])->one();
         $model->load(yii::$app->request->post(), '');
         $model->save();
-        Logs::registrarLogUser($user->id, 2, "O local de extração " . $model->codigo_lote . " foi modificado.");
+        Logs::registrarLogUser($user->id, 2, "O local de extração '" . $model->nome . "' foi modificado.");
         return $model;
 
     }

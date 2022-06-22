@@ -50,10 +50,10 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'encryption' => 'tls',
-                'host' => 'smtp-relay.sendinblue.com',
+                'host' => 'smtp.sapo.pt',
                 'port' => '587',
                 'username' => 'gestorapedreira@sapo.pt',
-                'password' => 'UTCEZ7QYjD9LHwJ4'//'UTCEZ7QYjD9LHwJ4'
+                'password' => 'CTeSP-DS-Grupo03'//'UTCEZ7QYjD9LHwJ4'
             ],        
         ],
         */
@@ -66,10 +66,10 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'encryption' => 'tls',
-                'host' => 'smtp-relay.sendinblue.com',
+                'host' => 'smtp.sapo.pt',
                 'port' => '587',
-                'username' => 'gestorapedreira@gmail.com',
-                'password' => 'UTCEZ7QYjD9LHwJ4',
+                'username' => 'gestorapedreira@sapo.pt',
+                'password' => 'CTeSP-DS-Grupo03',
             ],        
         ],
         'log' => [

@@ -44,7 +44,7 @@ class CorController extends BaseController
         $model = new CorRest();
         $model->load(Yii::$app->request->post(), '');
         $model->save();
-        Logs::registrarLogUser($user->id, 2, "A cor '" . $model->nome . "' foi criada.");
+        Logs::registrarLogUser($user->id, 2, "A cor de ID #" . $model->nome . " foi criada.");
         return $model;
     }
 
@@ -66,7 +66,7 @@ class CorController extends BaseController
         }
 
         $model->delete();
-        Logs::registrarLogUser($user->id, 2, "A cor" . $model->codigo_lote . " foi eliminada.");
+        Logs::registrarLogUser($user->id, 2, "A cor de ID #" . $model->id . " foi eliminada.");
         return "Deletado com sucesso";
     }
 
@@ -80,7 +80,7 @@ class CorController extends BaseController
         $model = CorRest::find()->where(['id' =>Yii::$app->request->post('id')])->one();
         $model->load(yii::$app->request->post(), '');
         $model->save();
-        Logs::registrarLogUser($user->id, 2, "A cor" . $model->codigo_lote . " foi modificada.");
+        Logs::registrarLogUser($user->id, 2, "A cor de ID #" . $model->id . " foi modificada.");
         return $model;
     }
 

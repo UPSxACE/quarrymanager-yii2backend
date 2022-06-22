@@ -57,7 +57,7 @@ class LocalArmazemController extends BaseController
 
         $model =  LocalArmazemRest::find()->where(['id' => Yii::$app->request->get('id')])->one();
         $model->delete();
-        Logs::registrarLogUser($user->id, 2, "O local de armazém " . $model->codigo_lote . " foi apagado.");
+        Logs::registrarLogUser($user->id, 2, "O local de armazém '" . $model->nome . "' foi apagado.");
         return "Deletado com sucesso";
     }
 
@@ -71,7 +71,7 @@ class LocalArmazemController extends BaseController
         $model = LocalArmazemRest::find()->where(['id' =>Yii::$app->request->post('id')])->one();
         $model->load(yii::$app->request->post(), '');
         $model->save();
-        Logs::registrarLogUser($user->id, 2, "O local de armazém " . $model->codigo_lote . " foi eliminado.");
+        Logs::registrarLogUser($user->id, 2, "O local de armazém '" . $model->nome . "' foi eliminado.");
         return $model;
 
     }
