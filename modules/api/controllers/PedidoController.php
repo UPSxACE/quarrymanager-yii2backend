@@ -3,6 +3,7 @@
 namespace app\modules\api\controllers;
 
 
+use app\models\Logs;
 use app\models\Pedido;
 use app\modules\api\models\EstadoPedidoRest;
 use app\modules\api\models\MaterialRest;
@@ -23,7 +24,7 @@ class PedidoController extends BaseController
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['create', 'update', 'delete', 'add'],
+            'actions' =>  ['create', 'update', 'delete', 'add', 'cancelar-encomenda', 'proximo-estado'],
             'allow' => true,
             'roles' => ['gestor'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -62,5 +63,25 @@ class PedidoController extends BaseController
         $pedido = Pedido::find()->where(["id" => Yii::$app->request->get("idPedido")])->one() ;
         $idProduto = $pedido->idProduto;
         return PedidoRest::agendarRecolhaOptions($idProduto);
+    }
+
+    public function actionCancelarEncomenda(){
+        $idEncomenda = Yii::$app->request->get("idPedido");
+        EstadoPedidoRest::cancelarPedido($idEncomenda);
+        return "Encomenda Cancelada";
+    }
+
+    public function actionProximoEstado(){
+        $idEncomenda = Yii::$app->request->get("idPedido");
+
+        $modelEncomenda = Pedido::find()->where(['id'=>$idEncomenda])->one();
+        $estadoAtual = $modelEncomenda->ultimoEstadoId();
+        if($estadoAtual < 9){
+            $modelEncomenda->nextState($idEncomenda);
+            Logs::registrarLogUser(Yii::$app->user->identity->id, 3, "O estado da encomenda #" . $modelEncomenda->id . " foi atualizada.");
+
+        }
+
+        return "Encomenda Atualizada";
     }
 }

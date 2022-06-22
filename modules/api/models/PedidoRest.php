@@ -20,6 +20,11 @@ class PedidoRest extends Pedido
         return ['id', 'dataHoraPedido', 'idUser0','idProduto0', 'ultima_atualizacao' => function ($model) { $EstadoPedido = EstadoPedidoRest::find()->where(['idPedido' => $this->id])->andWhere(['last' => '1'])->one(); return $EstadoPedido->dataEstado;}, 'ultimo_estado' => function ($model) {$ultimo_estado = $model->ultimoEstadoId(); $estado = Estado::findOne($ultimo_estado); return $estado->nome;}];
     }
 
+    public function extraFields()
+    {
+        return ['id_estado' => function ($model) { return $model->ultimoEstadoId();}];
+    }
+
     public function getIdProduto0()
     {
         return $this->hasOne(ProdutoRest::className(), ['id' => 'idProduto']);

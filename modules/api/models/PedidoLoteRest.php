@@ -8,8 +8,13 @@ use yii\data\ActiveDataProvider;
 
 class PedidoLoteRest extends PedidoLote
 {
+    public function extraFields()
+    {
+        return ['idTransportadora0'];
+    }
+
     public static function recolhasAgendadadas($id){
-        $query = PedidoLote::find()->where(['idPedido' => $id])->orderBy('dataHoraRecolha ASC'); //não recolhidos sempre vão aparecer primeiro
+        $query = PedidoLoteRest::find()->where(['idPedido' => $id])->orderBy('dataHoraRecolha ASC'); //não recolhidos sempre vão aparecer primeiro
         $provider = new ActiveDataProvider([ // cria objeto data provider
             'query' => $query,
             'pagination' => [
