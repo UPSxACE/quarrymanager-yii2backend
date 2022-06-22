@@ -500,7 +500,7 @@ class User extends ActiveRecord implements IdentityInterface
         $email = $userToken->data ?: $user->email;
         $subject = Yii::$app->id . " - " . Yii::t("user", "Email Confirmation");
         $result = $mailer->compose('confirmEmail', compact("subject", "user", "profile", "userToken"))
-            ->setFrom("gestorpedreira@gmail.com")
+            ->setFrom("gestorapedreira@outlook.com")
             ->setTo($email)
             ->setSubject($subject)
             ->send();
