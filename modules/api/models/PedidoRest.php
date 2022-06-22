@@ -14,7 +14,7 @@ class PedidoRest extends Pedido
     public function fields()
     {
 
-        return ['idUser0','idProduto0', 'ultimo_estado' => function ($model) {$ultimo_estado = $model->ultimoEstadoId(); $estado = Estado::findOne($ultimo_estado); return $estado->nome;}];
+        return ['id', 'idUser0','idProduto0', 'ultimo_estado' => function ($model) {$ultimo_estado = $model->ultimoEstadoId(); $estado = Estado::findOne($ultimo_estado); return $estado->nome;}];
     }
 
     public function getIdProduto0()
