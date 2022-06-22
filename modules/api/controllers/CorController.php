@@ -66,7 +66,9 @@ class CorController extends BaseController
         }
 
         $model->delete();
+
         Logs::registrarLogUser($user->id, 2, "A cor de ID #" . $model->id . " foi eliminada.");
+
         return "Deletado com sucesso";
     }
 
@@ -80,7 +82,9 @@ class CorController extends BaseController
         $model = CorRest::find()->where(['id' =>Yii::$app->request->post('id')])->one();
         $model->load(yii::$app->request->post(), '');
         $model->save();
+
         Logs::registrarLogUser($user->id, 2, "A cor de ID #" . $model->id . " foi modificada.");
+
         return $model;
     }
 

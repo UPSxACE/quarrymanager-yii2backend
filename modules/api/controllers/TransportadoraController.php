@@ -43,7 +43,9 @@ class TransportadoraController extends BaseController
         $model = new TransportadoraRest();
         $model->load(Yii::$app->request->post(), '');
         $model->save();
+
         Logs::registrarLogUser($user->id, 3, "A transportadora de ID #" . $model->id . " foi adicionada.");
+
         return $model;
     }
 
@@ -57,7 +59,9 @@ class TransportadoraController extends BaseController
 
         $model =  TransportadoraRest::find()->where(['id' => Yii::$app->request->get('id')])->one();
         $model->delete();
+
         Logs::registrarLogUser($user->id, 3, "A transportadora de ID #" . $model->id . " foi eliminada.");
+
         return "Deletado com sucesso";
     }
 
@@ -75,6 +79,7 @@ class TransportadoraController extends BaseController
         Logs::registrarLogUser($user->id, 3, "A transportadora de ID #" . $model->id . " foi modificada.");
         return $model;
     }
+
     public function actionFind(){
         $model = TransportadoraRest::find()->where(['id'=>Yii::$app->request->get('id')])->one();
         return $model;
