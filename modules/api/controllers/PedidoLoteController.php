@@ -4,8 +4,10 @@ namespace app\modules\api\controllers;
 
 
 use app\models\Logs;
+use app\modules\api\models\LoteRest;
 use app\modules\api\models\MaterialRest;
 use app\modules\api\models\PedidoLoteRest;
+use app\modules\api\models\PedidoRest;
 use app\modules\api\models\UserRest;
 use Yii;
 use yii\rest\ActiveController;
@@ -22,7 +24,7 @@ class PedidoLoteController extends BaseController
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['create', 'update', 'delete', 'add'],
+            'actions' =>  ['create', 'update', 'delete', 'add', 'agendar-recolha'],
             'allow' => true,
             'roles' => ['gestor'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -79,5 +81,20 @@ class PedidoLoteController extends BaseController
         $idEncomenda = Yii::$app->request->get("id");
         $dataProvider = PedidoLoteRest::recolhasAgendadadas($idEncomenda);
         return $dataProvider;
+    }
+
+    public function actionAgendarRecolha(){
+        $idEncomenda = Yii::$app->request->get("idPedido");
+        $modelPedidoLote = new PedidoLoteRest();
+
+        if ($modelPedidoLote->load(Yii::$app->request->post(), '')) {
+            $modelPedidoLote->idPedido = $idEncomenda;
+            $modelPedidoLote->dataHoraAgendamento = date('Y-m-d H:i:s');
+            if($modelPedidoLote->save()){
+                LoteRest::reservarQuantidade($modelPedidoLote->codigoLote, $modelPedidoLote->quantidade);
+            }
+        }
+
+        return $modelPedidoLote;
     }
 }
