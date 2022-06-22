@@ -49,7 +49,7 @@ $config = [
             'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'encryption' => 'tls',
+                'encryption' => 'ssl',
                 'host' => 'smtp.sapo.pt',
                 'port' => '587',
                 'username' => 'gestorapedreira@sapo.pt',
@@ -66,10 +66,10 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'encryption' => 'tls',
-                'host' => 'smtp.sapo.pt',
+                'host' => 'smtp-mail.outlook.com',
                 'port' => '587',
-                'username' => 'gestorapedreira@sapo.pt',
-                'password' => 'CTeSP-DS-Grupo03',
+                'username' => 'gestorapedreira@outlook.com',
+                'password' => 'CTeSP_DS_Grupo03',
             ],        
         ],
         'log' => [
