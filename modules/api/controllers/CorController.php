@@ -3,6 +3,7 @@
 namespace app\modules\api\controllers;
 
 
+use app\models\Cor;
 use app\models\Logs;
 use app\modules\api\models\CorRest;
 use app\modules\api\models\LoteRest;
@@ -17,7 +18,7 @@ class CorController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-cor','editar','find'  ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-cor','editar','find', 'cor-options'  ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -102,5 +103,9 @@ class CorController extends BaseController
 
 
         return $model;
+    }
+
+    public function actionCorOptions(){
+        return Cor::getAllAsArray();
     }
 }

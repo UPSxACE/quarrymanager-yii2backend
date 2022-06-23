@@ -4,6 +4,7 @@ namespace app\modules\api\controllers;
 
 
 use app\models\Logs;
+use app\models\Material;
 use app\modules\api\models\MaterialRest;
 use app\modules\api\models\UserRest;
 use Yii;
@@ -17,7 +18,7 @@ class MaterialController extends BaseController
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
 
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-material', 'editar', 'find' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-material', 'editar', 'find', 'material-options' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -95,5 +96,9 @@ class MaterialController extends BaseController
             $model = MaterialRest::find()->where(['id' => Yii::$app->request->get('id')])->one();
         }
         return $model;
+    }
+
+    public function actionMaterialOptions(){
+        return Material::getAllAsArray();
     }
 }

@@ -3,6 +3,7 @@
 namespace app\modules\api\controllers;
 
 
+use app\models\Logs;
 use app\models\Produto;
 use app\modules\api\models\ProdutoRest;
 use app\modules\api\models\UserRest;
@@ -18,7 +19,7 @@ class ProdutoController extends BaseController
         $behaviors['access']['rules'][] = [
 
 
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-produto', 'editar', 'find', 'produtos-loja' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-produto', 'editar', 'find', 'produtos-loja', 'produtos-novo-loja-options' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -89,6 +90,10 @@ class ProdutoController extends BaseController
     public function actionFind(){
         $model = ProdutoRest::find()->where(['id'=>Yii::$app->request->get('id')])->one();
         return $model;
+    }
+
+    public function actionProdutosNovoLojaOptions(){
+        return Produto::getAllForaDaLojaAsArray();;
     }
 }
 
