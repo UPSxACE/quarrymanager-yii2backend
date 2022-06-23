@@ -9,6 +9,7 @@ use app\models\UploadForm;
 use app\modules\api\models\ProfileRest;
 use app\modules\api\models\UserRest;
 use Yii;
+use yii\helpers\FileHelper;
 use yii\rest\ActiveController;
 
 class ProfileController extends BaseController
