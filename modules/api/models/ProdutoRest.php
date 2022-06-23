@@ -3,6 +3,8 @@
 namespace app\modules\api\models;
 
 use app\models\Cor;
+use app\models\Fotografia;
+use app\models\FotografiaProduto;
 use app\models\Material;
 use app\models\Produto;
 use yii\data\ActiveDataProvider;
@@ -57,7 +59,7 @@ class ProdutoRest extends Produto
 
     public function extraFields()
     {
-        return ['id'];
+        return ['id', 'url_fotografia' => function ($model) {$modelFotografiaProduto = FotografiaProduto::find()->where(["idProduto" => $model->id])->one();$picUrl = Fotografia::findOne($modelFotografiaProduto->idFotografia); return $picUrl->link; }];
     }
 
     public static function listarProdutosLoja(){

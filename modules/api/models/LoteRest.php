@@ -10,7 +10,7 @@ class LoteRest extends Lote
 
 
     public function fields(){
-        return ['codigo_lote', 'quantidade', 'dataHora','idProduto0', 'idLocalExtracao0'];
+        return ['codigo_lote', 'quantidade', 'dataHora','idProduto0', 'idLocalExtracao0', 'idLocalArmazem0'];
     }
 
     public function dadosListar($params){
