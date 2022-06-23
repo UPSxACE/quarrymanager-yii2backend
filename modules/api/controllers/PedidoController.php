@@ -85,7 +85,7 @@ class PedidoController extends BaseController
         return "Encomenda Atualizada";
     }
 
-    public static function pedidoOrcamento(){
+    public static function actionPedidoOrcamento(){
         $access_header = Yii::$app->request->headers->get("Authorization");
         $access_token = str_replace("Basic ", "", $access_header);
         $access_token = base64_decode($access_token);
