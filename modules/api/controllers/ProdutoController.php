@@ -18,6 +18,14 @@ class ProdutoController extends BaseController
 
     public function behaviors(){
         $behaviors = parent::behaviors();
+
+        $behaviors['access']['rules'][] = [
+
+
+            'actions' =>  ['options', 'listar', 'find', 'produtos-loja' ],
+            'allow' => true,
+            'roles' => ['@'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
+        ];
         $behaviors['access']['rules'][] = [
 
 

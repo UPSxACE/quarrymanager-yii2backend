@@ -19,7 +19,12 @@ class PedidoController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'options', 'find', 'find-pedidos-utilizador', 'agendar-recolha-options', 'pedido-orcamento'],
+            'actions' =>  ['options', 'find-pedidos-utilizador', 'pedido-orcamento'],
+            'allow' => true,
+            'roles' => ['@'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
+        ];
+        $behaviors['access']['rules'][] = [
+            'actions' =>  ['index', 'view', 'find', 'agendar-recolha-options'],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
