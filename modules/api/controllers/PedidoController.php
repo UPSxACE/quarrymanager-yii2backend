@@ -95,7 +95,7 @@ class PedidoController extends BaseController
         $modelPedido = new PedidoRest();
         $modelPedido->idUser = $user->id;
         $modelPedido->dataHoraPedido = date('Y-m-d H:i:s');
-        $modelPedido->idProduto = Yii::$app->request->request->post->("idProduto");;
+        $modelPedido->idProduto = Yii::$app->request->request->post("idProduto");
         if ($modelPedido->load(Yii::$app->request->post(), '') && $modelPedido->save()) {
             $modelEstadoPedido = new EstadoPedidoRest();
             $modelEstadoPedido->idEstado = '1';
