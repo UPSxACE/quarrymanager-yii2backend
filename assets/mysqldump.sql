@@ -112,7 +112,7 @@ CREATE TABLE `estado_pedido` (
   KEY `fk_Estado_Pedido_Estado1` (`idEstado`),
   CONSTRAINT `fk_Estado_Pedido_Estado1` FOREIGN KEY (`idEstado`) REFERENCES `estado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Estado_Pedido_Pedido1` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +121,7 @@ CREATE TABLE `estado_pedido` (
 
 LOCK TABLES `estado_pedido` WRITE;
 /*!40000 ALTER TABLE `estado_pedido` DISABLE KEYS */;
-INSERT INTO `estado_pedido` VALUES (1,1,1,'2022-04-22 23:17:13',0),(2,1,2,'2022-04-22 23:17:25',0),(3,1,3,'2022-04-22 23:17:33',0),(4,1,4,'2022-04-22 23:17:43',0),(5,1,5,'2022-04-22 23:17:55',0),(6,1,6,'2022-04-22 23:18:06',1),(7,2,1,'2022-04-22 23:23:13',0),(8,2,2,'2022-04-22 23:23:22',0),(9,2,3,'2022-04-22 23:23:25',0),(10,2,4,'2022-04-22 23:23:31',0),(11,2,5,'2022-04-22 23:23:33',0),(12,3,2,'2022-04-22 23:23:41',0),(13,4,2,'2022-04-22 23:23:47',1),(14,3,5,'2022-04-22 23:23:50',0),(15,3,1,'2022-04-22 23:24:02',0),(16,3,3,'2022-04-22 23:24:04',0),(17,3,4,'2022-04-22 23:24:08',0),(18,4,5,'2022-04-22 23:24:11',0),(19,4,3,'2022-04-22 23:24:14',0),(20,4,1,'2022-04-22 23:24:16',0),(21,4,4,'2022-04-22 23:24:18',0),(22,5,3,'2022-04-22 23:24:20',0),(23,5,5,'2022-04-22 23:24:24',0),(24,6,3,'2022-04-22 23:24:30',0),(25,7,3,'2022-04-22 23:26:36',0),(26,5,4,'2022-04-22 23:26:41',1),(27,5,1,'2022-04-22 23:26:46',0),(28,6,5,'2022-04-22 23:27:13',0),(29,7,5,'2022-04-22 23:27:32',1),(30,6,1,'2022-04-22 23:27:47',0),(31,7,1,'2022-04-22 23:28:16',0),(32,8,3,'2022-04-22 23:31:48',1),(33,8,1,'2022-04-22 23:31:57',1),(34,1,7,'2022-04-29 18:24:49',1);
+INSERT INTO `estado_pedido` VALUES (1,1,1,'2022-04-22 23:17:13',0),(2,1,2,'2022-04-22 23:17:25',0),(3,1,3,'2022-04-22 23:17:33',0),(4,1,4,'2022-04-22 23:17:43',0),(5,1,5,'2022-04-22 23:17:55',0),(6,1,6,'2022-04-22 23:18:06',1),(7,2,1,'2022-04-22 23:23:13',0),(8,2,2,'2022-04-22 23:23:22',0),(9,2,3,'2022-04-22 23:23:25',0),(10,2,4,'2022-04-22 23:23:31',0),(11,2,5,'2022-04-22 23:23:33',0),(12,3,2,'2022-04-22 23:23:41',0),(13,4,2,'2022-04-22 23:23:47',1),(14,3,5,'2022-04-22 23:23:50',0),(15,3,1,'2022-04-22 23:24:02',0),(16,3,3,'2022-04-22 23:24:04',0),(17,3,4,'2022-04-22 23:24:08',0),(18,4,5,'2022-04-22 23:24:11',0),(19,4,3,'2022-04-22 23:24:14',0),(20,4,1,'2022-04-22 23:24:16',0),(21,4,4,'2022-04-22 23:24:18',0),(22,5,3,'2022-04-22 23:24:20',0),(23,5,5,'2022-04-22 23:24:24',0),(24,6,3,'2022-04-22 23:24:30',0),(25,7,3,'2022-04-22 23:26:36',0),(26,5,4,'2022-04-22 23:26:41',1),(27,5,1,'2022-04-22 23:26:46',0),(28,6,5,'2022-04-22 23:27:13',0),(29,7,5,'2022-04-22 23:27:32',1),(30,6,1,'2022-04-22 23:27:47',0),(31,7,1,'2022-04-22 23:28:16',0),(32,8,3,'2022-04-22 23:31:48',1),(33,8,1,'2022-04-22 23:31:57',1),(34,1,7,'2022-04-29 18:24:49',1),(35,1,8,'2022-06-23 21:41:04',1),(36,1,9,'2022-06-23 21:47:49',1);
 /*!40000 ALTER TABLE `estado_pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +136,7 @@ CREATE TABLE `fotografia` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `link` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +145,7 @@ CREATE TABLE `fotografia` (
 
 LOCK TABLES `fotografia` WRITE;
 /*!40000 ALTER TABLE `fotografia` DISABLE KEYS */;
-INSERT INTO `fotografia` VALUES (1,'profilePictures/genericUserProfilePicture.svg'),(2,'profilePictures/CEO3.jpg'),(3,'profilePictures/CEO2.jpg'),(4,'profilePictures/CEO1.jpg'),(5,'productPictures/granito laranja.jpg'),(6,'productPictures/granito vermelho.jpg'),(7,'productPictures/marmore amarelo.jpg'),(8,'productPictures/pedra branca.jpg'),(9,'lotes/GRN_LRJ_00001/1.jpg'),(10,'lotes/GRN_LRJ_00002/1.jpg'),(11,'lotes/GRN_VRM_00001/1.jpg'),(12,'lotes/GRN_VRM_00002/1.jpg'),(13,'lotes/GRN_VRM_00003/1.jpg'),(14,'lotes/GRN_VRM_00004/1.jpg'),(15,'lotes/MRM_AMR_00001/1.jpg'),(16,'lotes/PDR_BRC_00001/1.jpg'),(17,'lotes/PDR_BRC_00002/1.jpg'),(18,'lotes/PDR_BRC_00003/1.jpg');
+INSERT INTO `fotografia` VALUES (1,'profilePictures/genericUserProfilePicture.svg'),(2,'profilePictures/CEO3.jpg'),(3,'profilePictures/CEO2.jpg'),(4,'profilePictures/CEO1.jpg'),(5,'productPictures/granito laranja.jpg'),(6,'productPictures/granito vermelho.jpg'),(7,'productPictures/marmore amarelo.jpg'),(8,'productPictures/pedra branca.jpg'),(9,'lotes/GRN_LRJ_00001/1.jpg'),(10,'lotes/GRN_LRJ_00002/1.jpg'),(11,'lotes/GRN_VRM_00001/1.jpg'),(12,'lotes/GRN_VRM_00002/1.jpg'),(13,'lotes/GRN_VRM_00003/1.jpg'),(14,'lotes/GRN_VRM_00004/1.jpg'),(15,'lotes/MRM_AMR_00001/1.jpg'),(16,'lotes/PDR_BRC_00001/1.jpg'),(17,'lotes/PDR_BRC_00002/1.jpg'),(18,'lotes/PDR_BRC_00003/1.jpg'),(19,'profilePictures/ceo2.jpg');
 /*!40000 ALTER TABLE `fotografia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,12 +415,13 @@ CREATE TABLE `pedido` (
   `quantidade` float DEFAULT NULL,
   `mensagem` varchar(150) DEFAULT NULL,
   `dataHoraPedido` datetime NOT NULL,
+  `precoFinal` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Pedido_Produto1_idx` (`idProduto`),
   KEY `fk_Pedido_user1_idx` (`idUser`),
   CONSTRAINT `fk_Pedido_Produto1` FOREIGN KEY (`idProduto`) REFERENCES `produto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Pedido_user1` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -429,7 +430,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES (1,7,4,NULL,NULL,50,NULL,'2022-04-22 23:17:13'),(2,7,3,NULL,NULL,50,NULL,'2022-04-22 23:17:25'),(3,7,3,NULL,NULL,25,NULL,'2022-04-22 23:17:33'),(4,7,2,NULL,NULL,50,NULL,'2022-04-22 23:17:43'),(5,7,1,NULL,NULL,50,NULL,'2022-04-22 23:17:55'),(6,7,1,NULL,NULL,50,NULL,'2022-04-22 23:18:06'),(7,1,4,NULL,NULL,NULL,'Teste','2022-04-29 18:24:49');
+INSERT INTO `pedido` VALUES (1,7,4,NULL,NULL,50,NULL,'2022-04-22 23:17:13',NULL),(2,7,3,NULL,NULL,50,NULL,'2022-04-22 23:17:25',NULL),(3,7,3,NULL,NULL,25,NULL,'2022-04-22 23:17:33',NULL),(4,7,2,NULL,NULL,50,NULL,'2022-04-22 23:17:43',NULL),(5,7,1,NULL,NULL,50,NULL,'2022-04-22 23:17:55',NULL),(6,7,1,NULL,NULL,50,NULL,'2022-04-22 23:18:06',NULL),(7,1,4,NULL,NULL,NULL,'Teste','2022-04-29 18:24:49',NULL),(8,8,4,NULL,NULL,15,'Olá!','2022-06-23 21:41:04',NULL),(9,8,4,NULL,NULL,1,'Olá!','2022-06-23 21:47:49',NULL);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -539,7 +540,7 @@ CREATE TABLE `profile` (
   KEY `fk_dadosPessoais_user1_idx` (`user_id`),
   CONSTRAINT `fk_Utilizador_Fotografia1` FOREIGN KEY (`idFotografia`) REFERENCES `fotografia` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_dadosPessoais_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -548,7 +549,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES (1,1,4,NULL,'Miguel Rocha',0,'1991-01-01',NULL,'Rua de Bragança','Bragança','5300-000',NULL,NULL,'2022-03-31 01:38:51','2022-03-31 01:38:51',NULL),(3,5,2,NULL,'Joaquim',0,'1985-03-05',NULL,'Rua de Lisbo','Lisboa','5400-000',NULL,NULL,'2022-04-22 20:48:10','2022-04-22 20:48:10',NULL),(4,6,3,NULL,'Ribeiro Cruz',0,'1992-09-11',NULL,'Rua de Coimbra','Coimbra','5200-000',NULL,NULL,'2022-04-22 20:48:25','2022-04-22 20:48:25',NULL),(5,7,1,NULL,'João',0,'1990-05-11',NULL,'Rua do Porto','Porto','5000-000',NULL,NULL,'2022-04-22 20:48:38','2022-04-22 20:48:38',NULL);
+INSERT INTO `profile` VALUES (1,1,4,'admin@gmail.com','Miguel Rocha',0,'1990-01-01','962075694','Rua de Bragança','Bragança','5300-116',NULL,NULL,'2022-03-31 01:38:51','2022-03-31 01:38:51',NULL),(3,5,2,'operario@gmail.com','Joaquim',0,'1985-03-05',NULL,'Rua de Lisbo','Lisboa','5400-000',NULL,NULL,'2022-04-22 20:48:10','2022-04-22 20:48:10',NULL),(4,6,3,'gestor@gmail.com','Ribeiro Cruz',0,'1992-09-11',NULL,'Rua de Coimbra','Coimbra','5200-000',NULL,NULL,'2022-04-22 20:48:25','2022-04-22 20:48:25',NULL),(5,7,1,'cliente@gmail.com','João',0,'1990-05-11',NULL,'Rua do Porto','Porto','5000-000',NULL,NULL,'2022-04-22 20:48:38','2022-04-22 20:48:38',NULL),(6,8,19,'eduardo11224b@gmail.com','Eduardo Botelho',0,'2001-01-11','962075694','Bragança',NULL,'5300-116',NULL,NULL,'2022-06-23 20:06:29','2022-06-23 20:06:29',NULL);
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -657,7 +658,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `user_username` (`username`),
   KEY `user_role_id` (`role_id`),
   CONSTRAINT `user_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -666,7 +667,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,1,1,NULL,'Admin','$2y$13$n7YDsOW1BdPhOvVPYxpj0eqakCjMm3aVEIE1Y2IEGRRKxYU2N13Lq','4I8AtWe0spfF3vSq05930xYJEwwEtZE5','dC9VOjlGLSmsg6ZGkh7E0DJKz8G1K59O','::1','2022-04-29 16:14:00','::1','2022-03-31 01:38:51','2022-03-31 01:38:51',NULL,NULL),(5,3,1,'operario@gmail.com','operario','$2y$13$0LzjsLhzINVYvLODv8Mvw.kMzyc7rksJTay7SzT3Iwsy4F9c6dvee','KVrlIjLkuOZWa84p15thU07RGJuLdKSs','0TOj4arsH5qNHnpTD7QIKHbvFeubmAaE','::1','2022-04-22 21:28:32','::1','2022-04-22 20:48:10','2022-04-22 20:48:10',NULL,NULL),(6,2,1,'gestor@gmail.com','gestor','$2y$13$6G0h6wBIYMsRNGhKtjqoRudUGta9Yqk6GZOCp.yrC9DBsXnPK62y2','li5sXlrc7xAKs_IkN7e6ddo6fAgTBaKc','HQjgSMdHtf4L7-F58qnpdKMsp46x5d72','::1','2022-04-22 21:31:36','::1','2022-04-22 20:48:25','2022-04-22 20:48:25',NULL,NULL),(7,4,1,'cliente@gmail.com','cliente','$2y$13$yxFrT6gMlbWvQ9.Vs6bMhO4foJ06AgBQPrA64fRfi.iR4nDGyz/Ae','Y7Fcqv6qBOYXYOk3JJtFAM1ZpUI5O6lS','IuuoT09TD7qMOR4So7vRc8ubELpYvEwE','::1','2022-04-22 21:16:18','::1','2022-04-22 20:48:38','2022-04-22 20:48:38',NULL,NULL);
+INSERT INTO `user` VALUES (1,1,1,'admin@gmail.com','Admin','$2y$13$n7YDsOW1BdPhOvVPYxpj0eqakCjMm3aVEIE1Y2IEGRRKxYU2N13Lq','4I8AtWe0spfF3vSq05930xYJEwwEtZE5','dC9VOjlGLSmsg6ZGkh7E0DJKz8G1K59O','::1','2022-06-23 19:50:04','::1','2022-03-31 01:38:51','2022-03-31 01:38:51',NULL,NULL),(5,3,1,'operario@gmail.com','operario','$2y$13$0LzjsLhzINVYvLODv8Mvw.kMzyc7rksJTay7SzT3Iwsy4F9c6dvee','KVrlIjLkuOZWa84p15thU07RGJuLdKSs','0TOj4arsH5qNHnpTD7QIKHbvFeubmAaE','::1','2022-04-22 21:28:32','::1','2022-04-22 20:48:10','2022-04-22 20:48:10',NULL,NULL),(6,2,1,'gestor@gmail.com','gestor','$2y$13$6G0h6wBIYMsRNGhKtjqoRudUGta9Yqk6GZOCp.yrC9DBsXnPK62y2','li5sXlrc7xAKs_IkN7e6ddo6fAgTBaKc','HQjgSMdHtf4L7-F58qnpdKMsp46x5d72','::1','2022-06-23 19:50:08','::1','2022-04-22 20:48:25','2022-04-22 20:48:25',NULL,NULL),(7,4,1,'cliente@gmail.com','cliente','$2y$13$yxFrT6gMlbWvQ9.Vs6bMhO4foJ06AgBQPrA64fRfi.iR4nDGyz/Ae','Y7Fcqv6qBOYXYOk3JJtFAM1ZpUI5O6lS','IuuoT09TD7qMOR4So7vRc8ubELpYvEwE','::1','2022-04-22 21:16:18','::1','2022-04-22 20:48:38','2022-04-22 20:48:38',NULL,NULL),(8,4,1,'eduardo11224b@gmail.com','Eduardo','$2y$13$K.it6PNLMaGMz0MouUUK4u3BNvOe1Zg3hcYpsic9Roeu4wStHD7gm','mj6Z-FfVkndj2eykk6EOQ-zLou1nexHZ','Q18tinY_M1VT-G4Nm58euI7ENUZOON88','::1','2022-06-23 19:47:51','::1','2022-06-23 19:06:25','2022-06-23 19:06:25',NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -720,7 +721,7 @@ CREATE TABLE `user_token` (
   UNIQUE KEY `user_token_token` (`token`),
   KEY `user_token_user_id` (`user_id`),
   CONSTRAINT `user_token_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -742,4 +743,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-29 18:30:14
+-- Dump completed on 2022-06-23 21:54:01
