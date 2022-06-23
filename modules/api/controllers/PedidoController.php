@@ -19,7 +19,7 @@ class PedidoController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['index', 'view', 'options', 'find', 'find-pedidos-utilizador', 'agendar-recolha-options'],
+            'actions' =>  ['index', 'view', 'options', 'find', 'find-pedidos-utilizador', 'agendar-recolha-options', 'pedido-orcamento'],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -83,5 +83,28 @@ class PedidoController extends BaseController
         }
 
         return "Encomenda Atualizada";
+    }
+
+    public static function pedidoOrcamento(){
+        $access_header = Yii::$app->request->headers->get("Authorization");
+        $access_token = str_replace("Basic ", "", $access_header);
+        $access_token = base64_decode($access_token);
+        $access_token = str_replace(":", "", $access_token);
+        $user = UserRest::findOne(["access_token"=>$access_token]);
+
+        $modelPedido = new PedidoRest();
+        $modelPedido->idUser = $user->id;
+        $modelPedido->dataHoraPedido = date('Y-m-d H:i:s');
+        $modelPedido->idProduto = Yii::$app->request->request->post->("idProduto");;
+        if ($modelPedido->load(Yii::$app->request->post(), '') && $modelPedido->save()) {
+            $modelEstadoPedido = new EstadoPedidoRest();
+            $modelEstadoPedido->idEstado = '1';
+            $modelEstadoPedido->idPedido = $modelPedido->id;
+            $modelEstadoPedido->dataEstado = $modelPedido->dataHoraPedido;
+
+            $modelEstadoPedido->save();
+        }
+
+        return $modelPedido;
     }
 }
