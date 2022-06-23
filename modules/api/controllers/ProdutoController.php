@@ -3,6 +3,8 @@
 namespace app\modules\api\controllers;
 
 
+use app\models\Fotografia;
+use app\models\FotografiaProduto;
 use app\models\Logs;
 use app\models\Produto;
 use app\modules\api\models\ProdutoRest;
@@ -19,7 +21,7 @@ class ProdutoController extends BaseController
         $behaviors['access']['rules'][] = [
 
 
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-produto', 'editar', 'find', 'produtos-loja', 'produtos-novo-loja-options' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-produto', 'editar', 'find', 'produtos-loja', 'produtos-novo-loja-options', 'adicionar-loja' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -84,6 +86,32 @@ class ProdutoController extends BaseController
         $model->load(yii::$app->request->post(), '');
         $model->save();
         Logs::registrarLogUser($user->id, 3, "O produto de ID #" . $model->id . "' foi modificado.");
+        return $model;
+    }
+
+    public function actionAdicionarLoja(){
+        $access_header = Yii::$app->request->headers->get("Authorization");
+        $access_token = str_replace("Basic ", "", $access_header);
+        $access_token = base64_decode($access_token);
+        $access_token = str_replace(":", "", $access_token);
+        $user = UserRest::findOne(["access_token" => $access_token]);
+
+        $model = ProdutoRest::find()->where(['id' =>Yii::$app->request->post('idProduto')])->one();
+        $model->load(Yii::$app->request->post(), '');
+        $model->na_loja = 1;
+        $model->save();
+
+        if(isset($_FILES["file"])){
+            if(move_uploaded_file($_FILES["file"]["tmp_name"], "uploads/productPictures/" . $_FILES["file"]["name"])){
+                $fotografiaModel = Fotografia::registrarFotografia("productPictures/" . $_FILES["file"]["name"]);
+                $fotografiaProduto = new FotografiaProduto();
+                $fotografiaProduto->idProduto = $model->id;
+                $fotografiaProduto->idFotografia = $fotografiaModel;
+                $fotografiaProduto->save();
+            }
+        }
+
+        Logs::registrarLogUser($user->id, 3, "O produto de ID #" . $model->id . "' foi adicionado à loja.");
         return $model;
     }
 
