@@ -221,7 +221,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $userForm = $this->module->model("UserForm");
         return $this->hasOne($userForm::className(), ['user_id' => 'id']);
-
     }
 
 
