@@ -26,10 +26,12 @@ class ProdutoController extends BaseController
             'allow' => true,
             'roles' => ['@'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
+
+
         $behaviors['access']['rules'][] = [
 
 
-            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-produto', 'editar', 'find', 'produtos-loja', 'produtos-novo-loja-options', 'adicionar-loja' ],
+            'actions' =>  ['index', 'view', 'create', 'update', 'delete', 'options', 'listar', 'add', 'delete-produto', 'editar', 'produtos-novo-loja-options', 'adicionar-loja' ],
             'allow' => true,
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
