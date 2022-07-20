@@ -66,10 +66,10 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'encryption' => 'tls',
-                'host' => 'smtp-mail.outlook.com',
+                'host' => 'SMTP_HOST',
                 'port' => '587',
-                'username' => 'gestorapedreira@outlook.com',
-                'password' => 'CTeSP_DS_Grupo03',
+                'username' => 'INSERT_SMTP_USERNAME',
+                'password' => 'INSERT_SMTP_PASSWORD',
             ],        
         ],
         'log' => [

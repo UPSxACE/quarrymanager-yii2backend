@@ -37,6 +37,7 @@ use ReflectionClass;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    public $Smtp_Email = "INSERT_SMTP_EMAIL";
     /**
      * @var int Inactive status
      */
@@ -499,7 +500,7 @@ class User extends ActiveRecord implements IdentityInterface
         $email = $userToken->data ?: $user->email;
         $subject = Yii::$app->id . " - " . Yii::t("user", "Email Confirmation");
         $result = $mailer->compose('confirmEmail', compact("subject", "user", "profile", "userToken"))
-            ->setFrom("gestorapedreira@outlook.com")
+            ->setFrom(USER::$Smtp_Email)
             ->setTo($email)
             ->setSubject($subject)
             ->send();
