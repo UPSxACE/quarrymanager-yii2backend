@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$email_params = (require __DIR__ . "/params.php")['email'];
 
 $config = [
     'id' => 'basic',
@@ -65,11 +66,11 @@ $config = [
             'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'encryption' => 'tls',
-                'host' => 'SMTP_HOST',
-                'port' => '587',
-                'username' => 'INSERT_SMTP_USERNAME',
-                'password' => 'INSERT_SMTP_PASSWORD',
+                'encryption' => $email_params['transport']['encryption'],
+                'host' => $email_params['transport']['host'],
+                'port' => $email_params['transport']['port'],
+                'username' => $email_params['transport']['username'],
+                'password' => $email_params['transport']['password'],
             ],        
         ],
         'log' => [

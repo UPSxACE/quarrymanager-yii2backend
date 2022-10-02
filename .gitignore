@@ -1,3 +1,6 @@
+#local variables
+config/local_variables.php
+
 # phpstorm project files
 .idea
 
