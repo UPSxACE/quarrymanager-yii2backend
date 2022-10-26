@@ -5,7 +5,7 @@ class DashboardAdminCest extends DashboardGestorCest
     public function _before(\FunctionalTester $I)
     {
         $I->amLoggedInAs(1);
-        $I->amOnPage(['dashboard/home']);
+        $I->amOnPage(['dashboard/']);
     }
 
     public function indexTest(\FunctionalTester $I)

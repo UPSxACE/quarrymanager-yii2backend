@@ -3,7 +3,7 @@ class DashboardCest
 {
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnPage(['dashboard/home']);
+        $I->amOnPage(['dashboard/']);
     }
 
     public function indexTest(\FunctionalTester $I)
