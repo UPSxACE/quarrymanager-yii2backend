@@ -27,6 +27,6 @@ class ProdutosOperarioCest extends ProdutosClienteCest
         $I->fillField(["name"=>"Produto[Massa_Vol_Aparente]"], 2);
         $I->fillField(["name"=>"Produto[Absorcao_Agua]"], 3.21);
         $I->click('Save');
-        $I->seeRecord('app\models\Produto', ['idMaterial' => $marmoreId, 'idCor' => $corId, 'Massa_Vol_Aparente' => 2, 'Res_Flexao' => 7.75]);
+        $I->seeRecord('app\models\Produto', ['and',['idMaterial' => $marmoreId, 'idCor' => $corId],"Res_Compressao LIKE 5.23", "Res_Flexao LIKE 7.75", "Massa_Vol_Aparente LIKE 2", "Absorcao_Agua LIKE 3.21" ]);
     }
 }
