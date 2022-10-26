@@ -14,11 +14,6 @@ class CoresOperarioCest // extends ProdutosClienteCest
     }
 
     public function createTest(\FunctionalTester $I){
-        // id de 'Mármore' na tabela Material da BD
-        $marmoreId = 3;
-        // id de 'Branco' na tabela Cor da BD
-        $corId = 3;
-
         $I->click('Nova Cor');
         $I->fillField(["name"=>"Cor[nome]"], "Cristal");
         $I->fillField(["name"=>"Cor[prefixo]"], "CRS");
