@@ -1,5 +1,5 @@
 <?php
-require_once( __DIR__ . "/../Operario/ProdutosOperarioCest.php");
+require_once( __DIR__ . "/../2-Operario/ProdutosOperarioCest.php");
 class ProdutosGestorCest extends ProdutosOperarioCest
 {
     public function _before(\FunctionalTester $I)

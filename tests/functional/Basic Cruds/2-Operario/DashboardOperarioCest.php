@@ -1,5 +1,5 @@
 <?php
-require_once( __DIR__ . "/../Cliente/DashboardClienteCest.php");
+require_once( __DIR__ . "/../1-Cliente/DashboardClienteCest.php");
 class DashboardOperarioCest extends DashboardClienteCest
 {
     public function _before(\FunctionalTester $I)
