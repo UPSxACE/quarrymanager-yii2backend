@@ -1,15 +1,15 @@
 <?php
-require_once( __DIR__ . "/../Cliente/ProdutosClienteCest.php");
-class ProdutosOperarioCest extends ProdutosClienteCest
+require_once( __DIR__ . "/../ProdutosCest.php");
+class ProdutosClienteCest extends ProdutosCest
 {
     public function _before(\FunctionalTester $I)
     {
-        $I->amLoggedInAs(5);
+        $I->amLoggedInAs(7);
         $I->amOnPage(['dashboard/produtos']);
     }
 
     public function indexTest(\FunctionalTester $I)
     {
-        $I->see('Produtos', 'h1');
+        $I->see('Forbidden', 'h1');
     }
 }

@@ -9,7 +9,7 @@ class ProdutosCest
 
     public function indexTest(\FunctionalTester $I)
     {
-        $I->see('Produtos', 'h1');
+        $I->see('Login', 'h1');
     }
 
 
