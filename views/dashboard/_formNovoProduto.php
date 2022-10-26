@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 ?>
-
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 <div class="novoproduto-form row">
 
 
 
 
-    <div class="col-6"><?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <div class="col-6">
         <?php
         echo $form->field($modelProduto, 'idMaterial')->dropdownList($arrayMateriais,
             ['text' => 'teste', 'prompt'=>'Selecione um material'],
@@ -32,8 +32,9 @@ use yii\widgets\ActiveForm;
             <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
             <a class="btn btn-danger" href="/dashboard/produtos">Cancel</a>
         </div>
-        <?php ActiveForm::end(); ?>
+
     </div>
 
 
 </div>
+<?php ActiveForm::end(); ?>
