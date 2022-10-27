@@ -1,9 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\controllers",
-    "\\modules\\api\\controllers"
+    "\\tests",
+    "\\tests\\functional",
+    "\\tests\\functional\\Backoffice Cruds",
+    "\\tests\\functional\\Backoffice Cruds\\1-Cliente",
+    "\\tests\\functional\\Backoffice Cruds\\2-Operario",
+    "\\tests\\functional\\Backoffice Cruds\\3-Gestor",
+    "\\tests\\functional\\Backoffice Cruds\\4-Administrador",
+    "\\tests\\functional\\Basic Cruds"
   ],
-  "SelectedNode": "\\views",
+  "SelectedNode": "\\tests\\functional\\Backoffice Cruds\\2-Operario\\MaterialCrudOperarioCest.php",
   "PreviewInSolutionExplorer": false
 }

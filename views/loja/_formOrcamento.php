@@ -4,12 +4,12 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 ?>
+<?php $form = ActiveForm::begin(); ?>
 
 <div class="row">
 
     <?php if(!Yii::$app->user->isGuest): ?>
         <div class="col-12">
-            <?php $form = ActiveForm::begin(); ?>
             <p>Para pedidos de orçamento deixe a sua mensagem.<br>Entraremos em contacto consigo o mais brevemente possível.</p>
         </div>
         <div class="col-6">
@@ -43,7 +43,6 @@ use yii\widgets\ActiveForm;
             <div class="form-group">
                 <?= Html::submitButton('Enviar', ['class' => 'btn btn-success col-12']) ?>
             </div>
-            <?php ActiveForm::end(); ?>
         </div>
 
     <?php else : ?>
@@ -58,3 +57,4 @@ use yii\widgets\ActiveForm;
 
 
 </div>
+<?php ActiveForm::end(); ?>
