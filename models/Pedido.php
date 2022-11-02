@@ -18,7 +18,6 @@ use Yii;
  * @property string|null $telefone
  * @property string|null $email
  * @property string|null $mensagem
- * @property int|null $nif
  * @property string $dataHoraPedido
  *
  * @property EstadoPedido[] $estadoPedidos
