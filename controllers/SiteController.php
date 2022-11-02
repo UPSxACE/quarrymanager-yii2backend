@@ -73,6 +73,8 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
+
+    /*
     public function actionLogin()
     {
         Logs::registrarLogSystem(1, "Tal usuário registrou-se");
@@ -92,6 +94,7 @@ class SiteController extends Controller
         ]);
     }
 
+
     /**
      * Logout action.
      *
@@ -109,6 +112,8 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
+
+    /*
     public function actionContact()
     {
         $model = new ContactForm();
@@ -127,10 +132,12 @@ class SiteController extends Controller
      *
      * @return string
      */
+    /*
     public function actionAbout()
     {
         return $this->render('about');
     }
+
 
     public function actionRegister()
     {
@@ -160,6 +167,7 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+    */
 
     public function actionUpload()
     {
