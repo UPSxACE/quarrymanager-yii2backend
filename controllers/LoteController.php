@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\LocalExtracao;
 use app\models\Lote;
 use app\models\LoteSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -19,17 +20,24 @@ class LoteController extends Controller
      */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['home', 'index' , 'view', 'create', 'delete', 'update'],
+                        'allow' => true,
+                        'roles' => ['operario'],
                     ],
                 ],
-            ]
-        );
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
     }
 
     /**
@@ -101,8 +109,11 @@ class LoteController extends Controller
             return $this->redirect(['view', 'codigo_lote' => $model->codigo_lote]);
         }
 
+        $localextracao = LocalExtracao::getAllAsArray();
+
         return $this->render('update', [
             'model' => $model,
+            'localextracao' => $localextracao
         ]);
     }
 
