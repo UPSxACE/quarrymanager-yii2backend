@@ -34,12 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'idProduto',
             'desconto',
             'quantidade',
-            'nome',
-            'morada',
-            'telefone',
-            'email:email',
             'mensagem',
-            'nif',
             'dataHoraPedido',
         ],
     ]) ?>

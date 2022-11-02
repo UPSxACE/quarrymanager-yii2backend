@@ -13,10 +13,6 @@ use Yii;
  * @property float|null $desconto
  * @property float|null $quantidade
  *  * @property float|null $precoFinal
- * @property string $nome
- * @property string|null $morada
- * @property string|null $telefone
- * @property string|null $email
  * @property string|null $mensagem
  * @property string $dataHoraPedido
  *
