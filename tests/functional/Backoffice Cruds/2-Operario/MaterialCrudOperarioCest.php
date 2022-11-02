@@ -20,6 +20,13 @@ class MaterialCrudOperarioCest extends MaterialCrudClienteCest
         $I->See("GRa");
     }
 
+    public function updateTest(\FunctionalTester $I){
+        $I->amOnPage(['/material/update?id=1']);
+        $I->See("Update Material");
+        $I->fillField(["name"=>"Material[nome]"], "Areia");
+        $I->click("Save");
+    }
+
     public function viewTest(\FunctionalTester $I){
         $I->amOnPage(['material/view?id=1']);
         $I->See("Granito");
