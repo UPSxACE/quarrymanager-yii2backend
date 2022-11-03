@@ -10,6 +10,6 @@ class PedidoClienteCest extends PedidoCest
 
     public function indexTest(\FunctionalTester $I)
     {
-        $I->see('Forbidden', 'h1');
+        $I->see('Forbidden');
     }
 }

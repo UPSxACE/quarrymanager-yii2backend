@@ -1,6 +1,6 @@
 <?php
 require_once( __DIR__ . "/../3-Gestor/TipoAcaoGestorCest.php");
-class TipoAcaoAdminCestAdminCest extends TipoAcaoGestorCest
+class TipoAcaoAdminCest extends TipoAcaoGestorCest
 {
     public function _before(\FunctionalTester $I)
     {
