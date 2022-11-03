@@ -1,6 +1,6 @@
 <?php
-require_once( __DIR__ . "/../2-Operario/LocalArmazemOperarioCest.php");
-class LocalArmazemGestorCest extends LocalArmazemOperarioCest
+require_once(__DIR__ . "/../2-Operario/LocaisArmazemOperarioCest.php");
+class LocaisArmazemGestorCest extends LocaisArmazemOperarioCest
 {
     public function _before(\FunctionalTester $I)
     {
