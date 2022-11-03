@@ -21,4 +21,12 @@ class CodigoDescontoOperarioCest extends CodigoDescontoClienteCest
         $I->See("zzz123");
     }
 
+    public function updateTest(\FunctionalTester $I){
+        $I->click("Create Codigo Desconto");
+        $I->fillField(["name"=>"CodigoDesconto[codigo]"], "zzz123");
+        $I->fillField(["name"=>"CodigoDesconto[descricao]"], "zzz123");
+        $I->click("Save");
+        $I->See("zzz123");
+    }
+
 }

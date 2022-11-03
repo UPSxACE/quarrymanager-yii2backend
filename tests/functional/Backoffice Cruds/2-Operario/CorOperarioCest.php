@@ -20,6 +20,13 @@ class CorOperarioCest extends CorClienteCest
         $I->See("Preto");
     }
 
+    public function updateTest(\FunctionalTester $I){
+        $I->amOnPage(['cor/update?id=1']);
+        $I->See("Update Cor");
+        $I->fillField(["name"=>"Cor[nome]"], "Branco");
+        $I->click("Save");
+    }
+
     public function viewTest(\FunctionalTester $I){
         $I->amOnPage(['cor/view?id=1']);
         $I->See("Laranja");
