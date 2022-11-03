@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'quantidade')->textInput() ?>
 
-    <?= $form->field($model, 'idLocalExtracao')->textInput() ?>
+    <!-- < ?= $form->field($model, 'idLocalExtracao')->textInput() ? > -->
 
 
 
@@ -28,6 +28,7 @@ use yii\widgets\ActiveForm;
         ['prompt'=>'Select Category']
         );
     ?>
+
 
     <?= $form->field($model, 'idLocalArmazem')->textInput() ?>
 
