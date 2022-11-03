@@ -1,6 +1,6 @@
 <?php
 require_once( __DIR__ . "/../1-Cliente/LocalExtracaoClienteCest.php");
-class LocalExtracaoOperarioCest extends LocalExtracaoCest
+class LocalExtracaoOperarioCest extends LocalExtracaoClienteCest
 {
     public function _before(\FunctionalTester $I)
     {
