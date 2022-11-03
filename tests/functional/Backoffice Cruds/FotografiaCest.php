@@ -1,10 +1,9 @@
 <?php
-
-class LogsCest
+class FotografiaCest
 {
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnPage(['logs/']);
+        $I->amOnPage(['fotografia/']);
     }
 
     public function indexTest(\FunctionalTester $I)

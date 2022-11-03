@@ -1,11 +1,11 @@
 <?php
-require_once( __DIR__ . "/../LogsCest.php");
-class LogsClienteCest extends LogsCest
+require_once( __DIR__ . "/../LocalExtracaoCest.php");
+class LocalExtracaoClienteCest extends LocalExtracaoCest
 {
     public function _before(\FunctionalTester $I)
     {
         $I->amLoggedInAs(7);
-        $I->amOnPage(['logs/']);
+        $I->amOnPage(['local-extracao/']);
     }
 
     public function indexTest(\FunctionalTester $I)

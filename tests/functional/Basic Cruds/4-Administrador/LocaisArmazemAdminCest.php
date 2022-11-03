@@ -1,6 +1,6 @@
 <?php
-require_once( __DIR__ . "/../3-Gestor/LocalArmazemGestorCest.php");
-class LocalArmazemAdminCest extends LocalArmazemGestorCest
+require_once(__DIR__ . "/../3-Gestor/LocaisArmazemGestorCest.php");
+class LocaisArmazemAdminCest extends LocaisArmazemGestorCest
 {
     public function _before(\FunctionalTester $I)
     {

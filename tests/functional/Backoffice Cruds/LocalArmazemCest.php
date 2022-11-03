@@ -1,10 +1,9 @@
 <?php
-
-class LogsCest
+class LocalArmazemCest
 {
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnPage(['logs/']);
+        $I->amOnPage(['local-armazem/']);
     }
 
     public function indexTest(\FunctionalTester $I)

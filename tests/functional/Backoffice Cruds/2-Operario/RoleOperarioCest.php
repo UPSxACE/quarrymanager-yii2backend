@@ -21,12 +21,18 @@ class RoleOperarioCest extends RoleClienteCest
         $I->fillField(["name"=>"Role[can_operario]"], "1");
         $I->click("Save");
         $I->see("Joaquim");
+        $I->see("1");
+        $I->see("0");
+        $I->see("1");
     }
 
 
     public function viewTest(\FunctionalTester $I){
-        $I->amOnPage(['cor/view?id=1']);
-        $I->See("Laranja");
+        $I->amOnPage(['role/view?id=1']);
+        $I->See("Administrador");
+        $I->See("1");
+        $I->See("1");
+        $I->See("1");
     }
 
     public function updateTest(\FunctionalTester $I)

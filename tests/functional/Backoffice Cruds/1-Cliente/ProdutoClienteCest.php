@@ -1,11 +1,11 @@
 <?php
-require_once( __DIR__ . "/../LogsCest.php");
-class LogsClienteCest extends LogsCest
+require_once( __DIR__ . "/../ProdutoCest.php");
+class ProdutoClienteCest extends ProdutoCest
 {
     public function _before(\FunctionalTester $I)
     {
         $I->amLoggedInAs(7);
-        $I->amOnPage(['logs/']);
+        $I->amOnPage(['produto/']);
     }
 
     public function indexTest(\FunctionalTester $I)
