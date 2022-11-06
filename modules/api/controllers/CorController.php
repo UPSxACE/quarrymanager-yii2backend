@@ -56,13 +56,13 @@ class CorController extends BaseController
         $access_token = str_replace(":", "", $access_token);
         $user = UserRest::findOne(["access_token"=>$access_token]);
 
-        if (Yii::$app->request->get('prefixo')){
+        if (Yii::$app->request->post('prefixo')){
 
-            $model =  CorRest::find()->where(['prefixo' => Yii::$app->request->get('prefixo')])->one();
+            $model =  CorRest::find()->where(['prefixo' => Yii::$app->request->post('prefixo')])->one();
 
         }
         else{
-            $model = CorRest::find()->where(['id' => Yii::$app->request->get('id')])->one();
+            $model = CorRest::find()->where(['id' => Yii::$app->request->post('id')])->one();
 
         }
 
@@ -91,10 +91,8 @@ class CorController extends BaseController
 
 
     public function actionFind(){
-        if (Yii::$app->request->post('prefixo')){
-
+        if (Yii::$app->request->get('prefixo')){
             $model =  CorRest::find()->where(['prefixo' => Yii::$app->request->get('prefixo')])->one();
-
         }
         else{
             $model = CorRest::find()->where(['id' => Yii::$app->request->get('id')])->one();
