@@ -56,13 +56,13 @@ class MaterialController extends BaseController
         $access_token = str_replace(":", "", $access_token);
         $user = UserRest::findOne(["access_token"=>$access_token]);
 
-        if (Yii::$app->request->get('prefixo')){
+        if (Yii::$app->request->post('prefixo')){
 
-            $model = MaterialRest::find()->where(['prefixo' => Yii::$app->request->get('prefixo')])->one();
+            $model = MaterialRest::find()->where(['prefixo' => Yii::$app->request->post('prefixo')])->one();
 
         }
         else{
-            $model = MaterialRest::find()->where(['id' => Yii::$app->request->get('id')])->one();
+            $model = MaterialRest::find()->where(['id' => Yii::$app->request->post('id')])->one();
 
         }
 
@@ -88,9 +88,10 @@ class MaterialController extends BaseController
 
         return $model;
     }
+
     public function actionFind()
     {
-        if (Yii::$app->request->post('prefixo')) {
+        if (Yii::$app->request->get('prefixo')) {
             $model = MaterialRest::find()->where(['prefixo' => Yii::$app->request->get('prefixo')])->one();
         } else {
             $model = MaterialRest::find()->where(['id' => Yii::$app->request->get('id')])->one();

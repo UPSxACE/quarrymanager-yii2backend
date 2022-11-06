@@ -9,8 +9,10 @@ use app\models\UploadForm;
 use app\modules\api\models\ProfileRest;
 use app\modules\api\models\UserRest;
 use Yii;
+use yii\db\Exception;
 use yii\helpers\FileHelper;
 use yii\rest\ActiveController;
+use yii\web\ForbiddenHttpException;
 
 class ProfileController extends BaseController
 {
@@ -57,6 +59,7 @@ class ProfileController extends BaseController
         return(["username" => $user->username, "email" => $user->email]);
     }
 
+    /*
     public function actionTestImageUpload(){
 
         $response = \Yii::$app->response;
@@ -71,7 +74,7 @@ class ProfileController extends BaseController
         move_uploaded_file($_FILES["file"]["tmp_name"], "uploads/profilePictures/" . $_FILES["file"]["name"]);
         return Yii::$app->request->post();
         return "Sucesso no upload";
-    }
+    } */
 
     public function actionEditar(){
         $access_header = Yii::$app->request->headers->get("Authorization");
@@ -113,7 +116,9 @@ class ProfileController extends BaseController
             }
 
         } else {
-            return "Password errada.";
+            throw new ForbiddenHttpException("Password errada.");
         }
+
+        return ["username" => $user->username, "email" => $user->email];
     }
 }

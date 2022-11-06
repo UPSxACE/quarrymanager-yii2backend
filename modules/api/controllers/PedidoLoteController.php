@@ -24,7 +24,7 @@ class PedidoLoteController extends BaseController
             'roles' => ['operario'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['create', 'update', 'delete', 'add', 'agendar-recolha'],
+            'actions' =>  ['create', 'update', 'delete', 'add', 'agendar-recolha', 'delete-pedido-lote', 'editar'],
             'allow' => true,
             'roles' => ['gestor'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -69,7 +69,7 @@ class PedidoLoteController extends BaseController
         $access_token = str_replace(":", "", $access_token);
         $user = UserRest::findOne(["access_token"=>$access_token]);
 
-        $model =  PedidoLoteRest::find()->where(['id' => Yii::$app->request->get('id')])->one();
+        $model =  PedidoLoteRest::find()->where(['id' => Yii::$app->request->post('id')])->one();
         $model->delete();
 
         Logs::registrarLogUser($user->id, 2, "O pedido de ID #" . $model->id . " foi eliminado.");

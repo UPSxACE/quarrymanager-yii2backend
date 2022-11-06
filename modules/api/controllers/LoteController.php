@@ -105,7 +105,7 @@ class LoteController extends BaseController
         $user = UserRest::findOne(["access_token"=>$access_token]);
 
 
-        $model =  LoteRest::find()->where(['codigo_lote' => Yii::$app->request->get('codigo_lote')])->one();
+        $model =  LoteRest::find()->where(['codigo_lote' => Yii::$app->request->post('codigo_lote')])->one();
 
         $model->delete();
         Logs::registrarLogUser($user->id, 2, "O Lote de ID #" . $model->codigo_lote . " foi eliminado");
