@@ -28,9 +28,10 @@ class LogsController extends BaseController
     }
 
     public function actionListar(){
+        /*
         if(isset($_GET["teste"]) && $_GET["teste"] === "1"){
             return ["sucesso"];
-        }
+        }*/
         $model = new LogsRest();
         $get = Yii::$app->request->get(); //esta linha de código vai buscar os parâmetros de query do REQUEST (ex: ?grau="licensiatura)
         $dataProvider = $model->dadosListar($get);
