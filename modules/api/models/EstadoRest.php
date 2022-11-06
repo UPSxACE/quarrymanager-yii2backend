@@ -12,6 +12,7 @@ class EstadoRest extends Estado
         return ['nome'];
     }
 
+    /*
     public function dadosListar($params){
         $query = EstadoRest::find();
 
@@ -25,5 +26,5 @@ class EstadoRest extends Estado
         $this->load($params, "");
 
         return $dataProvider;
-    }
+    }*/
 }

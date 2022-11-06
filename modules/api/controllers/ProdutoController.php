@@ -70,7 +70,7 @@ class ProdutoController extends BaseController
         $access_token = str_replace(":", "", $access_token);
         $user = UserRest::findOne(["access_token" => $access_token]);
 
-        $model =  ProdutoRest::find()->where(['id' => Yii::$app->request->get('id')])->one();
+        $model =  ProdutoRest::find()->where(['id' => Yii::$app->request->post('id')])->one();
         $model->delete();
         Logs::registrarLogUser($user->id, 3, "O produto de ID #" . $model->id . "' foi eliminado.");
         return "Deletado com sucesso";

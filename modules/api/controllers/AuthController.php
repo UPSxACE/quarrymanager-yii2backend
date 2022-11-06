@@ -89,9 +89,10 @@ public function verbs()
         $user->scenario = "register";
 
         $post = Yii::$app->request->post();
+        /*
         if(!$post){
             throw new ServerErrorHttpException("Erro no envio dos dados");
-        }
+        }*/
 
         if($user->load($post, '')){
 

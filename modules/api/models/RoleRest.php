@@ -11,6 +11,7 @@ class RoleRest extends Role
         return ['name'];
     }
 
+    /*
     public function dadosListar($params){
         $query = RoleRest::find();
 
@@ -24,5 +25,5 @@ class RoleRest extends Role
         $this->load($params, "");
 
         return $dataProvider;
-    }
+    }*/
 }

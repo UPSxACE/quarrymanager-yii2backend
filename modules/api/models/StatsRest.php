@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 
 class StatsRest extends EstadoPedido
 {
+    /*
     public function cardStats($params){
         $query = StatsRest::find()->where(['last' => '1']);
 
@@ -23,7 +24,7 @@ class StatsRest extends EstadoPedido
         $this->load($params, "");
 
         return $dataProvider;
-    }
+    }*/
 
 
     public function fields(){
