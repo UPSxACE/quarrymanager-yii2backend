@@ -1,6 +1,6 @@
 <?php
 
-class StockOperarioCest
+class LoteOperarioCest
 {
     public function _before(\FunctionalTester $I)
     {
