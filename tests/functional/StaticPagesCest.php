@@ -26,4 +26,10 @@ class StaticPagesCest
         $I->amOnPage(['faq/']);
         $I->see('FAQ!', 'h1');
     }
+    public function historicoTest(\FunctionalTester $I)
+    {
+        $I->amLoggedInAs(7);
+        $I->amOnPage(['perfil/historico']);
+        $I->see('Histórico de Encomendas', 'h1');
+    }
 }

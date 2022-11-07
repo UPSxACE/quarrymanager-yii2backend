@@ -104,4 +104,33 @@ class EncomendaGestorCest extends EncomendaOperarioCest
         $I->click("Mobilização do Stock", "a");
         $I->dontSee("Não", "td h4");
     }
+
+    public function confirmarRecolhaAlreadyConfirmedTest(\FunctionalTester $I){
+        $I->amOnPage(['dashboard/encomendas/1/mobilizacao']);
+        $I->see("Encomenda #000001", "h1");
+        $I->see("Pedra Branca");
+        $I->click("Agendar Recolha", "a");
+        $I->selectOption('PedidoLote[codigoLote]', array('value' => 'PDR_BRC_00001'));
+        $I->fillField(["name"=>"PedidoLote[quantidade]"], "23.15");
+        $I->selectOption('PedidoLote[idTransportadora]', array('text' => 'Unipessoal'));
+        $I->click("Save");
+
+        $I->seeCurrentUrlEquals('/dashboard/encomendas/1');
+        $I->click("Mobilização do Stock", "a");
+
+        $I->see("PDR_BRC_00001");
+        $I->see("23.15");
+        $I->see("Não", "td h4");
+        $I->click("(Confirmar Recolha)", "a");
+
+        $I->fillField(["name"=>"PedidoLote[matricula_Veiculo_recolha]"], "GGG-006");
+        $I->click("Save");
+
+        $I->see("Encomenda #000001", "h1");
+        $I->seeCurrentUrlEquals('/dashboard/encomendas/1');
+
+        $I->amOnPage("/dashboard/encomendas/1/mobilizacao/confirmar-recolha/4");
+        $I->see("Encomendas", "h1");
+        $I->seeCurrentUrlEquals('/dashboard/encomendas');
+    }
 }

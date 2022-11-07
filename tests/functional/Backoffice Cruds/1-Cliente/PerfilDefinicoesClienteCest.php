@@ -25,4 +25,28 @@ class PerfilDefinicoesClienteCest extends PerfilDefinicoesCest
         $I->click('Save', 'button');
         $I->see('Definições da conta atualizados com sucesso.');
     }
+    public function updatePerfilEmailTest(\FunctionalTester $I)
+    {
+        $I->fillField(["name"=>'User[username]'],"cliente");
+        $I->fillField(["name"=>'User[currentPassword]'],"cliente");
+        $I->fillField(["name"=>'User[email]'],"gestor2@gmail.com");
+        $I->click('Save', 'button');
+        $I->see('Definições da conta atualizados com sucesso.');
+    }
+    public function updatePerfilConfigFailPasswordTest(\FunctionalTester $I)
+    {
+        $I->fillField(["name"=>'User[username]'],"Clientinho");
+        $I->fillField(["name"=>'User[currentPassword]'],"cliente");
+        $I->fillField(["name"=>'User[newPassword]'],"cliente123");
+        $I->fillField(["name"=>'User[newPasswordConfirm]'],"cliente1234");
+        $I->click('Save', 'button');
+        $I->see('Passwords do not match');
+    }
+    public function updatePerfilConfigFailPasswordConfirmTest(\FunctionalTester $I)
+    {
+        $I->fillField(["name"=>'User[username]'],"Clientinho");
+        $I->fillField(["name"=>'User[currentPassword]'],"cliente123");
+        $I->click('Save', 'button');
+        $I->see('Account not updated. Incorrect password.');
+    }
 }

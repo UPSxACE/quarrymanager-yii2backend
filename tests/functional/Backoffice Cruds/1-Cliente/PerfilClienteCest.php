@@ -14,6 +14,11 @@ class PerfilClienteCest extends PerfilCest
     }
     public function indexTest(\FunctionalTester $I)
     {
+        $I->amOnPage(['perfil/']);
+        $I->see('Meu Perfil', 'h1');
+    }
+    public function meuPerfilTest(\FunctionalTester $I)
+    {
         $I->see('Meu Perfil', 'h1');
     }
     public function updatePerfilTest(\FunctionalTester $I)
@@ -28,4 +33,11 @@ class PerfilClienteCest extends PerfilCest
         $I->click('Save', 'button');
         $I->see('Dados da conta atualizados com sucesso.');
     }
+
+    public function updateProfilePicture(\FunctionalTester $I){
+        $I->attachFile('[name="UploadForm[imageFile]"][type="file"]', 'test-pic.png');
+        $I->click("Submit", "form button");
+        $I->see("Fotografia de perfil atualizada com sucesso.");
+    }
+
 }

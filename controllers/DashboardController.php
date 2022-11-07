@@ -191,7 +191,7 @@ class DashboardController extends Controller
         $modelPedidoLote = PedidoLote::find()->where(['id' => $idRecolha])->one();
 
         //codigo para que seja redirecionado caso lote já tenha sido recolhido(dataHora definida)
-        if(isset($modelPedidoLote->dataHora)){
+        if(isset($modelPedidoLote->dataHoraRecolha)){
             $this->redirect(['dashboard/encomendas']);
         }
 
