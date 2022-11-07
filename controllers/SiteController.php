@@ -169,6 +169,7 @@ class SiteController extends Controller
     }
     */
 
+    /*
     public function actionUpload()
     {
         $model = new UploadForm();
@@ -183,4 +184,5 @@ class SiteController extends Controller
 
         return $this->render('upload', ['model' => $model]);
     }
+    */
 }

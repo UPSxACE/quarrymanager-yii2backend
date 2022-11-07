@@ -35,7 +35,7 @@ use ReflectionClass;
  * @property UserAuth[] $userAuths
  * @property UserForm $userForm
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends \amnah\yii2\user\models\User implements IdentityInterface
 {
     /**
      * @var int Inactive status
@@ -86,64 +86,6 @@ class User extends ActiveRecord implements IdentityInterface
             $this->module = Yii::$app->getModule("user");
         }
     }
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        $rules = [
-            // general email and username rules
-            [['email', 'username'], 'string', 'max' => 255],
-            [['email', 'username'], 'unique'],
-            [['email', 'username'], 'filter', 'filter' => 'trim'],
-            [['email'], 'email'],
-            [['username'], 'match', 'pattern' => '/^\w+$/u', 'except' => 'social', 'message' => Yii::t('user', '{attribute} can contain only letters, numbers, and "_"')],
-
-            // password rules
-            [['newPassword'], 'string', 'min' => 3],
-            [['newPassword'], 'filter', 'filter' => 'trim'],
-            [['newPassword'], 'required', 'on' => ['register', 'reset']],
-            [['newPasswordConfirm'], 'required', 'on' => ['reset']],
-            [['newPasswordConfirm'], 'compare', 'compareAttribute' => 'newPassword', 'message' => Yii::t('user', 'Passwords do not match')],
-
-            // account page
-            [['currentPassword'], 'validateCurrentPassword', 'on' => ['account']],
-
-            // admin crud rules
-            [['role_id', 'status'], 'required', 'on' => ['admin']],
-            [['role_id', 'status'], 'integer', 'on' => ['admin']],
-            [['banned_at'], 'integer', 'on' => ['admin']],
-            [['banned_reason'], 'string', 'max' => 255, 'on' => 'admin'],
-        ];
-
-        // add required for currentPassword on account page
-        // only if $this->password is set (might be null from a social login)
-        if ($this->password) {
-            $rules[] = [['currentPassword'], 'required', 'on' => ['account']]; //'account' provavelmente aqui refere-se ao scenario
-        }
-
-        // add required rules for email/username depending on module properties
-        if ($this->module->requireEmail) {
-            $rules[] = ["email", "required"];
-        }
-        if ($this->module->requireUsername) {
-            $rules[] = ["username", "required"];
-        }
-
-        return $rules;
-    }
-
-    /**
-     * Validate current password (account page)
-     */
-    public function validateCurrentPassword()
-    {
-        if (!$this->validatePassword($this->currentPassword)) {
-            $this->addError("currentPassword", "Current password incorrect");
-        }
-    }
-
 
 
     //funções criadas para facilitar a criação de uma nova página de definições de conta
@@ -217,13 +159,6 @@ class User extends ActiveRecord implements IdentityInterface
 
     }
 
-    public function getUserForm()  //teste criado
-    {
-        $userForm = $this->module->model("UserForm");
-        return $this->hasOne($userForm::className(), ['user_id' => 'id']);
-    }
-
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -231,24 +166,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $role = $this->module->model("Role");
         return $this->hasOne($role::className(), ['id' => 'role_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUserTokens()
-    {
-        $userToken = $this->module->model("UserToken");
-        return $this->hasMany($userToken::className(), ['user_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUserAuths()
-    {
-        $userAuth = $this->module->model("UserAuth");
-        return $this->hasMany($userAuth::className(), ['user_id' => 'id']);
     }
 
     public function getProfile0()
@@ -261,22 +178,6 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Role::className(), ['id' => 'role_id']);
     }
 
-
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentity($id)
-    {
-        return static::findOne($id);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        return static::findOne(["access_token" => $token]);
-    }
 
     /**
      * @inheritdoc
@@ -295,14 +196,6 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->auth_key === $authKey;
-    }
-
-    /**
      * Validate password
      * @param string $password
      * @return bool
@@ -312,98 +205,6 @@ class User extends ActiveRecord implements IdentityInterface
         return Yii::$app->security->validatePassword($password, $this->password);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function beforeSave($insert)
-    {
-        // check if we're setting $this->password directly
-        // handle it by setting $this->newPassword instead
-        $dirtyAttributes = $this->getDirtyAttributes();
-        if (isset($dirtyAttributes["password"])) {
-            $this->newPassword = $dirtyAttributes["password"];
-        }
-
-        // hash new password if set
-        if ($this->newPassword) {
-            $this->password = Yii::$app->security->generatePasswordHash($this->newPassword);
-        }
-
-        // convert banned_at checkbox to date
-        if ($this->banned_at) {
-            $this->banned_at = gmdate("Y-m-d H:i:s");
-        }
-
-        // ensure fields are null so they won't get set as empty string
-        $nullAttributes = ["email", "username", "banned_at", "banned_reason"];
-        foreach ($nullAttributes as $nullAttribute) {
-            $this->$nullAttribute = $this->$nullAttribute ? $this->$nullAttribute : null;
-        }
-
-        return parent::beforeSave($insert);
-    }
-
-    /**
-     * Set attributes for registration
-     * @param int $roleId
-     * @param string $status
-     * @return static
-     */
-    public function setRegisterAttributes($roleId, $status = null)
-    {
-        // set default attributes
-        $attributes = [
-            "role_id" => $roleId,
-            "created_ip" => Yii::$app->request->userIP,
-            "auth_key" => Yii::$app->security->generateRandomString(),
-            "access_token" => Yii::$app->security->generateRandomString(),
-            "status" => static::STATUS_ACTIVE,
-        ];
-
-        // determine if we need to change status based on module properties
-        $emailConfirmation = $this->module->emailConfirmation;
-        $requireEmail = $this->module->requireEmail;
-        $useEmail = $this->module->useEmail;
-        if ($status) {
-            $attributes["status"] = $status;
-        } elseif ($emailConfirmation && $requireEmail) {
-            $attributes["status"] = static::STATUS_INACTIVE;
-        } elseif ($emailConfirmation && $useEmail && $this->email) {
-            $attributes["status"] = static::STATUS_UNCONFIRMED_EMAIL;
-        }
-
-        // set attributes and return
-        $this->setAttributes($attributes, false);
-        return $this;
-    }
-
-    /**
-     * Check for email change
-     * @return string|bool
-     */
-    public function checkEmailChange()
-    {
-        // check if user didn't change email
-        if ($this->email == $this->getOldAttribute("email")) {
-            return false;
-        }
-
-        // check if we need to confirm email change
-        if (!$this->module->emailChangeConfirmation) {
-            return false;
-        }
-
-        // check if user is removing email address (only valid if Module::$requireEmail = false)
-        if (!$this->email) {
-            return false;
-        }
-
-        // update status and email before returning new email
-        $newEmail = $this->email;
-        $this->status = static::STATUS_UNCONFIRMED_EMAIL;
-        $this->email = $this->getOldAttribute("email");
-        return $newEmail;
-    }
 
     /**
      * Update login info (ip and time)
@@ -414,68 +215,6 @@ class User extends ActiveRecord implements IdentityInterface
         $this->logged_in_ip = Yii::$app->request->userIP;
         $this->logged_in_at = gmdate("Y-m-d H:i:s");
         return $this->save(false, ["logged_in_ip", "logged_in_at"]);
-    }
-
-    /**
-     * Confirm user email
-     * @param string $newEmail
-     * @return bool
-     */
-    public function confirm($newEmail)
-    {
-        // update status
-        $this->status = static::STATUS_ACTIVE;
-
-        // process $newEmail from a userToken
-        //   check if another user already has that email
-        $success = true;
-        if ($newEmail) {
-            $checkUser = static::findOne(["email" => $newEmail]);
-            if ($checkUser) {
-                $success = false;
-            } else {
-                $this->email = $newEmail;
-            }
-        }
-
-        $this->save(false, ["email", "status"]);
-        return $success;
-    }
-
-    /**
-     * Check if user can do specified $permission
-     * @param string $permissionName
-     * @param array $params
-     * @param bool $allowCaching
-     * @return bool
-     */
-    public function can($permissionName, $params = [], $allowCaching = true)
-    {
-        // check for auth manager rbac
-        // copied from \yii\web\User
-        $auth = Yii::$app->getAuthManager();
-        if ($auth) {
-            if ($allowCaching && empty($params) && isset($this->permissionCache[$permissionName])) {
-                return $this->permissionCache[$permissionName];
-            }
-            $access = $auth->checkAccess($this->getId(), $permissionName, $params);
-            if ($allowCaching && empty($params)) {
-                $this->permissionCache[$permissionName] = $access;
-            }
-            return $access;
-        }
-
-        // otherwise use our own custom permission (via the role table)
-        return $this->role->checkPermission($permissionName);
-    }
-
-    /**
-     * Get display name for the user
-     * @return string|int
-     */
-    public function getDisplayName()
-    {
-        return $this->username ?: $this->email ?: $this->id;
     }
 
     /**
@@ -509,33 +248,4 @@ class User extends ActiveRecord implements IdentityInterface
         return $result;
     }
 
-    /**
-     * Get list of statuses for creating dropdowns
-     * @return array
-     */
-    public static function statusDropdown()
-    {
-        // get data if needed
-        static $dropdown;
-        $constPrefix = "STATUS_";
-        if ($dropdown === null) {
-
-            // create a reflection class to get constants
-            $reflClass = new ReflectionClass(get_called_class());
-            $constants = $reflClass->getConstants();
-
-            // check for status constants (e.g., STATUS_ACTIVE)
-            foreach ($constants as $constantName => $constantValue) {
-
-                // add prettified name to dropdown
-                if (strpos($constantName, $constPrefix) === 0) {
-                    $prettyName = str_replace($constPrefix, "", $constantName);
-                    $prettyName = Inflector::humanize(strtolower($prettyName));
-                    $dropdown[$constantValue] = $prettyName;
-                }
-            }
-        }
-
-        return $dropdown;
-    }
 }
