@@ -15,9 +15,19 @@ class PedidoLoteApiCest{
         $I->seeResponseCodeIsClientError();
     }
 
+
     public function indexTest(\FunctionalTester $I)
     {
         $I->sendAjaxGetRequest('/api/pedido-lote');
+        $I->seeResponseCodeIsSuccessful();
+        if(Yii::$app->getResponse()->content === "null"){
+            throw new Exception("Content of the answer is null");
+        }
+    }
+
+    public function indexExpandTest(\FunctionalTester $I)
+    {
+        $I->sendAjaxGetRequest('/api/pedido-lote?expand=idTransportadora0');
         $I->seeResponseCodeIsSuccessful();
         if(Yii::$app->getResponse()->content === "null"){
             throw new Exception("Content of the answer is null");
