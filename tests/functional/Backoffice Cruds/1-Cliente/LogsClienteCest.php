@@ -12,4 +12,5 @@ class LogsClienteCest extends LogsCest
     {
         $I->see('Forbidden', 'h1');
     }
+
 }

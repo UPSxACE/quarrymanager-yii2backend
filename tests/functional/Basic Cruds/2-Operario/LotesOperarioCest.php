@@ -47,4 +47,11 @@ class LotesOperarioCest
         $I->see("Vermelho");
         $I->see("700m²");
     }
+
+    public function loteDelete(\FunctionalTester $I){
+        $I->amOnPage(['dashboard/delete-lote?codigo_lote=GRN_LRJ_00001']);
+        $I->canSeeResponseCodeIsSuccessful();
+
+    }
+
 }

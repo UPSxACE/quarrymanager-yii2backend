@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "pedido_lote".
@@ -22,6 +23,19 @@ use Yii;
  */
 class PedidoLote extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            'softDeleteBehavior' => [
+                'class' => SoftDeleteBehavior::className(),
+                'softDeleteAttributeValues' => [
+                    'isDeleted' => true
+                ],
+                'replaceRegularDelete' => true // mutate native delete() method
+            ],
+        ];
+
+    }
     /**
      * {@inheritdoc}
      */

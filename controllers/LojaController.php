@@ -52,9 +52,9 @@ class LojaController extends Controller{
                 if($modelEstadoPedido->save()){
                     Yii::$app->session->setFlash("Orcamento-success", Yii::t("user", "Pedido de orçamento enviado."));
                     return $this->refresh();
-                } else {
+                } /*else {
                     //mensagem de erro
-                }
+                } */
             }
         } else {
             $modelPedido->loadDefaultValues();

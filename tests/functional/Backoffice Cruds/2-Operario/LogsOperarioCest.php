@@ -34,4 +34,14 @@ class LogsOperarioCest extends LogsClienteCest
         $I->fillField(["name"=>'Logs[dataHora]'],"2022-11-02 18:08:00");
         $I->click('Save', 'button');
     }
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['logs/delete?id=2']);
+        $I->See("Logs");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['logs/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }

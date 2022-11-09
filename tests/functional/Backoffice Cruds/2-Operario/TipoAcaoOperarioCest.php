@@ -38,4 +38,15 @@ class TipoAcaoOperarioCest extends TipoAcaoClienteCest
         $I->fillField(["name"=>'TipoAcao[nome]'],"Teste1");
         $I->click('Save', 'button');
     }
+
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['tipo-acao/delete?id=1']);
+        $I->See("Tipo Acaos");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['tipo-acao/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }

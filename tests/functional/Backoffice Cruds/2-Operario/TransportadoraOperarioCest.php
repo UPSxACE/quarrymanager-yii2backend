@@ -33,4 +33,15 @@ class TransportadoraOperarioCest extends TransportadoraClienteCest
         $I->fillField(["name"=>'Transportadora[nome]'],"Correios");
         $I->click('Save', 'button');
     }
+
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['transportadora/delete?id=1']);
+        $I->See("Transportadoras");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['transportadora/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }

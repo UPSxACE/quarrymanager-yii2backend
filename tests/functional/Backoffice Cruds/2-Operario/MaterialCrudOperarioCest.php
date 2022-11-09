@@ -31,4 +31,15 @@ class MaterialCrudOperarioCest extends MaterialCrudClienteCest
         $I->amOnPage(['material/view?id=1']);
         $I->See("Granito");
     }
+
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['material/delete?id=1']);
+        $I->See("Materials");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['material/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }

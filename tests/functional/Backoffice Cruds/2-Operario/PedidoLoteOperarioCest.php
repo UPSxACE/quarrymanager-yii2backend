@@ -47,4 +47,15 @@ class PedidoLoteOperarioCest extends PedidoLoteClienteCest
         $I->click('Save', 'button');
     }
 
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['pedido-lote/delete?id=1']);
+        $I->See("Pedido Lotes");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['pedido-lote/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
+
 }

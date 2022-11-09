@@ -54,4 +54,15 @@ class LoteOperarioCest extends LoteClienteCest
         $I->See("3");
         $I->See("2022-01-01 23:25:23");
     }
+
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['lote/delete?codigo_lote=GRN_LRJ_00001']);
+        $I->See("Lotes","h1");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['lote/view?codigo_lote=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }

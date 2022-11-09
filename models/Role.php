@@ -5,6 +5,7 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "tbl_role".
@@ -19,6 +20,8 @@ use yii\db\ActiveRecord;
  */
 class Role extends ActiveRecord
 {
+
+
     /**
      * @var int Admin user role
      */
@@ -97,8 +100,16 @@ class Role extends ActiveRecord
                     return gmdate("Y-m-d H:i:s");
                 },
             ],
+            'softDeleteBehavior' => [
+                'class' => SoftDeleteBehavior::className(),
+                'softDeleteAttributeValues' => [
+                    'isDeleted' => true
+                ],
+                'replaceRegularDelete' => true // mutate native delete() method
+            ],
         ];
     }
+
 
     /**
      * @return \yii\db\ActiveQuery

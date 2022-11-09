@@ -95,4 +95,15 @@ class ProfileOperarioCest extends ProfileClienteCest
         $I->See("2021-01-22 21:48:38");
         $I->See("zxcv9876");
     }
+
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['profile/delete?id=1']);
+        $I->See("Profiles");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['profile/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }

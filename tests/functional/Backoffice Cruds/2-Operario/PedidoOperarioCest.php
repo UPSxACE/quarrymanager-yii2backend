@@ -56,4 +56,15 @@ class PedidoOperarioCest extends PedidoClienteCest
         $I->See("Ah, please, give me some of these.");
         $I->See("2022-01-01 23:23:23");
     }
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['pedido/delete?id=1']);
+        $I->See("Pedidos");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['pedido/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
+
 }

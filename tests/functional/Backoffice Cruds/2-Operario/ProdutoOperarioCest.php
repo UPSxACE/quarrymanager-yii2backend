@@ -54,4 +54,14 @@ class ProdutoOperarioCest extends ProdutoClienteCest
         $I->fillField(["name"=>'Produto[preco]'],20.69);
         $I->click('Save', 'button');
     }
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['produto/delete?id=1']);
+        $I->See("Produtos");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['produto/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }

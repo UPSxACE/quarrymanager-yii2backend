@@ -49,4 +49,14 @@ class RoleOperarioCest extends RoleClienteCest
         $I->See("1");
         $I->See("0");
     }
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['role/delete?id=1']);
+        $I->See("Roles");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['role/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }
