@@ -33,4 +33,14 @@ class EstadoOperarioCest extends EstadoClienteCest
         $I->see('estado1');
 
     }
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['estado/delete?id=1']);
+        $I->See("Estados");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['estado/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }

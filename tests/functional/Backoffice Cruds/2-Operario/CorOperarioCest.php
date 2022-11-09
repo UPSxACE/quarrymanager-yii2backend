@@ -31,4 +31,14 @@ class CorOperarioCest extends CorClienteCest
         $I->amOnPage(['cor/view?id=1']);
         $I->See("Laranja");
     }
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['cor/delete?id=1']);
+        $I->See("Cors");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['cor/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }
