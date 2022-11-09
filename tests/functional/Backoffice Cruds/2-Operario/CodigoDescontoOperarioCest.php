@@ -22,11 +22,19 @@ class CodigoDescontoOperarioCest extends CodigoDescontoClienteCest
     }
 
     public function updateTest(\FunctionalTester $I){
-        $I->click("Create Codigo Desconto");
-        $I->fillField(["name"=>"CodigoDesconto[codigo]"], "zzz123");
-        $I->fillField(["name"=>"CodigoDesconto[descricao]"], "zzz123");
+        $I->amOnPage(['codigo-desconto/update?codigo=1']);
+        $I->See("Update");
+        $I->fillField(["name"=>"CodigoDesconto[descricao]"], "Segundo Desconto.");
         $I->click("Save");
-        $I->See("zzz123");
     }
 
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['codigo-desconto/delete?codigo=1']);
+        $I->See("Codigo Descontos");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['codigo-desconto/view?codigo=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }
