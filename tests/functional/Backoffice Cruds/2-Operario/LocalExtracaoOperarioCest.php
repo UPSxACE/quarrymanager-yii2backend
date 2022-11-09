@@ -44,4 +44,14 @@ class LocalExtracaoOperarioCest extends LocalExtracaoClienteCest
         $I->See("2.465");
         $I->See("4.486");
     }
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['local-extracao/delete?id=1']);
+        $I->See("Local Extracaos");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['local-extracao/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }

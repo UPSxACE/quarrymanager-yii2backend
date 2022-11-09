@@ -36,4 +36,14 @@ class FotografiaOperarioCest extends FotografiaClienteCest
         $I->see("fotos/fotomaria.png");
 
     }
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['fotografia/delete?id=1']);
+        $I->See("Fotografias");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['fotografia/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }

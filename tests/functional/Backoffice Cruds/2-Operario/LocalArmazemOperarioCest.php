@@ -33,4 +33,14 @@ class LocalArmazemOperarioCest extends LocalArmazemClienteCest
         $I->click("Save");
         $I->See("Armazem de Rua");
     }
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['local-armazem/delete?id=1']);
+        $I->See("Local Armazems");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['local-armazem/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }

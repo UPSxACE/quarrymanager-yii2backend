@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "localarmazem".
@@ -18,6 +19,20 @@ class LocalArmazem extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+    public function behaviors()
+    {
+        return [
+            'softDeleteBehavior' => [
+                'class' => SoftDeleteBehavior::className(),
+                'softDeleteAttributeValues' => [
+                    'isDeleted' => true
+                ],
+                'replaceRegularDelete' => true // mutate native `delete()` method
+            ],
+        ];
+    }
+
     public static function tableName()
     {
         return 'localarmazem';

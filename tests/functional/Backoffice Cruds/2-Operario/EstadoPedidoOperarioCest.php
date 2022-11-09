@@ -40,4 +40,13 @@ class EstadoPedidoOperarioCest extends EstadoPedidoClienteCest
         $I->See("2");
         $I->See("2022-01-01 23:23:23");
     }
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['estado-pedido/delete?id=1']);
+        $I->See("Estado Pedidos");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['estado-pedido/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }

@@ -38,4 +38,14 @@ class FotografiaLoteOperarioCest extends FotografiaLoteClienteCest
         $I->See("GRN_LRJ_00002");
         $I->See("2");
     }
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['fotografia-lote/delete?id=1']);
+        $I->See("Fotografia Lotes");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['fotografia-lote/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }

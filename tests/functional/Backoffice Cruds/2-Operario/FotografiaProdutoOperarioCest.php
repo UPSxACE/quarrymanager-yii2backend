@@ -38,4 +38,14 @@ class FotografiaProdutoOperarioCest extends FotografiaProdutoClienteCest
         $I->See("3");
         $I->See("2");
     }
+
+    public function deleteTest(\FunctionalTester $I){
+        $I->amOnPage(['fotografia-produto/delete?id=1']);
+        $I->See("Fotografia Produtos");
+    }
+
+    public function findModelFailTest(\FunctionalTester $I){
+        $I->amOnPage(['fotografia-produto/view?id=-1']);
+        $I->canSeeResponseCodeIs(404);
+    }
 }
