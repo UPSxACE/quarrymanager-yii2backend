@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "263b4df21a5c4675e6d4fea14482d882",
+    "content-hash": "1254bd14c144dbeb740fa2e12fa6b981",
     "packages": [
         {
             "name": "amnah/yii2-user",
