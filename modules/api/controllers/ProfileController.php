@@ -87,6 +87,8 @@ class ProfileController extends BaseController
 
         $model->load(Yii::$app->request->post(), '');
 
+        //print(var_dump($_FILES));
+
         if(isset($_FILES["file"])){ //atualização imagem perfil
             if(move_uploaded_file($_FILES["file"]["tmp_name"], "uploads/profilePictures/" . $_FILES["file"]["name"])){
                 $fotografiaModel = Fotografia::registrarFotografia("profilePictures/" . $_FILES["file"]["name"]);

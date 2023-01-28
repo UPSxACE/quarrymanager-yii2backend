@@ -14,6 +14,8 @@ use yii\data\ActiveDataProvider;
 
 class PedidoRest extends Pedido
 {
+    public $anexos = [];
+
     public function fields()
     {
 

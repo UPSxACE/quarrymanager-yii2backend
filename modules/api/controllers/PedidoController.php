@@ -3,6 +3,8 @@
 namespace app\modules\api\controllers;
 
 
+use app\models\Fotografia;
+use app\models\FotografiaProduto;
 use app\models\Logs;
 use app\models\Pedido;
 use app\modules\api\models\EstadoPedidoRest;
@@ -10,6 +12,7 @@ use app\modules\api\models\MaterialRest;
 use app\modules\api\models\PedidoRest;
 use app\modules\api\models\UserRest;
 use Yii;
+use yii\helpers\FileHelper;
 use yii\rest\ActiveController;
 
 class PedidoController extends BaseController
@@ -19,7 +22,7 @@ class PedidoController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['options', 'find-pedidos-utilizador', 'pedido-orcamento'],
+            'actions' =>  ['options', 'find-pedidos-utilizador', 'pedido-orcamento', 'pedido-orcamento-v2'],
             'allow' => true,
             'roles' => ['@'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -109,6 +112,67 @@ class PedidoController extends BaseController
 
             $modelEstadoPedido->save();
         }
+
+        return $modelPedido;
+    }
+
+    public static function actionPedidoOrcamentoV2(){
+        $access_header = Yii::$app->request->headers->get("Authorization");
+        $access_token = str_replace("Basic ", "", $access_header);
+        $access_token = base64_decode($access_token);
+        $access_token = str_replace(":", "", $access_token);
+        $user = UserRest::findOne(["access_token"=>$access_token]);
+
+        $modelPedido = new PedidoRest();
+
+
+        $modelPedido->idUser = $user->id;
+        $modelPedido->dataHoraPedido = date('Y-m-d H:i:s');
+        $modelPedido->idProduto = Yii::$app->request->post("idProduto");
+        if ($modelPedido->load(Yii::$app->request->post(), '') && $modelPedido->save()) {
+            $modelEstadoPedido = new EstadoPedidoRest();
+            $modelEstadoPedido->idEstado = '1';
+            $modelEstadoPedido->idPedido = $modelPedido->id;
+            $modelEstadoPedido->dataEstado = $modelPedido->dataHoraPedido;
+
+            $modelEstadoPedido->save();
+        } else {
+            return "ERRO";
+        }
+
+        $count = 0;
+        FileHelper::createDirectory('uploads/users/' . $user->id . '/', 0775);
+
+        foreach ($_FILES as $file){
+
+            if($file["type"] === "image/jpeg"){
+                if(move_uploaded_file($file["tmp_name"], "uploads/users/" . $user->id . "/" . "image" . $count . ".jpeg")){
+                    $fotografiaId = Fotografia::registrarFotografia("lotes/" . $user->id . "/" . "image" . $count . ".jpeg");
+                    $fotografiaModel = Fotografia::findOne(["id" => $fotografiaId]);
+                    $modelPedido->anexos[$count] = $fotografiaModel->link;
+
+                }
+                $count+=1;
+            } elseif ($file["type"] === "image/jpg"){
+                if(move_uploaded_file($file["tmp_name"], "uploads/users/" . $user->id . "/" . "image" . $count . ".jpg")){
+                    $fotografiaId = Fotografia::registrarFotografia("users/" . $user->id . "/" . "image" . $count . ".jpg");
+                    $fotografiaModel = Fotografia::findOne(["id" => $fotografiaId]);
+                    $modelPedido->anexos[$count] = $fotografiaModel->link;
+                }
+                $count+=1;
+            } elseif ($file["type"] === "image/png"){
+                if(move_uploaded_file($file["tmp_name"], "uploads/users/" . $user->id . "/" . "image" . $count . ".png")){
+                    $fotografiaId = Fotografia::registrarFotografia("users/" . $user->id . "/" . "image" . $count . ".png");
+                    $fotografiaModel = Fotografia::findOne(["id" => $fotografiaId]);
+                    $modelPedido->anexos[$count] = $fotografiaModel->link;
+                }
+                $count+=1;
+            } else {return "Apenas aceitamos imagens do tipo JPG, JPeG ou PNG";}
+
+
+        }
+
+        Logs::registrarLogUser($user->id, 2, "O usuário de ID " . $user->id . " adidicionou um(uns) anexo(s).");
 
         return $modelPedido;
     }

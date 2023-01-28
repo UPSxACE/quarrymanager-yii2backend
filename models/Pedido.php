@@ -53,6 +53,7 @@ class Pedido extends \yii\db\ActiveRecord
         return [
             [['idUser', 'dataHoraPedido'], 'required'],
             [['idUser', 'idProduto'], 'integer'],
+            [['codigo_desconto'], 'string', 'max' => 150],
             [['desconto', 'quantidade', 'precoFinal'], 'number'],
             [['dataHoraPedido'], 'safe'],
             [['mensagem'], 'string', 'max' => 150],
