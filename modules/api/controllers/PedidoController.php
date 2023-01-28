@@ -7,12 +7,14 @@ use app\models\Fotografia;
 use app\models\FotografiaProduto;
 use app\models\Logs;
 use app\models\Pedido;
+use app\models\Produto;
 use app\modules\api\models\EstadoPedidoRest;
 use app\modules\api\models\MaterialRest;
 use app\modules\api\models\PedidoRest;
 use app\modules\api\models\UserRest;
 use Yii;
 use yii\helpers\FileHelper;
+use yii\httpclient\Client;
 use yii\rest\ActiveController;
 
 class PedidoController extends BaseController
@@ -117,11 +119,18 @@ class PedidoController extends BaseController
     }
 
     public static function actionPedidoOrcamentoV2(){
+        $conta_gestores_uid = "GESTORES";
+
         $access_header = Yii::$app->request->headers->get("Authorization");
         $access_token = str_replace("Basic ", "", $access_header);
         $access_token = base64_decode($access_token);
         $access_token = str_replace(":", "", $access_token);
         $user = UserRest::findOne(["access_token"=>$access_token]);
+
+        $user_uid = Yii::$app->request->post("user_uid");
+        $user_name = Yii::$app->request->post("user_name");
+        $user_avatar = Yii::$app->request->post("user_avatar");
+
 
         $modelPedido = new PedidoRest();
 
@@ -143,13 +152,16 @@ class PedidoController extends BaseController
         $count = 0;
         FileHelper::createDirectory('uploads/users/' . $user->id . '/', 0775);
 
+        $objeto_resposta = new \stdClass();
+        $objeto_resposta->anexos = [];
+
         foreach ($_FILES as $file){
 
             if($file["type"] === "image/jpeg"){
                 if(move_uploaded_file($file["tmp_name"], "uploads/users/" . $user->id . "/" . "image" . $count . ".jpeg")){
                     $fotografiaId = Fotografia::registrarFotografia("lotes/" . $user->id . "/" . "image" . $count . ".jpeg");
                     $fotografiaModel = Fotografia::findOne(["id" => $fotografiaId]);
-                    $modelPedido->anexos[$count] = $fotografiaModel->link;
+                    $objeto_resposta->anexos[$count] = $fotografiaModel->link;
 
                 }
                 $count+=1;
@@ -157,14 +169,14 @@ class PedidoController extends BaseController
                 if(move_uploaded_file($file["tmp_name"], "uploads/users/" . $user->id . "/" . "image" . $count . ".jpg")){
                     $fotografiaId = Fotografia::registrarFotografia("users/" . $user->id . "/" . "image" . $count . ".jpg");
                     $fotografiaModel = Fotografia::findOne(["id" => $fotografiaId]);
-                    $modelPedido->anexos[$count] = $fotografiaModel->link;
+                    $objeto_resposta->anexos[$count] = $fotografiaModel->link;
                 }
                 $count+=1;
             } elseif ($file["type"] === "image/png"){
                 if(move_uploaded_file($file["tmp_name"], "uploads/users/" . $user->id . "/" . "image" . $count . ".png")){
                     $fotografiaId = Fotografia::registrarFotografia("users/" . $user->id . "/" . "image" . $count . ".png");
                     $fotografiaModel = Fotografia::findOne(["id" => $fotografiaId]);
-                    $modelPedido->anexos[$count] = $fotografiaModel->link;
+                    $objeto_resposta->anexos[$count] = $fotografiaModel->link;
                 }
                 $count+=1;
             } else {return "Apenas aceitamos imagens do tipo JPG, JPeG ou PNG";}
@@ -172,8 +184,99 @@ class PedidoController extends BaseController
 
         }
 
+        // Achar fotografia do produto
+        $idProduto = $modelPedido->idProduto;
+        $idFotografia = FotografiaProduto::findOne(["idProduto" => $idProduto])->idFotografia;
+        $linkFotografiaProduto = Fotografia::findOne(["id"=>$idFotografia])->link;
+
+        // Achar titulo do produto
+        $tituloProduto = Produto::findOne(["id" => $idProduto])->tituloArtigo;
+
+        // Criar objeto de ultima mensagem lida
+        $ultima_lida = [];
+        $ultima_lida[$user_uid] = [".sv"=>"timestamp"];
+
+        $client = new Client();
+
+        // Criar Canal de Mensagem
+        $response = $client->createRequest()
+            ->setMethod("POST")
+            ->setFormat(Client::FORMAT_JSON)
+            ->setUrl("https://ds3-gestorapedreira-default-rtdb.europe-west1.firebasedatabase.app/pedidos-listagem.json")
+            ->setData([
+                "pic"=>$linkFotografiaProduto,
+                "titulo"=>$tituloProduto,
+                "estado"=>$modelPedido->ultimoEstadoNome(),
+                "ultima-mensagem"=>[
+                    ".sv"=>"timestamp"
+                ],
+                "ultima-lida"=>$ultima_lida
+            ])
+            ->send();
+
+        $id_canal = $response->getData()["name"];
+
+        // Buscar dados desse novo canal
+        $response = $client->createRequest()
+            ->setMethod("GET")
+            ->setFormat(Client::FORMAT_JSON)
+            ->setUrl("https://ds3-gestorapedreira-default-rtdb.europe-west1.firebasedatabase.app/pedidos-listagem/".$id_canal .".json")
+            ->send();
+
+        $dados_canal = $response->getData();
+        $ultima_mensagem_timestamp = $dados_canal["ultima-mensagem"];
+
+
+        $mensagem = "";
+        if($modelPedido->mensagem !== null && $modelPedido->mensagem !== ""){
+            $mensagem = $modelPedido->mensagem;
+
+            // Adicionar primeira mensagem ao canal
+            $response = $client->createRequest()
+                ->setMethod("POST")
+                ->setFormat(Client::FORMAT_JSON)
+                ->setUrl("https://ds3-gestorapedreira-default-rtdb.europe-west1.firebasedatabase.app/pedidos-mensagens/". $id_canal . ".json")
+                ->setData([
+                    "_id" => $id_canal,
+                    "createdAt" => $ultima_mensagem_timestamp,
+                    "createdAtLocal" => $ultima_mensagem_timestamp,
+                    "text" => $mensagem,
+                    "user" => [
+                        "_id" => $user_uid,
+                        "name" => $user_name,
+                        "avatar" => $user_avatar
+                    ],
+                    "anexos" => $objeto_resposta->anexos
+                ])
+                ->send();
+        }
+
+        // Adicionar novo canal à lista de canais do usuário
+        $response = $client->createRequest()
+            ->setMethod("PUT")
+            ->setFormat(Client::FORMAT_JSON)
+            ->setUrl("https://ds3-gestorapedreira-default-rtdb.europe-west1.firebasedatabase.app/pedidos-canais/".$user_uid."/". $id_canal . ".json")
+            ->setData([
+                "visible" => true,
+                "createdAt" => $ultima_mensagem_timestamp
+            ])
+            ->send();
+
+        // Adicionar novo canal à lista de canais da conta partilhada de gestores
+        $response = $client->createRequest()
+            ->setMethod("PUT")
+            ->setFormat(Client::FORMAT_JSON)
+            ->setUrl("https://ds3-gestorapedreira-default-rtdb.europe-west1.firebasedatabase.app/pedidos-canais/".$conta_gestores_uid."/". $id_canal . ".json")
+            ->setData([
+                "visible" => true,
+                "createdAt" => $ultima_mensagem_timestamp
+            ])
+            ->send();
+
+        //return $response->getData();
+
         Logs::registrarLogUser($user->id, 2, "O usuário de ID " . $user->id . " adidicionou um(uns) anexo(s).");
 
-        return $modelPedido;
+        return $objeto_resposta;
     }
 }
