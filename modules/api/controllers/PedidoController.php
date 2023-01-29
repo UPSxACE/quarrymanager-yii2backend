@@ -171,7 +171,7 @@ class PedidoController extends BaseController
 
             if($file["type"] === "image/jpeg"){
                 if(move_uploaded_file($file["tmp_name"], "uploads/users/" . $user->id . "/" . "image" . $count . ".jpeg")){
-                    $fotografiaId = Fotografia::registrarFotografia("lotes/" . $user->id . "/" . "image" . $count . ".jpeg");
+                    $fotografiaId = Fotografia::registrarFotografia("users/" . $user->id . "/" . "image" . $count . ".jpeg");
                     $fotografiaModel = Fotografia::findOne(["id" => $fotografiaId]);
                     $objeto_resposta->anexos[$count] = $fotografiaModel->link;
 
