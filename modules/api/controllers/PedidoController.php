@@ -92,14 +92,6 @@ class PedidoController extends BaseController
         if($estadoAtual < 9){
             $modelEncomenda->nextState($idEncomenda);
             Logs::registrarLogUser(Yii::$app->user->identity->id, 3, "O estado da encomenda #" . $modelEncomenda->id . " foi atualizada.");
-
-            $client = new Client();
-            $client->createRequest()
-                ->setMethod("PUT")
-                ->setFormat(Client::FORMAT_JSON)
-                ->setUrl("https://ds3-gestorapedreira-default-rtdb.europe-west1.firebasedatabase.app/pedidos-listagem/" . $modelEncomenda->id . "/estado.json")
-                ->setData($modelEncomenda->ultimoEstadoNome())
-                ->send();
         }
 
         return "Encomenda Atualizada";

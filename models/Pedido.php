@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\httpclient\Client;
 use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
@@ -117,6 +118,13 @@ class Pedido extends \yii\db\ActiveRecord
             $modelEstadoPedido->last = 1;
 
             if($modelEstadoPedido->save()){
+                $client = new Client();
+                $client->createRequest()
+                    ->setMethod("PUT")
+                    ->setFormat(Client::FORMAT_JSON)
+                    ->setUrl("https://ds3-gestorapedreira-default-rtdb.europe-west1.firebasedatabase.app/pedidos-listagem/" . $modelEstadoPedido->idPedido . "/estado.json")
+                    ->setData($modelEstadoPedido->idPedido0->ultimoEstadoNome())
+                    ->send();
                 return true;
             }
 
