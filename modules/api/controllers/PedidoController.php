@@ -170,23 +170,23 @@ class PedidoController extends BaseController
         foreach ($_FILES as $file){
 
             if($file["type"] === "image/jpeg"){
-                if(move_uploaded_file($file["tmp_name"], "uploads/users/" . $user->id . "/" . "image" . $count . ".jpeg")){
-                    $fotografiaId = Fotografia::registrarFotografia("users/" . $user->id . "/" . "image" . $count . ".jpeg");
+                if(move_uploaded_file($file["tmp_name"], "uploads/users/" . $user->id . "/" . hash("md5", "image" . $count) . ".jpeg")){
+                    $fotografiaId = Fotografia::registrarFotografia("users/" . $user->id . "/" .  hash("md5", "image" . $count) . ".jpeg");
                     $fotografiaModel = Fotografia::findOne(["id" => $fotografiaId]);
                     $objeto_resposta->anexos[$count] = $fotografiaModel->link;
 
                 }
                 $count+=1;
             } elseif ($file["type"] === "image/jpg"){
-                if(move_uploaded_file($file["tmp_name"], "uploads/users/" . $user->id . "/" . "image" . $count . ".jpg")){
-                    $fotografiaId = Fotografia::registrarFotografia("users/" . $user->id . "/" . "image" . $count . ".jpg");
+                if(move_uploaded_file($file["tmp_name"], "uploads/users/" . $user->id . "/" . hash("md5", "image" . $count). ".jpg")){
+                    $fotografiaId = Fotografia::registrarFotografia("users/" . $user->id . "/" .  hash("md5", "image" . $count) . ".jpg");
                     $fotografiaModel = Fotografia::findOne(["id" => $fotografiaId]);
                     $objeto_resposta->anexos[$count] = $fotografiaModel->link;
                 }
                 $count+=1;
             } elseif ($file["type"] === "image/png"){
-                if(move_uploaded_file($file["tmp_name"], "uploads/users/" . $user->id . "/" . "image" . $count . ".png")){
-                    $fotografiaId = Fotografia::registrarFotografia("users/" . $user->id . "/" . "image" . $count . ".png");
+                if(move_uploaded_file($file["tmp_name"], "uploads/users/" . $user->id . "/" .  hash("md5", "image" . $count) . ".png")){
+                    $fotografiaId = Fotografia::registrarFotografia("users/" . $user->id . "/" .  hash("md5", "image" . $count) . ".png");
                     $fotografiaModel = Fotografia::findOne(["id" => $fotografiaId]);
                     $objeto_resposta->anexos[$count] = $fotografiaModel->link;
                 }
@@ -224,7 +224,7 @@ class PedidoController extends BaseController
                 "ultima-mensagem"=>[
                     ".sv"=>"timestamp"
                 ],
-                "ultima-lida"=>$ultima_lida
+                "ultima-lida"=>$ultima_lida,
             ])
             ->send();
 
@@ -258,7 +258,8 @@ class PedidoController extends BaseController
                         "name" => $user_name,
                         "avatar" => $user_avatar
                     ],
-                    "anexos" => $objeto_resposta->anexos
+                    "anexos" => $objeto_resposta->anexos,
+                    "sent"=>true
                 ])
                 ->send();
         }
