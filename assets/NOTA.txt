@@ -1,8 +1,0 @@
-É necessário adicionar o seguinte usuário ao MySQL:
-
-
-
-
-
-username: yii2app
-password: CTeSP-DS-Grupo03
