@@ -11,11 +11,13 @@ use app\models\Produto;
 use app\modules\api\models\EstadoPedidoRest;
 use app\modules\api\models\MaterialRest;
 use app\modules\api\models\PedidoRest;
+use app\modules\api\models\ProdutoRest;
 use app\modules\api\models\UserRest;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\httpclient\Client;
 use yii\rest\ActiveController;
+use yii\web\BadRequestHttpException;
 
 class PedidoController extends BaseController
 {
@@ -24,7 +26,7 @@ class PedidoController extends BaseController
     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'][] = [
-            'actions' =>  ['options', 'find-pedidos-utilizador', 'pedido-orcamento', 'pedido-orcamento-v2'],
+            'actions' =>  ['options', 'find-pedidos-utilizador', 'pedido-orcamento', 'pedido-orcamento-v2', 'loja-pesquisa'],
             'allow' => true,
             'roles' => ['@'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -138,6 +140,16 @@ class PedidoController extends BaseController
         $modelPedido->idUser = $user->id;
         $modelPedido->dataHoraPedido = date('Y-m-d H:i:s');
         $modelPedido->idProduto = Yii::$app->request->post("idProduto");
+
+        try {
+            if(Yii::$app->request->post("quantidade") <= 0){
+                throw new BadRequestHttpException;
+            }
+        } catch (\Exception $e) {
+            throw new BadRequestHttpException;
+        }
+
+
         if ($modelPedido->load(Yii::$app->request->post(), '') && $modelPedido->save()) {
             $modelEstadoPedido = new EstadoPedidoRest();
             $modelEstadoPedido->idEstado = '1';
@@ -278,5 +290,11 @@ class PedidoController extends BaseController
         Logs::registrarLogUser($user->id, 2, "O usuário de ID " . $user->id . " adidicionou um(uns) anexo(s).");
 
         return $objeto_resposta;
+    }
+
+    public function actionLojaPesquisa(){
+        $pesquisa = Yii::$app->request->get("titulo");
+        $modelProdutos = ProdutoRest::find()->where(['like', 'tituloArtigo', $pesquisa])->all();
+        return $modelProdutos;
     }
 }
