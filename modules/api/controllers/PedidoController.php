@@ -3,6 +3,7 @@
 namespace app\modules\api\controllers;
 
 
+use app\models\Estado;
 use app\models\Fotografia;
 use app\models\FotografiaProduto;
 use app\models\Logs;
@@ -92,6 +93,13 @@ class PedidoController extends BaseController
             $modelEncomenda->nextState($idEncomenda);
             Logs::registrarLogUser(Yii::$app->user->identity->id, 3, "O estado da encomenda #" . $modelEncomenda->id . " foi atualizada.");
 
+            $client = new Client();
+            $client->createRequest()
+                ->setMethod("PUT")
+                ->setFormat(Client::FORMAT_JSON)
+                ->setUrl("https://ds3-gestorapedreira-default-rtdb.europe-west1.firebasedatabase.app/pedidos-listagem/" . $modelEncomenda->id . "/estado.json")
+                ->setData($modelEncomenda->ultimoEstadoNome())
+                ->send();
         }
 
         return "Encomenda Atualizada";
@@ -210,11 +218,13 @@ class PedidoController extends BaseController
 
         $client = new Client();
 
+        $id_canal = $modelPedido->id;
+
         // Criar Canal de Mensagem
         $response = $client->createRequest()
-            ->setMethod("POST")
+            ->setMethod("PUT")
             ->setFormat(Client::FORMAT_JSON)
-            ->setUrl("https://ds3-gestorapedreira-default-rtdb.europe-west1.firebasedatabase.app/pedidos-listagem.json")
+            ->setUrl("https://ds3-gestorapedreira-default-rtdb.europe-west1.firebasedatabase.app/pedidos-listagem/" . $id_canal . ".json")
             ->setData([
                 "pic"=>$linkFotografiaProduto,
                 "titulo"=>$tituloProduto,
@@ -225,8 +235,6 @@ class PedidoController extends BaseController
                 "ultima-lida"=>$ultima_lida
             ])
             ->send();
-
-        $id_canal = $response->getData()["name"];
 
         // Buscar dados desse novo canal
         $response = $client->createRequest()
