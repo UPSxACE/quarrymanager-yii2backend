@@ -12,6 +12,7 @@ use Yii;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
+use yii\httpclient\Client;
 use yii\rest\Controller;
 use yii\web\ServerErrorHttpException;
 
@@ -20,7 +21,8 @@ public function verbs()
     {
         return [
             'register' => ['POST', 'OPTIONS'],
-            'login' => ['POST', 'OPTIONS']
+            'login' => ['POST', 'OPTIONS'],
+            'refresh-token' => ['GET', 'OPTIONS']
         ];
     }
 
@@ -101,12 +103,36 @@ public function verbs()
                 $user->setRegisterAttributes(Role::ROLE_USER);
                 if($user->save()){
                     $this->afterRegister($user, $post);
+                    return $user->access_token;
                 }
 
             }
         }
 
         return $user;
+    }
+
+    public function actionRefreshToken(){
+        $access_header = Yii::$app->request->headers->get("Authorization");
+        $access_token = str_replace("Basic ", "", $access_header);
+        $access_token = base64_decode($access_token);
+        $access_token = str_replace(":", "", $access_token);
+        $user = UserRest::findOne(["access_token"=>$access_token]);
+
+        $push_token = Yii::$app->request->get("push_token");
+
+        if($push_token){
+            $client = new Client();
+            $response = $client->createRequest()
+                ->setMethod("PUT")
+                ->setFormat(Client::FORMAT_JSON)
+                ->setUrl("https://ds3-gestorapedreira-default-rtdb.europe-west1.firebasedatabase.app/users/user_" . $user->id . "/push_token.json")
+                ->setData($push_token)
+                ->send();
+            return $response;
+        }
+        return null;
+
     }
 
     protected function afterRegister($user, $post)
