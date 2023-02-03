@@ -3,12 +3,13 @@
 namespace app\modules\api\controllers;
 
 
-use app\modules\api\models\FotografiaRest;
+use app\models\Fotografia;
+use app\modules\api\models\FotografiaLoteRest;
 use yii\rest\ActiveController;
 
 class FotografiaController extends BaseController
 {
-    public $modelClass = FotografiaRest::class;
+    public $modelClass = Fotografia::class;
 
     public function behaviors(){
         $behaviors = parent::behaviors();
