@@ -75,6 +75,17 @@ class ProdutoRest extends Produto
         return $dataProvider;
     }
 
+    public static function listarProdutosLojaTodos(){
+        $query = ProdutoRest::find()->where(['na_loja' => 1]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query'=>$query,
+            'pagination' => false
+        ]);
+
+        return $dataProvider;
+    }
+
 
     public function getIdMaterial0()
     {

@@ -22,7 +22,7 @@ class ProdutoController extends BaseController
         $behaviors['access']['rules'][] = [
 
 
-            'actions' =>  ['options', 'listar', 'find', 'produtos-loja' ],
+            'actions' =>  ['options', 'listar', 'find', 'produtos-loja', 'produtos-loja-todos' ],
             'allow' => true,
             'roles' => ['@'] // se tirar o role, qualquer utilizar AUTENTICADO pode usar o serviço.
         ];
@@ -80,6 +80,13 @@ class ProdutoController extends BaseController
     public function actionProdutosLoja(){
 
         $dataProvider = ProdutoRest::listarProdutosLoja();
+
+        return $dataProvider;
+    }
+
+    public function actionProdutosLojaTodos(){
+
+        $dataProvider = ProdutoRest::listarProdutosLojaTodos();
 
         return $dataProvider;
     }
