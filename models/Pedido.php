@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\modules\api\models\FirebaseRest;
 use Yii;
 use yii\httpclient\Client;
 use yii2tech\ar\softdelete\SoftDeleteBehavior;
@@ -125,6 +126,8 @@ class Pedido extends \yii\db\ActiveRecord
                     ->setUrl("https://ds3-gestorapedreira-default-rtdb.europe-west1.firebasedatabase.app/pedidos-listagem/" . $modelEstadoPedido->idPedido . "/estado.json")
                     ->setData($modelEstadoPedido->idPedido0->ultimoEstadoNome())
                     ->send();
+
+                FirebaseRest::notificarAtualizacaoPedido($modelEstadoPedido->idPedido, $modelEstadoPedido->idPedido0->ultimoEstadoNome(), Produto::findOne(["id" => $modelEstadoPedido->idPedido0->idProduto])->tituloArtigo);
                 return true;
             }
 

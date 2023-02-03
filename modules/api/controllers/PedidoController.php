@@ -10,6 +10,7 @@ use app\models\Logs;
 use app\models\Pedido;
 use app\models\Produto;
 use app\modules\api\models\EstadoPedidoRest;
+use app\modules\api\models\FirebaseRest;
 use app\modules\api\models\MaterialRest;
 use app\modules\api\models\PedidoRest;
 use app\modules\api\models\ProdutoRest;
@@ -211,6 +212,14 @@ class PedidoController extends BaseController
         $client = new Client();
 
         $id_canal = $modelPedido->id;
+
+        // Registar o cliente que criou o pedido
+        $response = $client->createRequest()
+            ->setMethod("PUT")
+            ->setFormat(Client::FORMAT_JSON)
+            ->setUrl("https://ds3-gestorapedreira-default-rtdb.europe-west1.firebasedatabase.app/pedidos-clientes/" . $id_canal . "/cliente.json")
+            ->setData($user->id)
+            ->send();
 
         // Criar Canal de Mensagem
         $response = $client->createRequest()
