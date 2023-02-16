@@ -1,5 +1,6 @@
 # quarrymanager-yii2backend
-Front-end rep: https://github.com/UPSxACE/quarrymanager-reactfrontend
+React Native rep: https://github.com/UPSxACE/quarrymanager-reactnative
+Web version rep: https://github.com/UPSxACE/quarrymanager-reactfrontend
 
 # How to setup the project and initialize it:
 - Create a local_variables.php file in **config** folder (see example below)
